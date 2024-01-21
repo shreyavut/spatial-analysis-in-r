@@ -1,0 +1,21 @@
+---
+title: "This is totally a Quarto page"
+format: html
+editor: visual
+---
+
+This class will definitely teach you something.
+
+```{r}
+
+### run o
+install.packages(c("sf", "tidyverse", "leaflet", "mapview"))
+
+install.packages("mapview")
+
+nlibrary(sf)
+library(tidyverse)
+library(leaflet)
+library(mapview)
+
+```
