@@ -11,6 +11,6 @@ Some advantages of using `sf` for spatial analysis:
 * Reproduce your scripts
 * Fairly easy visualization
 * Faster processing time for large datasets
-* Free! :money: 
+* Free! 💰
 
 Clone this repository locally to start! Or check out or documentation (here)[link tk].
