@@ -1,5 +1,5 @@
 # Spatial Analysis in R - NICAR 2024
-## Shreya Vuttaluru, Tampa Bay Times, and Ryan Little, Baltimore Banner
+### Shreya Vuttaluru, Tampa Bay Times, and Ryan Little, Baltimore Banner
 
 This GitHub repository accompanies a class on spatial analysis in R. We'll cover basic spatial functions in R and explore tools for exploratory mapping, spatial joins, buffering, calculating spatial distances between points and spatial indexing.
 
