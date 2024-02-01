@@ -5,24 +5,30 @@ format: html
 editor: visual
 ---
 
-We'll be using the `sf` package for geospatial functions. This package has many of the same functions available in geospatial software like ArcGIS, QGIS and PostGIS. 
+We'll be using the `sf` package for geospatial functions. This package has many of the same functions available in geospatial software like ArcGIS, QGIS and PostGIS.
 
-Some advantages of using `sf` for spatial analysis: 
+Some advantages of using `sf` for spatial analysis:
 
-* Easy to integrate with other data analysis and cleaning steps 
-* Reproduce your scripts
-* Fairly easy visualization
-* Faster processing time for large datasets
-* Free! :money: 
+-   Easy to integrate with other data analysis and cleaning steps
+-   Reproduce your scripts
+-   Fairly easy visualization
+-   Faster processing time for large data sets
+-   Free! :money:
 
-### Step 1: Load required packages. 
+### Step 1: Load required packages.
 
 ```{r}
 
-### Run this line to install all packages, if needed. 
-install.packages(c("sf", "tidyverse", "leaflet", "mapview", "janitor", "lubridate", "tidycensus"))
+### This code will install the packages required for this project if you don't already have them installed.
+packages <- c("sf", "tidyverse", "leaflet", "mapview", "janitor", "lubridate", "tidycensus")
 
-### Call our packages into our script here.
+for (pkg in packages) {
+  if (!require(pkg, character.only = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+### Import our packages into our script here.
 library(sf)
 library(tidyverse)
 library(janitor)
@@ -34,33 +40,26 @@ library(tidycensus)
 
 ```
 
-### Step 2: Load in the datasets we'll be working with today. We've pre-cleaned the data so we can focus on the spatial functions. But you'll typically need to clean your data before 
+### Step 2: Load in the data sets we'll be working with today. We've pre-cleaned the data so we can focus on the spatial functions. But you'll typically need to clean your data before
 
-* `shooting_victims.csv` is a dataset of unique shooting victims in Baltimore. This means that if there are multiple victims in a shooting, there each row represents a unique victim. 
+-   `shooting_victims.csv` is a data set of unique shooting victims in Baltimore. This means that if there are multiple victims in a shooting, there each row represents a unique victim.
 
-* `shooting_events.csv` is a dataset that contains unique shooting events — one line for each individual shooting, regardless of how many victims. 
+-   `shooting_events.csv` is a data set that contains unique shooting events --- one line for each individual shooting, regardless of how many victims.
 
-* `high_school_parcels.geojson` is a spatial file of polygons that make up the area of high schools in Baltimore. 
+-   `high_school_parcels.geojson` is a spatial file of polygons that make up the area of high schools in Baltimore.
 
-Some other types of spatial files you might see:
-* `filename.shp` — An ESRI shapefile. Typically come in a folder with associated files like `.prj, .dbf, and 
-* `filename.kml` or `filename.kmz` - AGoogle Earth spatial file
-* `filename.gdb` — A geodatabase folder of files that manage spatial data. These can be tough to work with, and I recommend handling them in PostGIS or PostgresSQL. 
-* `filename.rds` - You can store spatial data in an R dataset file
+Some other types of spatial files you might see: \* `filename.shp` --- An ESRI shapefile. Typically come in a folder with associated files like `.prj, .dbf, and  *`filename.kml`or`filename.kmz`- AGoogle Earth spatial file *`filename.gdb`— A geodatabase folder of files that manage spatial data. These can be tough to work with, and I recommend handling them in PostGIS or PostgresSQL.  *`filename.rds\` - You can store spatial data in an R data set file
 
 ```{r}
 
-### Read in the shootings data
-shootings <- read_csv("data/shooting_victims.csv") %>%
-  filter(description == "shooting")
+### Imporintg shooting victims data
+victims <- read_csv("data/shooting_victims.csv") 
 
-### Read in the shootings data
-victims <- read_csv("data/shooting_events.csv") %>%
-  filter(description == "shooting")
+### Importing shooting events data
+shootings <- read_csv("data/shooting_events.csv") 
   
-### Read in the shootings data — notice we use `st_read` to read
+### Importing a spatial feature of each parcel of each high school in Baltimore. notice we use `st_read()` instead of 'read_csv()'
 high_schools <- st_read("data/high_school_parcels.geojson")
-
 
 ```
 
@@ -74,8 +73,7 @@ shootings %>%
 
 ```
 
-
-Let's inspect our high schools: 
+Let's inspect our high schools:
 
 ```{r}
 
@@ -83,10 +81,9 @@ Let's inspect our high schools:
 high_schools %>%
   as.data.frame()
 
-
 ```
 
-Let's take a glance at our high schools.
+Let's see what our high schools look like on a map. We will use a function called `mapview()`. It creates an interactive leaflet map that displays our `sf` object.
 
 ```{r}
 
@@ -96,46 +93,47 @@ mapview(high_schools)
 
 ### Step 3: What are some questions we can answer from this data?
 
-* How many shootings _at_ high schools have there been over time? 
-* How many shootings _near_ high schools have there been over time? 
-* What is the 
-* Are there particular high schools that experience more shootings than others? 
-* What else can you think of? 
+-   How many shootings *at* high schools have there been over time?
+-   How many shootings *near* high schools have there been over time?
+-   Are there particular high schools that experience more shootings than others?
+-   What else can you think of?
 
-Let's plan to address question number two — how many shootings have been _near_ high schools in Baltimore? 
+Let's plan to address the second question --- how many shootings happened *near* high schools in Baltimore?
 
-First, let's take a glance at a subset our where are shootings are. Our dataset has over 6,000 rows, which can be tough to visualize all at once. When you have a lot of individual points you'll likely want to filter the data in some way for a meaningful visualization. 
+First, let's take a glance at a subset of where are shootings are. Our data set has over 6,000 rows, which can be tough to visualize all at once. When you have a lot of individual points you'll likely want to filter the data in some way for a meaningful visualization.
+
+Then, we will try to use `mapview()` to view the `csv` we imported on a map. 
 
 ```{r}
 
 shootings_subset <- shootings %>%
   head(300)
 
-mapview(shootings)
+mapview(shootings_subset)
 
 ```
 
-You'll remember that we read in `csv` files of this data, which are not inherently spatial files! 
+You'll remember that we read in `csv` files of this data, which are not inherently spatial files!
 
-This means we have to convert our data into a spatial object. When we have fields for latitude and longitude, this is a fairly straightforward process. 
+This means we have to convert our data into a spatial object. When we have fields for latitude and longitude, this is a fairly straightforward process.
 
 ```{r}
 
-### Make our shootings into a spatial object
+### Transform shootings into a spatial object
 spatial_shootings <- shootings %>%
-  ### filter out any NA values for longitude and latutude 
+  ### filter out any NA values for longitude and latitude 
   filter(!is.na(longitude) |
          !is.na(latitude)
          ) %>%
-  ### use the st_as_sf function to define the spatial aspects of our dataset
+  ### use the st_as_sf function to define the spatial aspects of our data set
   st_as_sf(
     coords = c("longitude", "latitude"),
     crs = 4326 
   ) 
 
-### Make our victims into a spatial object
+### Transform victims into a spatial object
 spatial_victims <- victims %>%
-  ### filter out any NA values for longitude and latutude 
+  ### filter out any NA values for longitude and latitude 
   filter(!is.na(longitude) |
          !is.na(latitude)
          ) %>%
@@ -147,106 +145,116 @@ spatial_victims <- victims %>%
 
 ```
 
-Now we can take a look at where our shootings are.
+Now we can take a look at where our shootings are using `mapview()` again.
 
 ```{r}
 
 shootings_subset <- spatial_shootings %>%
   head(300)
 
-mapview(shootings_subset, cex = 3, col.regions="red")
+mapview(shootings_subset, 
+        #changing the size of the markers
+        cex = 3, 
+        #changing the color of the markers
+        col.regions="red")
 
 ```
 
+\*\*\*\*\* A quick side note about Coordinate Reference Systems, also called CRS \*\*\*\*\*\*\*
 
-***** A quick sidenote about Coordinate Reference Systems, also called CRS *******
+Coordinate Reference Systems essentially tell our computers what kind of map we want to display our data on. If you're a round-earth truther, you'll know that the earth is *not* flat, and that maps are not perfect representations of what Earth looks like. We set CRS that are the most accurate representations of the areas we are working with.
 
-Coordinate Reference Systems essentially tell our computers what kind of map we want to display our data on. If you're a round-earth truther, you'll know that the earth is _not_ flat, and that maps are not perfect reprentation of what our earth looks like. So we set CRS that are the closest to accurate representation of the areas we are working with.
+Truthfully, these are the bane of my existence. [This](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf) is great resource on which one to use depending on what part of the world you're looking at and the type of analysis you're doing.
 
-Truthfully, these are the bane of my existance. [This](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf) is great resource on which one to use depending on what part of the world you're looking at and the type of analysis you're doing.
+If you're in the United States, my favorites are \* 4326 for most visualization-only cases. \* 5070 in any cases where you are calculating perimeter, area, or other mathematical operation. \* You can also cheat and use ChatGPT. 
 
-If you're in the United States, my favorites are 
-* 4326 for most visualization-only cases. 
-* 5070 in any cases where you are calculating perimeter, area, or other mathematical operation. 
-* You can also cheat and use ChatGPT. 
+Datawrapper and Flourish sometimes require 4326.
 
-***** END NOTE *******
+\*\*\*\*\* END NOTE \*\*\*\*\*\*\*
 
 ### Step 4: Buffering
 
-Since we want to look at the shootings near a high school, we have to define what _near_ means. Let's pick *3* blocks as our distance. 
+Since we want to analyze how many shootings have taken place near a high school, we have to define what *near* means. Let's pick *3* blocks as our distance.
 
-In Baltimore, we counted 100 meters for each block, and an additonal 50 meters for the immediate street. This is not a block for every city, and it might be worth looking at planning documents in your city to determine 
+In Baltimore, we counted 100 meters for each block, plus an additional 50 meters for the immediate street. This is not a block for every city, or the size of every block in Baltimore.
 
-Number of meters to buffer = (Number of blocks * 100) + 50 
+Number of meters to buffer = (Number of blocks \* 100) + 50
 
-*Buffering* involves generating a new polygon (or polygons) that represent an area of a specified distance around a spatial feature. For us, this is determing a three-block radius around a Baltimore High School
+*Buffering* involves generating a new polygon (or polygons) that represent an area of a specified distance in a circle around a spatial feature. The code block below creates a three-block radius around each Baltimore high school. We will use the `st_buffer` function and set the size of the buffering by providing a numerical value to an argument called `dist`.
 
 ```{r}
 
 buffered_high_schools <- high_schools %>%
   ### let's change the CRS here, since we're doing a mathematical calculation, and working in Meters
   st_transform(5070) %>%
+  ### dist is the size of the buffer we are creating
   st_buffer(dist = 350)
-  
-mapview(buffered_high_schools)
 
 ```
 
-Let's also narrow down our shootings data to look at only juveniles
+Now let's look at the output. We can display two different spatial features in one map using `mapview()` if we connect them with a `+`. Here, we will look at the buffered shapes, shaded in blue, and the original high school parcels, shaded in green.
+
+```{r}
+  
+mapview(buffered_high_schools, col.regions="blue") +
+  mapview(high_schools, col.regions="green")
+
+```
+
+Let's also narrow down our shootings data to look at only juveniles.
 
 ```{r}
 
-juvenile_victims <- spatial_victims %>%
+juvenile_spatial_victims <- spatial_victims %>%
   filter(age_range == "juvenile") 
 
 ```
 
 ### Step 5: Spatial Joins
 
-Spatial Joins are super powerful, because they allow us to merge geographic data together. Our goal here is to join the point data we have in the shootings to the buffered polygons. 
-
-Here, we can also pull in demographic data from `tidycensus` to tell us what the characteristics of the neighborhoods the shootings occurred in are. 
+Spatial Joins are powerful because they allow us to merge geographic data together. Our goal here is to identify which shootings took place inside the buffered ranges we created for each Baltimore high school by using the `st_within()` function. 
 
 ```{r}
 
 # Perform a spatial join using st_within
-within_buffer <- st_within(juvenile_victims, buffered_high_schools, sparse = FALSE)
+within_buffer <- st_within(juvenile_spatial_victims, buffered_high_schools, sparse = FALSE)
 
 ```
 
-Whoops! The CRS's don't match. This is a very annoying problem that you will run into frequently. When joining datasets, we always want to make sure that our CRS's are equivalent. When we initially loaded in our `victims` data, we set the CRS to ESPG:4326, but when doing our buffer on `high_schools`, we changed the CRS to ESPG:5070. 
+Whoops! The CRS don't match. This is a very annoying problem that you will run into frequently. When joining data sets, we always want to make sure that our CRS's are equivalent. When we initially loaded in our `victims` data, we set the CRS to ESPG:4326, but when we buffered our `high_schools`, we changed the CRS to ESPG:5070.
 
-Let's transform our `victims` data to 5070. 
+Let's transform our `juvenile_spatial_victims` data to 5070.
 
 ```{r}
 
-juvenile_victims <- juvenile_victims %>%
-  st_as_sf() %>%
+juvenile_spatial_victims <- juvenile_spatial_victims %>%
   st_transform(crs=5070)
 
 ```
 
-Take 2 on the join. 
+Join take two.
 
 ```{r}
 
 # Perform a spatial join using st_within. This code creates a matrix 
-within_buffer <- st_within(juvenile_victims, buffered_high_schools, sparse = FALSE)
+within_buffer <- st_within(juvenile_spatial_victims, buffered_high_schools, sparse = FALSE)
 
-# We need to apply rowSums to get incidents within any of the school buffers. This will create a dataframe for us. 
-shooting_incidents_within_buffer_1 <- juvenile_victims[rowSums(within_buffer) > 0, ] %>%
+# We need to apply rowSums to get incidents within any of the school buffers. This will create a data.frame for us. 
+shooting_incidents_within_buffer_1 <- juvenile_spatial_victims[rowSums(within_buffer) > 0, ] %>%
   ### count each unique victim only once, even if they are within 
   distinct(cc_number, .keep_all = TRUE)
 
 ```
 
-Map this method: 
+Map this method:
 
 ```{r}
 
 map <- mapview(buffered_high_schools, 
                col.region = "blue", # Set the color of the buffered high schools
+               alpha.region = 0.3) +
+       mapview(high_schools,
+               col.region = "green",
                alpha.region = 0.3) +
        mapview(shooting_incidents_within_buffer_1, 
                      col.region = "red", # Set the color of the shooting incidents
@@ -259,27 +267,30 @@ map
 
 ```
 
-But there's an even easier way to do this! The method above is how we approached it for the story, but using `st_join` and passing through `st_within` as an argument also yields similar results. 
+But there's an even easier way to do this! The method above is how we approached it for the story, but using `st_join` and passing through `st_within` as an argument also yields similar results.
 
 ```{r}
 
 # Perform a spatial join using st_join with st_within
-juvenile_shootings_within_buffer <- st_join(juvenile_victims, buffered_high_schools, join = st_within)
+juvenile_spatial_shootings_within_buffer <- st_join(juvenile_spatial_victims, buffered_high_schools, join = st_within)
 
 # Filter to keep only those incidents that are within a school buffer
 # (i.e., where buffered_high_schools data is not NA)
-shooting_incidents_within_buffer_2 <- juvenile_shootings_within_buffer %>%
+shooting_incidents_within_buffer_2 <- juvenile_spatial_shootings_within_buffer %>%
   filter(!is.na(school_name)) %>%
   distinct(cc_number, .keep_all=TRUE)
 
 ```
 
-Map the second method: 
+Map the second method:
 
 ```{r}
 
 map <- mapview(buffered_high_schools, 
                col.region = "blue", # Set the color of the buffered high schools
+               alpha.region = 0.3) +
+       mapview(high_schools,
+               col.region = "green",
                alpha.region = 0.3) +
        mapview(shooting_incidents_within_buffer_2, 
                      col.region = "red", # Set the color of the shooting incidents
@@ -292,7 +303,7 @@ map
 
 ```
 
-Let's plot what these incidents have looked like year over year since 2015. 
+Let's plot what these incidents have looked like year over year since 2015.
 
 ```{r}
 
@@ -315,9 +326,9 @@ ggplot(shooting_incidents_by_year, aes(x = year, y = count)) +
 
 ```
 
-For extra fun, census data can also provide some really helpful context and insight into what the demographics of the neighborhoods that these shootings occurred in are. 
+For extra fun, Census data can also provide some really helpful context and insight into the demographics of the neighborhoods where these shootings occurred.
 
-We found that most of the shootings happened in the Black Butterfly — a historically redlined part of Baltimore that faced disinvestment and disparity. 
+We found that most of the shootings happened in the Black Butterfly --- an historically red-lined part of Baltimore that has faced decades of disinvestment and disparity.
 
 ```{r}
 
@@ -351,7 +362,7 @@ black_pop %>%
 
 ```
 
-Let's visually inpect the data. We'll display the `percent_black` population, and overlay the shooting incidents. 
+Let's visually inpect the data. We'll display the `percent_black` population, and overlay the shooting incidents.
 
 ```{r}
 
@@ -366,3 +377,8 @@ mapview(shooting_incidents_within_buffer_2,
         cex=2)
 
 ```
+
+Now try it on your own:
+
+
+
