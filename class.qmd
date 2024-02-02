@@ -102,9 +102,9 @@ Let's plan to address the second question --- how many shootings happened *near*
 
 First, let's take a glance at a subset of where are shootings are. Our data set has over 6,000 rows, which can be tough to visualize all at once. When you have a lot of individual points you'll likely want to filter the data in some way for a meaningful visualization.
 
-Then, we will try to use `mapview()` to view the `csv` we imported on a map. 
+Then, we will try to use `mapview()` to view the `csv` we imported on a map.
 
-```{r}
+```{r error=TRUE}
 
 shootings_subset <- shootings %>%
   head(300)
@@ -147,7 +147,7 @@ spatial_victims <- victims %>%
 
 Now we can take a look at where our shootings are using `mapview()` again.
 
-```{r}
+```{r error=TRUE}
 
 shootings_subset <- spatial_shootings %>%
   head(300)
@@ -166,7 +166,7 @@ Coordinate Reference Systems essentially tell our computers what kind of map we 
 
 Truthfully, these are the bane of my existence. [This](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf) is great resource on which one to use depending on what part of the world you're looking at and the type of analysis you're doing.
 
-If you're in the United States, my favorites are \* 4326 for most visualization-only cases. \* 5070 in any cases where you are calculating perimeter, area, or other mathematical operation. \* You can also cheat and use ChatGPT. 
+If you're in the United States, my favorites are \* 4326 for most visualization-only cases. \* 5070 in any cases where you are calculating perimeter, area, or other mathematical operation. \* You can also cheat and use ChatGPT.
 
 Datawrapper and Flourish sometimes require 4326.
 
@@ -212,9 +212,9 @@ juvenile_spatial_victims <- spatial_victims %>%
 
 ### Step 5: Spatial Joins
 
-Spatial Joins are powerful because they allow us to merge geographic data together. Our goal here is to identify which shootings took place inside the buffered ranges we created for each Baltimore high school by using the `st_within()` function. 
+Spatial Joins are powerful because they allow us to merge geographic data together. Our goal here is to identify which shootings took place inside the buffered ranges we created for each Baltimore high school by using the `st_within()` function.
 
-```{r}
+```{r error=TRUE}
 
 # Perform a spatial join using st_within
 within_buffer <- st_within(juvenile_spatial_victims, buffered_high_schools, sparse = FALSE)
@@ -378,30 +378,33 @@ mapview(shooting_incidents_within_buffer_2,
 
 ```
 
-Now try it on your own! Choose between datasets in Florida or in Baltimore to 
+Now try it on your own! Choose between datasets in Florida or in Baltimore to
 
 Option 1: Florida Data
 
-* `pinellas_tracts.geojson` is a spatial file of census tracts along with the total population and Black population estimates
-* `erp_application.shp` is a shapefile of Environmental Resource Permit applications in Florida since Jan 1, 2023
-* `gc_schools_jul23.shp` is a shapefile of schools in Florida, containing points for each school. 
-* `tb_corporate_owners.geojson` is a subset of a dataset showing corporate-owned single family homes in the Tampa Bay Area. 
+-   `pinellas_tracts.geojson` is a spatial file of census tracts along with the total population and Black population estimates
+-   `erp_application.shp` is a shapefile of Environmental Resource Permit applications in Florida since Jan 1, 2023
+-   `gc_schools_jul23.shp` is a shapefile of schools in Florida, containing points for each school.
+-   `tb_corporate_owners.geojson` is a subset of a dataset showing corporate-owned single family homes in the Tampa Bay Area.
 
-Be sure to go into the `option_1` directory for this data. 
-
-```{r}
-
-
-```
-
-Option 2: Baltimore Data
-*List datasets here:
-
-
-Be sure to go into the `option_2` directory for this data. 
+Be sure to go into the `data/florida/` directory for this data.
 
 ```{r}
 
 
 ```
 
+Option 2: Baltimore Data 
+
+ -   `Polling_Place.geojson` is a spatial file of poling places in Baltimore.
+ -   `CCTV_Locations_Cameras.geojson` is a spatial file of Baltimore Police surveillance cameras.
+ -   `brooklyn-homes.geojson` is a spatial file that contains the property parcel of a Baltimore housing authority housing complex in southern Baltimore.
+ -   `Completed_City_Demo.geojson` is a spatial file of buildings demolished by the Baltimore City government.
+ 
+
+Be sure to go into the `data/baltimore/` directory for this data.
+
+```{r}
+
+
+```
