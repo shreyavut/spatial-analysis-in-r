@@ -385,6 +385,7 @@ Option 1: Florida Data
 * `pinellas_tracts.geojson` is a spatial file of census tracts along with the total population and Black population estimates
 * `erp_application.shp` is a shapefile of Environmental Resource Permit applications in Florida since Jan 1, 2023
 * `gc_schools_jul23.shp` is a shapefile of schools in Florida, containing points for each school. 
+* `tb_corporate_owners.geojson` is a subset of a dataset showing corporate-owned single family homes in the Tampa Bay Area. 
 
 Be sure to go into the `option_1` directory for this data. 
 
