@@ -378,7 +378,7 @@ mapview(shooting_incidents_within_buffer_2,
 
 ```
 
-Now try it on your own! Choose between datasets in Florida or in Baltimore to
+Now try it on your own! Choose between datasets in Florida or in Baltimore to practice reading in spatial files and performing joins. 
 
 Option 1: Florida Data
 
