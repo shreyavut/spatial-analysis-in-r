@@ -378,32 +378,29 @@ mapview(shooting_incidents_within_buffer_2,
 
 ```
 
-Now try it on your own:
+Now try it on your own! Choose between datasets in Florida or in Baltimore to 
 
-Option 1: Florida Parcels 
+Option 1: Florida Data
 
-Let's figure out what census tracts the single family Florida Homeowners in `pinellas_parcels.shp` are in. `pinellas_tracts.geojson` has census tract data for total population and the Black population. 
+* `pinellas_tracts.geojson` is a spatial file of census tracts along with the total population and Black population estimates
+* `erp_application.shp` is a shapefile of Environmental Resource Permit applications in Florida since Jan 1, 2023
+* `gc_schools_jul23.shp` is a shapefile of schools in Florida. 
 
 Be sure to go into the `option_1` directory for this data. 
 
 ```{r}
 
-### Load in Census tract data 
-st_read()
-
-### Load in pinellas parcels data
-st_read()
 
 ```
 
-Option 2: CCTV Cameras
+Option 2: Baltimore Data
+
+List datasets here:
+
 
 Be sure to go into the `option_2` directory for this data. 
 
 ```{r}
-
-### Load in CCTV data
-st_read()
 
 
 ```

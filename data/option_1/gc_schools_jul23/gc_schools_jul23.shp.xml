@@ -1,0 +1,1586 @@
+<metadata><eainfo><detailed xmlns="" Name="gc_schools_jul23"><enttyp><enttypl>GC_SCHOOLS_JUL23</enttypl><enttypd>GC_SCHOOLS_JUL23</enttypd><enttypds>GeoPlan</enttypds><enttypt Sync="TRUE">Feature Class</enttypt><enttypc Sync="TRUE">0</enttypc></enttyp><attr><attrlabl Sync="TRUE">FID</attrlabl><attalias Sync="TRUE">FID</attalias><attrtype Sync="TRUE">OID</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Internal feature number.</attrdef><attrdefs Sync="TRUE">Esri</attrdefs><attrdomv><udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom></attrdomv></attr><attr xmlns=""><attrlabl>Shape</attrlabl><attrdef>Feature geometry.</attrdef><attrdefs>ESRI</attrdefs><attrdomv><udom>Coordinates defining the features.</udom></attrdomv><attalias Sync="TRUE">Shape</attalias><attrtype Sync="TRUE">Geometry</attrtype><attwidth Sync="TRUE">0</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>PARCELID</attrlabl><attrdef>Parcel Identification Number, derived from the 2015 statewide parcel layer.  </attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">PARCELID</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">40</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>FEDERAL_ID</attrlabl><attrdef>The Federal (NCES) public and private school identification number.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FEDERAL_ID</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>STATE_ID</attrlabl><attrdef>The FDOE public school ID number.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">STATE_ID</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>NAME</attrlabl><attrdef>Facility designation, facility name.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">NAME</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">100</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>ADDRESS</attrlabl><attrdef>A description of a facility's physical location providing direction for delivery and provision of emergency services.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">ADDRESS</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">65</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>CITY</attrlabl><attrdef>City of facility's physical location.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">CITY</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">40</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>ZIPCODE</attrlabl><attrdef>US postal delivery designation of facility's physical location.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">ZIPCODE</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>COUNTY</attrlabl><attrdef>County of facility's physical location.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">COUNTY</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">35</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>PHONE</attrlabl><attrdef>The phone number of the school facility.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">PHONE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">20</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>TYPE</attrlabl><attrdef>Educational grade ranges by category. The School Type is derived directly from the Grade Code reported for the school.</attrdef><attrdefs>FLDOE</attrdefs><attrdomv><edom xmlns=""><edomv>COLLEGE/UNIVERSITY</edomv><edomvd>College or University.</edomvd><edomvds>GeoPlan</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>COMBINATION ELEMENTARY AND SECONDARY</edomv><edomvd>Schools providing instruction in grade groupings that include more than one of the elementary, middle/junior high, and senior high grade categories.</edomvd><edomvds>FLDOE</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>DISTRICT OFFICE (SCHOOL BOARD)</edomv><edomvd>County school district office or school board.</edomvd><edomvds>GeoPlan</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>ELEMENTARY</edomv><edomvd>Schools providing instruction at one or more grade levels from PK through grade 5. May include schools serving grade 6 if also serving one or more grades PK through 5 (e.g., a K-6 school).</edomvd><edomvds>FLDOE</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>MIDDLE/JR. HIGH</edomv><edomvd>Schools providing instruction in middle school configurations (grades 6-8) and junior high school configurations (grades 7-9). This school type can also include schools serving a single grade in the 6-8 range (e.g., a 6th grade center).</edomvd><edomvds>FLDOE</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>SENIOR HIGH</edomv><edomvd>Schools providing instruction at one or more grade levels from 9 to 12; includes regular high schools and 9th grade centers.</edomvd><edomvds>FLDOE</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>UNASSIGNED</edomv><edomvd>Grade level not yet assigned.</edomvd><edomvds>FLDOE</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>UNKNOWN</edomv><edomvd>Grade level unknown.</edomvd><edomvds>GeoPlan</edomvds></edom></attrdomv><attalias Sync="TRUE">TYPE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">55</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>OWNER</attrlabl><attrdef>Entity owner of the facility.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">OWNER</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">60</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>OPERATING</attrlabl><attrdef>The responsible organization for management and operation of a facility (e.g., FEDERAL, STATE, COUNTY, MUNICIPAL, PRIVATE, WMD, etc.).</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">OPERATING</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">60</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>OP_CLASS</attrlabl><attrdef>Classification of the operating entity. (e.g., public, private, quasi-public). </attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">OP_CLASS</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">20</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>YR_BUILT</attrlabl><attrdef>The year a structure was built for determining possible historical significance.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">YR_BUILT</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>FSOURCE</attrlabl><attrdef>Feature Spatial Source.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FSOURCE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">100</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>DATASOURCE</attrlabl><attrdef>Feature Data/Tabular Source.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">DATASOURCE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">100</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>PROGRAMS</attrlabl><attrdef>The main educational program offered at the school.</attrdef><attrdefs>FLDOE</attrdefs><attalias Sync="TRUE">PROGRAMS</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">60</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>GRADES</attrlabl><attrdef>The grade level range available at the school.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">GRADES</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>LOW_GRADE</attrlabl><attrdef>The lowest grade level at the school.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">LOW_GRADE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>HIGH_GRADE</attrlabl><attrdef>The highest grade level at the school.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">HIGH_GRADE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>PRINCIPAL</attrlabl><attrdef>The school principal's name.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">PRINCIPAL</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">50</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>ENROLLMENT</attrlabl><attrdef>Total number of students attending the school.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">ENROLLMENT</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>TEACHERS</attrlabl><attrdef>Number of teachers. Teachers for this are full time teachers only.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">TEACHERS</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>STDTCH_RT</attrlabl><attrdef>Student teacher ratio.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">STDTCH_RT</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>MIGRNT_STD</attrlabl><attrdef>Number of migrant students. Migrant has not been updated since 2008.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">MIGRNT_STD</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>TITLE1SCHO</attrlabl><attrdef>Designation of the school as a Title I school. Title I Status is designated by the school district based upon criteria in the No  Child Left Behind legislation. A school's status is reported to the Department's  Bureau of Student Assistance and is supplied to the MSID file by that office. Title I schools may operate school-wide programs or targeted assistance programs.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">TITLE1SCHO</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">5</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>MAGNETINFO</attrlabl><attrdef>Type of magnet program(s) available at the school. Magnet schools and magnet programs offer a specialized curriculum to students outside the school's normal attendance boundaries attracting substantial numbers of students of different social, economic, ethnic, and racial backgrounds. These programs may include subjects like performing arts, technology, marine and environmental science, communications and international affairs and business. Program specialty areas include Academically Talented, Criminal Justice, Foreign Language, International Baccalaureate, Medical, Performing Arts, Science/Math, Technology and others.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">MAGNETINFO</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">60</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>COMMENTS</attrlabl><attrdef>Comments about school, derived primarily from FDOE. Comments from previous versions of the layer are placed in parentheses. </attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">COMMENTS</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">150</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>FREE_LUNCH</attrlabl><attrdef>Number of students receiving free lunch.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FREE_LUNCH</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>REDUCED_LU</attrlabl><attrdef>Number of students receiving reduced lunch.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">REDUCED_LU</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>FISH_FAC1</attrlabl><attrdef>First Florida Inventory of School Houses (FISH) Identification Number.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FISH_FAC1</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>FISH_FAC2</attrlabl><attrdef>Second Florida Inventory of School Houses (FISH) Identification Number.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FISH_FAC2</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>BBSERVICE</attrlabl><attrdef>The presence of broadband service at facility.</attrdef><attrdefs>GeoPlan</attrdefs><attrdomv><edom xmlns=""><edomv>Y</edomv><edomvd>Yes</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>U</edomv><edomvd>Unknown</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attalias Sync="TRUE">BBSERVICE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">2</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>BBPROVIDER</attrlabl><attrdef>Provider of broadband service.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">BBPROVIDER</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">50</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>BBSPEED</attrlabl><attrdef>Broadband speed to and from facility.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">BBSPEED</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">75</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>DSTREAMSPD</attrlabl><attrdef>Max download speed.</attrdef><attrdefs>GeoPlan</attrdefs><attrdomv><edom xmlns=""><edomv>1</edomv><edomvd>Less than or equal to 200 kbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>2</edomv><edomvd>Greater than 200 kbps and less than 768 kbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>3</edomv><edomvd>Greater than or equal 768 kbps and less than 1.5 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>4</edomv><edomvd>Greater than or equal to 1.5 mbps and less than 3 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>5</edomv><edomvd>Greater than or equal to 3 mbps and less than 6 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>6</edomv><edomvd>Greater than or equal to 6 mbps and less than 10 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>7</edomv><edomvd>Greater than or equal to 10 mbps and less than 25 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>8</edomv><edomvd>Greater than or equal to 25 mbps and less than 50 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>9</edomv><edomvd>Greater than or equal to 50 mbps and less than 100 mbps</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>10</edomv><edomvd>Greater than or equal to 100 mbps and less than 1000 mbps (1Gbps)</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>11</edomv><edomvd>Greater than 1000 mbps (1Gbps)</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attalias Sync="TRUE">DSTREAMSPD</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>FDOE_MSID</attrlabl><attrdef>Date that attribute data was updated based on the FDOE Master School Identification File.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FDOE_MSID</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>NCES_PUB</attrlabl><attrdef>Date that attribute data was updated based on the NCES public schools dataset</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">NCES_PUB</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>NCES_COLL</attrlabl><attrdef>Date that attribute data was updated based on the NCES college navigator dataset</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">NCES_COLL</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>LAT_DD</attrlabl><attrdef>Latitude in Decimal Degrees.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">LAT_DD</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>LONG_DD</attrlabl><attrdef>Longitude in Decimal Degrees.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">LONG_DD</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>MGRS</attrlabl><attrdef>Military Grid Reference System (MGRS) Coordinate of the facility. The MGRS is the geocoordinate standard used by NATO militaries for locating points on the earth. The MGRS provides a means to represent any location on the surface of the Earth using an alphanumeric string. Hierarchical references are based on the Universal Transverse Mercator (UTM) coordinate system. The MGRS is used for the entire earth. http://mgrs-data.org/</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">MGRS</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>GOOGLEMAP</attrlabl><attalias Sync="TRUE">GOOGLEMAP</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">100</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef>Webpage hyperlink to location in Google Maps.</attrdef><attrdefs>GeoPlan</attrdefs></attr><attr xmlns=""><attrlabl>GCID</attrlabl><attrdef>The GeoPlan Center identification number that links this point feature layer with its corresponding polygon feature layer.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">GCID</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>ACRES</attrlabl><attrdef>Facility acreage.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">ACRES</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr><attr xmlns=""><attrlabl>DESCRIPT</attrlabl><attrdef>FGDL added item based on NAME.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">DESCRIPT</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">100</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl Sync="TRUE">ACTIVITYCD</attrlabl><attalias Sync="TRUE">ACTIVITYCD</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">5</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef>Activity code used to distinguish between active and non-active schools. </attrdef><attrdefs>GeoPlan</attrdefs><attrdomv><edom xmlns=""><edomv>A</edomv><edomvd>Active school.</edomvd><edomvds>GeoPlan</edomvds></edom><edom xmlns=""><edomv>C</edomv><edomvd>Closed school.</edomvd><edomvds>GeoPlan</edomvds></edom><edom xmlns=""><edomv>F</edomv><edomvd>Future school.</edomvd><edomvds>GeoPlan</edomvds></edom></attrdomv></attr><attr xmlns=""><attrlabl>FLAG</attrlabl><attrdef>Type of update that occurred.</attrdef><attrdefs>GeoPlan</attrdefs><attrdomv><edom xmlns=""><edomv>V</edomv><edomvd>Verified, in most cases this verification was based on ESRI/Google Imagery, Google Street View, and Parcel Data. The exact facility boundaries are not verified and in many cases only based on parcel boundaries.</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attrdomv><edom xmlns=""><edomv>NV</edomv><edomvd>Not verified</edomvd><edomvds>Producer defined</edomvds></edom></attrdomv><attalias Sync="TRUE">FLAG</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">5</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>UPDATE_DAY</attrlabl><attrdef>The date the data was last updated by the Source.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">UPDATE_DAY</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr xmlns=""><attrlabl>FGDLAQDATE</attrlabl><attrdef>The date FGDL acquired the data from the source.</attrdef><attrdefs>GeoPlan</attrdefs><attalias Sync="TRUE">FGDLAQDATE</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">AUTOID</attrlabl><attalias Sync="TRUE">AUTOID</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attrdef Sync="TRUE">Unique ID added by GeoPlan. This field is for historic tracking of features.</attrdef><attscale Sync="TRUE">0</attscale></attr></detailed></eainfo><Esri><CreaDate>20230817</CreaDate><CreaTime>10141500</CreaTime><ArcGISFormat>1.0</ArcGISFormat><DataProperties><itemProps><itemName Sync="TRUE">gc_schools_jul23</itemName><nativeExtBox><westBL Sync="TRUE">67948.300800</westBL><eastBL Sync="TRUE">793209.452100</eastBL><southBL Sync="TRUE">63298.480600</southBL><northBL Sync="TRUE">777660.876200</northBL><exTypeCode Sync="TRUE">1</exTypeCode></nativeExtBox><itemSize Sync="TRUE">0.000</itemSize><itemLocation><linkage Sync="TRUE">file://\\ict-az2-fs11.server.ufl.edu\geo-fs8-qaqc\finaldata\state\post_load\gc_schools_jul23.shp</linkage><protocol Sync="TRUE">Local Area Network</protocol></itemLocation><imsContentType Sync="TRUE" export="False">002</imsContentType></itemProps><coordRef><type Sync="TRUE">Projected</type><geogcsn Sync="TRUE">GCS_North_American_1983_HARN</geogcsn><csUnits Sync="TRUE">Linear Unit: Meter (1.000000)</csUnits><projcsn Sync="TRUE">NAD_1983_HARN_Florida_GDL_Albers</projcsn><peXml Sync="TRUE">&lt;ProjectedCoordinateSystem xsi:type='typens:ProjectedCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/3.1.0'&gt;&lt;WKT&gt;PROJCS[&amp;quot;NAD_1983_HARN_Florida_GDL_Albers&amp;quot;,GEOGCS[&amp;quot;GCS_North_American_1983_HARN&amp;quot;,DATUM[&amp;quot;D_North_American_1983_HARN&amp;quot;,SPHEROID[&amp;quot;GRS_1980&amp;quot;,6378137.0,298.257222101]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433]],PROJECTION[&amp;quot;Albers&amp;quot;],PARAMETER[&amp;quot;False_Easting&amp;quot;,400000.0],PARAMETER[&amp;quot;False_Northing&amp;quot;,0.0],PARAMETER[&amp;quot;Central_Meridian&amp;quot;,-84.0],PARAMETER[&amp;quot;Standard_Parallel_1&amp;quot;,24.0],PARAMETER[&amp;quot;Standard_Parallel_2&amp;quot;,31.5],PARAMETER[&amp;quot;Latitude_Of_Origin&amp;quot;,24.0],UNIT[&amp;quot;Meter&amp;quot;,1.0],AUTHORITY[&amp;quot;EPSG&amp;quot;,3087]]&lt;/WKT&gt;&lt;XOrigin&gt;-19550100&lt;/XOrigin&gt;&lt;YOrigin&gt;-7526400&lt;/YOrigin&gt;&lt;XYScale&gt;225743210.67916927&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;0.001&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;WKID&gt;3087&lt;/WKID&gt;&lt;LatestWKID&gt;3087&lt;/LatestWKID&gt;&lt;/ProjectedCoordinateSystem&gt;</peXml></coordRef><copyHistory><copy source="Q:\data_output\erik\qaqc\2023\schools_2\final\gc_schools_jul23" dest="\\ict-az2-fs11.server.ufl.edu\geo-fs8-qaqc\finaldata\state\pre_load\gc_schools_jul23" date="20230817" time="10141500"/></copyHistory><lineage><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Conversion Tools.tbx\FeatureClassToFeatureClass" Date="20230818" Time="164847">FeatureClassToFeatureClass Q:\finaldata\state\pre_load\gc_schools_jul23.shp C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\ GC_SCHOOLS_JUL23 # "PARCELID "PARCELID" true true false 40 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,PARCELID,0,40;FEDERAL_ID "FEDERAL_ID" true true false 15 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FEDERAL_ID,0,15;STATE_ID "STATE_ID" true true false 15 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,STATE_ID,0,15;NAME "NAME" true true false 100 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,NAME,0,100;ADDRESS "ADDRESS" true true false 65 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,ADDRESS,0,65;CITY "CITY" true true false 40 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,CITY,0,40;ZIPCODE "ZIPCODE" true true false 10 Long 0 10,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,ZIPCODE,-1,-1;COUNTY "COUNTY" true true false 35 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,COUNTY,0,35;PHONE "PHONE" true true false 20 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,PHONE,0,20;TYPE "TYPE" true true false 55 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,TYPE,0,55;OWNER "OWNER" true true false 60 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,OWNER,0,60;OPERATING "OPERATING" true true false 60 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,OPERATING,0,60;OP_CLASS "OP_CLASS" true true false 20 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,OP_CLASS,0,20;YR_BUILT "YR_BUILT" true true false 10 Long 0 10,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,YR_BUILT,-1,-1;FSOURCE "FSOURCE" true true false 100 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FSOURCE,0,100;DATASOURCE "DATASOURCE" true true false 100 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,DATASOURCE,0,100;PROGRAMS "PROGRAMS" true true false 60 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,PROGRAMS,0,60;GRADES "GRADES" true true false 15 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,GRADES,0,15;LOW_GRADE "LOW_GRADE" true true false 15 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,LOW_GRADE,0,15;HIGH_GRADE "HIGH_GRADE" true true false 15 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,HIGH_GRADE,0,15;PRINCIPAL "PRINCIPAL" true true false 50 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,PRINCIPAL,0,50;ENROLLMENT "ENROLLMENT" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,ENROLLMENT,-1,-1;TEACHERS "TEACHERS" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,TEACHERS,-1,-1;STDTCH_RT "STDTCH_RT" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,STDTCH_RT,-1,-1;MIGRNT_STD "MIGRNT_STD" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,MIGRNT_STD,-1,-1;TITLE1SCHO "TITLE1SCHO" true true false 5 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,TITLE1SCHO,0,5;MAGNETINFO "MAGNETINFO" true true false 60 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,MAGNETINFO,0,60;COMMENTS "COMMENTS" true true false 150 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,COMMENTS,0,150;FREE_LUNCH "FREE_LUNCH" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FREE_LUNCH,-1,-1;REDUCED_LU "REDUCED_LU" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,REDUCED_LU,-1,-1;FISH_FAC1 "FISH_FAC1" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FISH_FAC1,-1,-1;FISH_FAC2 "FISH_FAC2" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FISH_FAC2,-1,-1;BBSERVICE "BBSERVICE" true true false 2 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,BBSERVICE,0,2;BBPROVIDER "BBPROVIDER" true true false 50 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,BBPROVIDER,0,50;BBSPEED "BBSPEED" true true false 75 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,BBSPEED,0,75;DSTREAMSPD "DSTREAMSPD" true true false 10 Long 0 10,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,DSTREAMSPD,-1,-1;FDOE_MSID "FDOE_MSID" true true false 8 Date 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FDOE_MSID,-1,-1;NCES_PUB "NCES_PUB" true true false 8 Date 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,NCES_PUB,-1,-1;NCES_COLL "NCES_COLL" true true false 8 Date 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,NCES_COLL,-1,-1;LAT_DD "LAT_DD" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,LAT_DD,-1,-1;LONG_DD "LONG_DD" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,LONG_DD,-1,-1;MGRS "MGRS" true true false 15 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,MGRS,0,15;GOOGLEMAP "GOOGLEMAP" true true false 100 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,GOOGLEMAP,0,100;GCID "GCID" true true false 10 Long 0 10,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,GCID,-1,-1;ACRES "ACRES" true true false 19 Double 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,ACRES,-1,-1;DESCRIPT "DESCRIPT" true true false 100 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,DESCRIPT,0,100;ACTIVITYCD "ACTIVITYCD" true true false 5 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,ACTIVITYCD,0,5;FLAG "FLAG" true true false 5 Text 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FLAG,0,5;UPDATE_DAY "UPDATE_DAY" true true false 8 Date 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,UPDATE_DAY,-1,-1;FGDLAQDATE "FGDLAQDATE" true true false 8 Date 0 0,First,#,Q:\finaldata\state\pre_load\gc_schools_jul23.shp,FGDLAQDATE,-1,-1" #</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddField" Date="20230818" Time="164859">AddField C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 AUTOID "Long (32-bit integer)" # # # # NULLABLE NON_REQUIRED #</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\CalculateField" Date="20230818" Time="164905">CalculateField C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 AUTOID !OBJECTID! PYTHON_9.3 # Text NO_ENFORCE_DOMAINS</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164907">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 AUTOID A20230818164907 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164908">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 DESCRIPT D20230818164907 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164909">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 NAME N20230818164907 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164911">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 TYPE AF20230818164910 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164914">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 GOOGLEMAP AF20230818164913 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164917">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 OP_CLASS AF20230818164916 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164920">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 TITLE1SCHO AF20230818164919 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164922">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 REDUCED_LU AF20230818164922 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164925">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 FREE_LUNCH AF20230818164925 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\AddIndex" Date="20230818" Time="164928">AddIndex C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 ENROLLMENT AF20230818164927 NON_UNIQUE NON_ASCENDING</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\Analyze" Date="20230818" Time="164931">Analyze C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\\ETAT.GC_SCHOOLS_JUL23 BUSINESS</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\CopyFeatures" Date="20230818" Time="172333">CopyFeatures C:\Users\sam240\AppData\Roaming\ESRI\ArcGISPro\Favorites\poke_etat.sde\ETAT.aaa\ETAT.GC_SCHOOLS_JUL23 Q:\finaldata\state\post_load\gc_schools_jul23.shp # # # #</Process></lineage></DataProperties><SyncDate>20230818</SyncDate><SyncTime>17233200</SyncTime><ModDate>20230818</ModDate><ModTime>17233200</ModTime><ArcGISProfile>FGDC</ArcGISProfile><ArcGISstyle>FGDC CSDGM Metadata</ArcGISstyle><SyncOnce>FALSE</SyncOnce><scaleRange><minScale>150000000</minScale><maxScale>5000</maxScale></scaleRange></Esri><mdLang><languageCode value="eng"/><countryCode value="USA" Sync="TRUE"/></mdLang><mdChar><CharSetCd value="004"/></mdChar><mdHrLv><ScopeCd value="005"/></mdHrLv><mdDateSt Sync="TRUE">20230818</mdDateSt><mdStanName>ArcGIS Metadata</mdStanName><mdStanVer>1.0</mdStanVer><distInfo xmlns=""><distTranOps><transSize Sync="TRUE">0.000</transSize></distTranOps><distributor><distorCont><rpOrgName>Florida Geographic Data Library (FGDL)</rpOrgName><role><RoleCd value="005"/></role><rpCntInfo><cntAddress addressType="postal"><delPoint>431 Architecture PO Box 115706</delPoint><eMailAdd>Web site: http://www.fgdl.org</eMailAdd><city>Gainesville</city><adminArea>FL</adminArea><postCode>32611-5706</postCode><country>US</country></cntAddress><cntPhone><voiceNum tddtty="">None</voiceNum></cntPhone></rpCntInfo></distorCont><distorTran><onLineSrc><orDesc>DOWNLOADABLE DATA</orDesc><linkage>https://www.fgdl.org/</linkage></onLineSrc></distorTran></distributor><distFormat><formatName Sync="TRUE">Shapefile</formatName></distFormat></distInfo><dataIdInfo><idCitation xmlns=""><resTitle>School Facilities (Public and Post-Secondary) in Florida - 2023</resTitle><date><pubDate>2023-07-31T00:00:00</pubDate></date><citRespParty xmlns=""><rpOrgName>University of Florida GeoPlan Center</rpOrgName><role><RoleCd value="006"/></role><rpCntInfo xmlns=""><cntAddress addressType="postal"><delPoint>University of Florida</delPoint><city>Gainesville</city><adminArea>FL</adminArea><postCode>32611</postCode><eMailAdd>https://www.geoplan.ufl.edu/contact/</eMailAdd><delPoint>431 Architecture PO Box 115706</delPoint></cntAddress></rpCntInfo></citRespParty><presForm xmlns=""><PresFormCd value="005"/></presForm><presForm xmlns=""><fgdcGeoform>vector digital data</fgdcGeoform></presForm><otherCitDet>State of Florida</otherCitDet></idCitation><idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This dataset contains 2023 information on public schools and post-secondary institutions in the State of Florida. It is a combination of schools and educational facility addresses from various sources, including the Florida Department of Education, the U.S. Department of Education National Center for Education Statistics, and other sources listed below. The data contains selected fields denoting the physical address, school number, district, and contact information for schools located in Florida. This data is meant to be used for planning purposes only and is not intended to represent a 100% inventory of schools. This dataset is an update to the GC_SCHOOLS_MAR21 layer. A previous version of this layer contained both public and private school information. A subset of private schools from that layer, GC_SCHOOLS_PRIV_SEP17, is available through FGDL. For this latest update, a corresponding schools boundary layer, GC_SCHOOLSBND_JUL23, is available through FGDL.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs><idPurp>This dataset contains 2023 information on public schools and post-secondary institutions in the State of Florida. </idPurp><idCredit>FDOE, NCES, FLORIDA COUNTIES, DTS, RPCs.</idCredit><idStatus><ProgCd value="001"/></idStatus><resMaint xmlns=""><maintFreq><MaintFreqCd value="009"/></maintFreq></resMaint><placeKeys xmlns=""><keyword>Florida</keyword></placeKeys><tempKeys xmlns=""><keyword>2023</keyword></tempKeys><themeKeys xmlns=""><keyword>FDOE</keyword><keyword>middle</keyword><keyword>NCES</keyword><keyword>high</keyword><keyword>elementary</keyword><keyword>college</keyword><keyword>school</keyword><keyword>kindergarten</keyword><keyword>university</keyword></themeKeys><themeKeys xmlns=""><thesaName xmlns=""><resTitle>ISO 19115 Topic Category</resTitle></thesaName><keyword>society</keyword><keyword>location</keyword></themeKeys><searchKeys><keyword>FDOE</keyword><keyword>NCES</keyword><keyword>2023</keyword><keyword>middle</keyword><keyword>high</keyword><keyword>Florida</keyword><keyword>elementary</keyword><keyword>college</keyword><keyword>school</keyword><keyword>kindergarten</keyword><keyword>university</keyword></searchKeys><spatRpType><SpatRepTypCd value="001"/></spatRpType><dataLang><languageCode value="eng"/><countryCode value="USA" Sync="TRUE"/></dataLang><dataExt xmlns=""><geoEle xmlns=""><GeoBndBox><westBL>-87.4788</westBL><eastBL>-79.8822</eastBL><southBL>24.5127</southBL><northBL>31.01</northBL></GeoBndBox></geoEle></dataExt><dataExt xmlns=""><exDesc>publication date</exDesc><tempEle><TempExtent><exTemp><TM_Period xmlns=""><tmBegin>2003-01-01T00:00:00</tmBegin><tmEnd>2023-07-31T00:00:00</tmEnd></TM_Period></exTemp></TempExtent></tempEle></dataExt><suppInfo>The Master School Identification (MSID) file is maintained by the Department of 
+Education (DOE) to ensure the Department provides accurate identification and 
+directory information on each Florida public school in the state. This file contains 
+information for all public PK-12 schools as well as for adult and 
+vocational-technical schools operated by district school boards.
+Information from this file is used for direct communication to the schools as well as 
+for reporting data for each school. The Master School Identification file is used to 
+edit all records submitted to the Department's Student, Staff and Finance 
+Automated Data Base Systems. The MSID provides the universe for 
+accountability reporting, including annual school grades and adequate yearly 
+progress calculations. It is the basis for reporting to the U.S. Department of 
+Education (USDE) via the Common Core of Data and Education Data Exchange 
+Network (EDEN) reporting systems. The federally-assigned identification numbers, 
+which are required for certain grant applications and for assignment of E-rate 
+funds, are provided to the Florida DOE the year following submission of new 
+school information to the USDE.
+
+FDOE Public Schools are from the Master School ID file, 
+Public schools are from the 2023-2024 school year. 
+https://eds.fldoe.org/EDS/MasterSchoolID/
+
+********************************************************
+
+The Common Core of Data (CCD) is a program of the U.S. Department of 
+Education's National Center for Education Statistics that annually collects fiscal 
+and non-fiscal data about all public schools, public school districts and state 
+education agencies in the United States. The data are supplied by state 
+education agency officials and include information that describes schools and 
+school districts, including name, address, and phone number; descriptive 
+information about students and staff, including demographics; and fiscal data, 
+including revenues and current expenditures.
+
+NCES public school data is gathered by CCD (Common Core of Data), 
+Public school data is from the 2021-2022 school year
+https://nces.ed.gov/ccd/schoolsearch/
+
+NCES college data is gathered by IPEDS, College data 
+is from the 2022-2023 school year.
+https://nces.ed.gov/collegenavigator
+
+********************************************************</suppInfo><envirDesc Sync="TRUE">Microsoft Windows 10 Version 10.0 (Build 19045) ; Esri ArcGIS 13.1.2.41833</envirDesc><dataExt xmlns=""><geoEle xmlns=""><GeoBndBox esriExtentType="search"><exTypeCode Sync="TRUE">1</exTypeCode><westBL Sync="TRUE">-87.478046</westBL><eastBL Sync="TRUE">-79.881802</eastBL><northBL Sync="TRUE">31.007286</northBL><southBL Sync="TRUE">24.515449</southBL></GeoBndBox></geoEle></dataExt><dataChar><CharSetCd value="004"/></dataChar><resConst><Consts xmlns=""><useLimit>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;None&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</useLimit></Consts><LegConsts xmlns=""><useLimit>The Florida Geographic Data Library is a collection of Geospatial Data compiled by the University of Florida GeoPlan Center with support from the Florida Department of Transportation. GIS data available in FGDL is collected from various state, federal, and other agencies (data sources) who are data stewards, producers, or publishers. The data available in FGDL may not be the most current version of the data offered by the data source. University of Florida GeoPlan Center makes no guarantees about the currentness of the data and suggests that data users check with the data source to see if more recent versions of the data exist. Furthermore, the GIS data available in the FGDL are provided 'as is'. The University of Florida GeoPlan Center makes no warranties, guaranties or representations as to the truth, accuracy or completeness of the data provided by the data sources. The University of Florida GeoPlan Center makes no representations or warranties about the quality or suitability of the materials, either expressly or implied, including but not limited to any implied warranties of merchantability, fitness for a particular purpose, or non-infringement. The University of Florida GeoPlan Center shall not be liable for any damages suffered as a result of using, modifying, contributing or distributing the materials. A note about data scale: Scale is an important factor in data usage. Certain scale datasets are not suitable for some project, analysis, or modeling purposes. Please be sure you are using the best available data. 1:24000 scale datasets are recommended for projects that are at the county level. 1:24000 data should NOT be used for high accuracy base mapping such as property parcel boundaries. 1:100000 scale datasets are recommended for projects that are at the multi-county or regional level. 1:125000 scale datasets are recommended for projects that are at the regional or state level or larger. Vector datasets with no defined scale or accuracy should be considered suspect. Make sure you are familiar with your data before using it for projects or analysis. Every effort has been made to supply the user with data documentation. For additional information, see the References section and the Data Source Contact section of this documentation.</useLimit></LegConsts></resConst><resConst/><idPoC xmlns=""><rpOrgName>University of Florida GeoPlan Center</rpOrgName><role><RoleCd value="006"/></role><rpCntInfo xmlns=""><cntAddress addressType="postal"><delPoint>University of Florida</delPoint><city>Gainesville</city><adminArea>FL</adminArea><postCode>32611</postCode><eMailAdd>https://www.geoplan.ufl.edu/contact/</eMailAdd><delPoint>431 Architecture PO Box 115706</delPoint></cntAddress></rpCntInfo><displayName>University of Florida GeoPlan Center</displayName></idPoC><tpCat><TopicCatCd value="016"/></tpCat><tpCat><TopicCatCd value="013"/></tpCat></dataIdInfo><dqInfo xmlns=""><dqScope><scpLvl><ScopeCd value="005"/></scpLvl></dqScope><report xmlns="" type="DQTopConsis" dimension=""><evalMethDesc>This data is provided 'as is'. GeoPlan relied on the integrity of the original data layer's topology</evalMethDesc></report><dataLineage><prcStep xmlns=""><stepDesc>The GeoPlan Center performed the following steps in order to create the 2008 
+statewide schools data layer.
+
+68 Different Sources Comprise the Schools Dataset.
+
+The following Sources were either reprojected to the FGDL Albers NAD83 HPGN 
+map projection or if no spatial data existed they were geocoded to a statewide 
+2007 TeleAtlas Streets dataset.  For downloaded county and district wide polygon 
+layers the label points were created and then used for each facility.
+
+Once the point sources were created via geocoding or reprojected existing point 
+data they were merged into one statewide layer.
+
+Record (facility) duplications were removed by manually viewing and editing the 
+statewide layer's attribute table for each of the 67 counties.  Where record 
+duplication existed source information of previously corrected FDOT Districts and 
+Regional Planning Council data took preference followed by, County data, and 
+finally geocoded data.
+
+Finally the FDOE state identification number and the NCES federal identification 
+numbers were added for each facility with such an id.  Next a table join was performed 
+for each table (FDOE and NCES) to the master statewide shapefile.  
+Un-used or duplicate fields were deleted.
+
+Below are the data Sources as described in the Source field in the attribute table.</stepDesc><stepDateTm>2008-07-10T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>SOURCE DATA INFORMATION - 68 Sources
+
+STRUCTURE:
+ SOURCE NAME
+ RECORD COUNT
+ UPDATE DAY
+ FILE NAME
+ PROJECTION
+ SCALE
+ WEBSITE
+ OTHER
+
+******************************
+ALACHUA COUNTY
+RECORD COUNT: 40
+01/01/2004
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet
+N/A
+http://gis.alachuacounty.us/
+
+******************************
+BAY COUNTY
+RECORD COUNT: 35
+11/01/2000
+SCHOOLS_PT.SHP
+NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet
+N/A
+http://www.pcbaygis.com/
+
+******************************
+BRADFORD COUNTY P.A.
+RECORD COUNT: 10
+12/31/2006
+BRADFORD_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet 
+VARIOUS
+
+******************************
+BREVARD COUNTY
+RECORD COUNT: 2
+06/30/2008
+ADDRESS.SHP
+NAD1983 HARN State Plane Florida East FIPS 0901 Ft
+N/A
+http://www.brevardpropertyappraiser.com/gisdata/datasearch.asp
+
+******************************
+BROWARD COUNTY
+RECORD COUNT: 251
+08/21/2003
+SCHOOLS.SHP
+NAD_1983_HARN_StatePlane_Florida_East_FIPS_0901_Ft
+N/A
+05/01/1999
+COLLEGES.SHP
+NAD_1983_HARN_StatePlane_Florida_East_FIPS_0901_Ft
+N/A
+http://gis.broward.org/GISData.htm
+
+******************************
+CALHOUN COUNTY P.A.
+RECORD COUNT: 5
+12/31/2006
+CALHOUN_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+CHARLOTTE COUNTY
+RECORD COUNT: 20
+07/05/2008
+COMMUNITY_AMENITIES.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902
+N/A
+http://www.ccgis.com/gis/ftp_download_page.html
+
+******************************
+CITRUS COUNTY P.A.
+RECORD COUNT: 22
+12/31/2006
+CITRUS_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+COLLIER COUNTY
+RECORD COUNT: 73
+02/17/2004
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+http://gis.colliergov.net/portal2007/
+
+******************************
+COLUMBIA COUNTY P.A.
+RECORD COUNT: 17
+12/31/2006
+COLUMBIA_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+DESOTO COUNTY P.A.
+RECORD COUNT: 7
+12/31/2006
+DESOTO_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+DIXIE COUNTY P.A.
+RECORD COUNT: 4
+12/31/2006
+DIXIE_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+DTS
+RECORD COUNT: 1353
+12/06/2006
+SCHOOLS_D5_JAN07.SHP
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+
+******************************
+ESCAMBIA COUNTY
+RECORD COUNT: 79
+06/30/2004
+SCHOOLS.SHP
+NAD_1983_HARN_StatePlane_Florida_North_FIPS_0903
+N/A
+http://www.co.escambia.fl.us/departments/gis/default.php
+
+
+******************************
+FDOE COLLEGE
+RECORD COUNT: 323
+11/06/2007
+COMM_COLLEGE_INDEPENDENT.XLS
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+11/06/2007
+COMM_COLLEGE_PUB.XLS
+N/A
+
+The database files were geocoded against 2007 Tel Atlas Roads, 
+and finally converted into a shapefile 
+with the FGDL Albers HPGN map projection.
+
+******************************
+FDOE PRIVATE
+RECORD COUNT: 459
+5/29/2007
+K_12_PRIVATE_DATA_REQUEST.XLS
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+
+The database files were geocoded against 2007 Tel Atlas Roads, 
+and finally converted into a shapefile 
+with the FGDL Albers HPGN map projection.
+
+******************************
+FDOE PUBLIC
+RECORD COUNT: 424
+5/29/2007
+MSID_ALL_SCHOOLS_0708.XLS
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+
+The database files were geocoded against 2007 Tel Atlas Roads, 
+and finally converted into a shapefile 
+with the FGDL Albers HPGN map projection.
+
+******************************
+FRANKLIN COUNTY P.A.
+RECORD COUNT: 5
+12/31/2006
+FRANKLIN_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+GADSDEN COUNTY P.A.
+RECORD COUNT: 16
+12/31/2006
+GADSDEN_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+GEOPLAN CENTER
+RECORD COUNT: 31
+06/30/2008
+
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+
+******************************
+GILCHRIST COUNTY P.A.
+RECORD COUNT: 4
+12/31/2006
+GILCHRIST_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+GLADES COUNTY P.A.
+RECORD COUNT: 4
+12/31/2006
+GLADES_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+GULF COUNTY
+RECORD COUNT: 11
+7/13/2007
+SCHOOLS_PT_1.SHP
+NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet
+N/A
+http://www.gulfcounty-fl.gov/
+
+******************************
+HAMILTON COUNTY P.A.
+RECORD COUNT: 7
+12/31/2006
+HAMILTON_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+HARDEE COUNTY P.A.
+RECORD COUNT: 8
+12/31/2006
+HARDEE_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+ftp://ftp.hardeecounty.net/Layers
+
+******************************
+HENDRY COUNTY P.A.
+RECORD COUNT: 11
+12/31/2006
+HENDRY_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+HERNANDO COUNTY
+RECORD COUNT: 20
+06/01/2001
+ELEME_PT.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+06/01/2001
+MIDDLEPT.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+06/01/2001
+HIGHPT.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+ftp://www.hernandocounty.us/planning/Shape%20Library%20(ESRI%20Format)/
+
+******************************
+HIGHLANDS COUNTY P.A.
+RECORD COUNT: 14
+12/31/2006
+HIGHLANDS_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+HILLSBOROUGH COUNTY
+RECORD COUNT: 227
+05/01/2006
+SCHLPTS.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+
+******************************
+HILLSBOROUGH COUNTY P.A.
+RECORD COUNT: 1
+12/31/2006
+HILLSBOROUGH_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+http://www-gis.hillsboroughcounty.org/geodata/FTP_HTMLS/geodatadir.cfm
+
+******************************
+HOLMES COUNTY P.A.
+RECORD COUNT: 8
+12/31/2006
+HOLMES_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+INDIAN RIVER COUNTY
+RECORD COUNT: 24
+02/06/2008
+SCHOOLS_PUB_K12.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+
+******************************
+JACKSON COUNTY
+RECORD COUNT: 22
+02/04/2008
+JC_FIREPOLICESCHOOLS_POINT_MERGE.SHP
+GCS_WGS_1984
+N/A
+
+******************************
+JEFFERSON COUNTY P.A.
+RECORD COUNT: 6
+12/31/2006
+JEFFERSON_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+LAFAYETTE COUNTY P.A.
+RECORD COUNT: 2
+12/31/2006
+LAFAYETTE_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+LAKE COUNTY
+RECORD COUNT: 54
+01/01/2006
+PUBLICSCHOOLS.SHP
+NAD1983_HARN_StatePlane_Florida_East_FIPS_0901_Ft
+N/A
+2006
+PRIVATESCHOOLS.SHP
+NAD1983_HARN_StatePlane_Florida_East_FIPS_0901_Ft
+N/A
+05/22/2006
+CHARTERSCHOOLS.SHP
+NAD1983_HARN_StatePlane_Florida_East_FIPS_0901_Ft
+N/A
+ftp://ftp.co.lake.fl.us/GIS/GisDownloads/Shapefiles/
+
+******************************
+LEE COUNTY
+RECORD COUNT: 89
+01/01/2008
+SCHOOLLOCATIONS.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+http://leegis.leegov.com/GISData.htm
+
+******************************
+LEON COUNTY
+RECORD COUNT: 147
+07/18/2005
+COMMON_PLACES.SHP
+NAD1983_HARN_StatePlane_Florida_North_FIPS_0903_Ft
+N/A
+
+******************************
+LEVY COUNTY P.A.
+RECORD COUNT: 14
+12/31/2006
+LEVY_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+LIBERTY COUNTY P.A.
+RECORD COUNT: 5
+12/31/2006
+LIBERTY_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+MADISON COUNTY P.A.
+RECORD COUNT: 10
+12/31/2006
+MADISON_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+MANATEE COUNTY
+RECORD COUNT: 65
+08/25/2005
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+http://www.mymanatee.org/internet/information_services_site.nsf/ContentLookup/gis_data_downloads
+
+******************************
+MARION COUNTY
+RECORD COUNT: 10
+06/19/2006
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+ftp://146.201.97.137/County_local_data/Marion/shapefiles/
+
+******************************
+MARTIN COUNTY
+RECORD COUNT: 26
+10/09/2001
+SCHOOLS.SHP
+NAD_1983_HARN_StatePlane_Florida_East_FIPS_0901
+N/A
+http://www.martin.fl.us/portal/page?_pageid=254,3431495&amp;_dad=portal&amp;_schema=PORTAL
+
+******************************
+MIAMI-DADE COUNTY
+RECORD COUNT: 894
+06/01/2006
+LSCHOOLS.SHP
+NAD 1983 State Plane Zone 3601
+N/A
+03/01/2006
+LSCHLPVT.SHP
+NAD 1983 State Plane Zone 3601
+N/A
+09/01/2006
+LSCHCHRT.SHP
+NAD 1983 State Plane Zone 3601
+
+******************************
+MONROE COUNTY
+RECORD COUNT: 16
+11/04/2004
+CRITICALFACILITIES.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+
+******************************
+NCES 2005-2006 PRIVATE
+RECORD COUNT: 857
+02/29/2008
+NCESDATA_BBE49DF8_02292008.XLS
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+
+National Center for Education Statistics
+PSS Private School Universe Survey data 2005-2006 school year
+The file contains (1819) records based on your search.
+NCES is not responsible for the manner in which this data is presented. This data 
+is provided as an extra service to the user. For more information about this data, 
+visit the PSS homepage. http://nces.ed.gov/surveys/pss
+
+downloaded from:
+http://nces.ed.gov/surveys/pss/privateschoolsearch/school_list.asp?Search=1&amp;State=12
+
+NCES Public and Private School Data were down loaded
+from: http://nces.ed.gov/globallocator/
+The database files were geocoded against 2007 Tel Atlas Roads, 
+and finally converted into a shapefile 
+with the FGDL Albers HPGN map projection.
+
+******************************
+NCES 2005-2006 PUBLIC
+RECORD COUNT: 320
+02/29/2008
+NCESDATA_662805A5_02292008.XLS
+GCS_North_American_1983_HARN - ALBERS
+VARIOUS
+
+National Center for Education Statistics
+CCD public school data 2005-2006 school year
+The file contains (3723) records based on your search.
+SEARCH CRITERIA: State: "Florida"
+NCES is not responsible for the manner in which this data is presented. This data 
+is provided as an extra service to the user. To download full CCD datasets, please 
+go to the CCD home page. http://nces.ed.gov/ccd
+
+downloaded from:
+http://nces.ed.gov/globallocator/
+
+NCES Public and Private School Data were down loaded
+from: http://nces.ed.gov/globallocator/
+The database files were geocoded against 2007 Tel Atlas Roads, 
+and finally converted into a shapefile 
+with the FGDL Albers HPGN map projection.
+
+******************************
+NEFRPC
+RECORD COUNT: 386
+06/15/2006
+SCHOOLS_D2_JUN06.SHP
+GCS_North_American_1983_HARN - ALBERS
+N/A
+
+******************************
+OKALOOSA COUNTY
+RECORD COUNT: 59
+05/15/2007
+SCHPY.SHP
+NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet
+N/A
+ftp://ftpgis.co.okaloosa.fl.us/public/Shape%20Files/
+
+******************************
+OKEECHOBEE COUNTY P.A.
+RECORD COUNT: 12
+12/31/2006
+OKEECHOBEE_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+ORANGE COUNTY
+RECORD COUNT: 193
+07/17/2007
+PUBLIC_SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+09/20/2007
+HEAD_START.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+09/20/2007
+COLLEGE_AND_UNIVERSITIES.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+ftp://ftp.onetgov.net/divisions/Infomap/pub/GIS_Downloads/
+
+******************************
+PALM BEACH COUNTY
+RECORD COUNT: 173
+08/29/2001
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+1:24,000
+04/15/2008
+LANDMARKS.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+ftp://ftp.co.palm-beach.fl.us/
+http://www.palmbeach.k12.fl.us/maps/gis/gisdata/gisdata.htm
+
+******************************
+PASCO COUNTY
+RECORD COUNT: 28
+11/03/2005
+PASCOSCHOOLS.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+http://www.pascocountyfl.net/devser/sd/survey/surveyweb/GisMaps/default.html
+
+******************************
+PASCO SCHL BRD
+RECORD COUNT: 79
+01/01/2008
+PASCO COUNTY SCHOOLS GIS PUBLIC.MDB
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+http://www.pasco.k12.fl.us/
+
+******************************
+PINELLAS COUNTY
+RECORD COUNT: 266
+01/11/2008
+SCHOOLS.SHP
+NAD_1927_StatePlane_Florida_West_FIPS_0902
+N/A
+http://gis.pinellascounty.org/gisData/gisDataSets.aspx
+
+******************************
+POLK COUNTY
+RECORD COUNT: 21
+01/03/2008
+SCHOOLS_ALL.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+ftp://www.polk-county.net/
+
+******************************
+POLK COUNTY P.A.
+RECORD COUNT: 122
+12/31/2006
+POLK_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+SANTA ROSA COUNTY
+RECORD COUNT: 39
+02/05/2008
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet
+N/A
+http://www.santarosa.fl.gov/gis/index.html
+
+******************************
+SARASOTA COUNTY
+RECORD COUNT: 80
+01/27/2008
+SCHOOLSPOINTS.SHP
+NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet
+N/A
+http://gis.scgov.net/data_download_page.asp
+
+******************************
+ST. LUCIE COUNTY
+RECORD COUNT: 64
+01/29/2008
+ST_LUCIECOUNTY_CRITICAL_FACILITIES.SHP
+NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet
+N/A
+
+******************************
+SUWANNEE COUNTY P.A.
+RECORD COUNT: 9
+12/31/2006
+SUWANNEE_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+TAYLOR COUNTY P.A.
+RECORD COUNT: 8
+12/31/2006
+TAYLOR_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+UNION COUNTY P.A.
+RECORD COUNT: 4
+12/31/2006
+UNION_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+VOLUSIA COUNTY
+RECORD COUNT: 150
+07/03/2007
+SCHOOLS.SHP
+NAD1983_HARN_StatePlane_Florida_East_FIPS_0901_Ft
+N/A
+http://volusia.org/gis/download/shapes.htm
+
+******************************
+WAKULLA COUNTY P.A.
+RECORD COUNT: 10
+12/31/2006
+WAKULLA_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************
+WALTON COUNTY
+RECORD COUNT: 17
+02/14/2007
+SCHOOLS.SHP
+NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet
+N/A
+http://gisftp.co.walton.fl.us/
+
+******************************
+WASHINGTON COUNTY P.A.
+RECORD COUNT: 7
+12/31/2006
+WASHINGTON_PARCELS_06.SHP
+NAD 1983 State Plane Florida (north east or west) Feet
+VARIOUS
+
+******************************</stepDesc><stepDateTm>2008-07-10T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>Next GeoPlan Center performed the following attribute table adjustments. -Upper cased all records. -Added DESCRIPT field based on NAME -Socio-Cultural Effect data fields and definitions were added. FLAG, UPDATE_DAY, AUTOID, NAME, ADDRESS, CITY, ZIPCODE, OPERATING, OP_CLASS, SERVICES, COMMON_USE USE, YR_BUILT, FGDLAQDATE.</stepDesc><stepDateTm>2008-07-10T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn xmlns=""><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+
+The GeoPlan Center performed the following steps in 2011-2012. 
+
+Downloaded data: 
+June 1st, 2011 &amp; May 14, 2012- MSID all public schools from 
+FDOE http://doeweb-prd.doe.state.fl.us/EDS/MasterSchoolID/
+
+May 14, 2012- FDOE Private schools 
+http://www.floridaschoolchoice.org/information/privateschooldirectory/DownloadExcelFile.aspx
+(Downloaded and merged All Schools Part 1 &amp; 2)
+
+NCES public schools: http://nces.ed.gov/ccd/schoolsearch/ 
+(Search State: Florida, then download as an excel file)
+
+NCES private schools: http://nces.ed.gov/surveys/pss/privateschoolsearch/ 
+(Search State: Florida, then download as excel file)
+
+Community colleges: http://data.fldoe.org/workforce/contacts/default.cfm?action=showList&amp;ListID=11
+
+Colleges: http://nces.ed.gov/collegenavigator/
+
+Location of codebooks/glossaries for downloaded tables:
+MSID:  http://www.fldoe.org/eias/dataweb/tech/msid.pdf
+
+NCES Public schools glossary: http://nces.ed.gov/ccd/commonfiles/glossary.asp
+
+NCES Private schools file layout: http://nces.ed.gov/surveys/pss/privateschoolsearch/aboutdata.asp
+
+Downloaded gc_schools_jul08.shp from FGDL. Total number of records 7781
+
+----------------------------------------------------------------------
+Spatial updates:
+-Converted downloaded Excel tables to DBF table in spatial database
+
+-Compared/investigated records in this table that were not in gc_schools_jul08.shp. Populated a h_check field 
+by marking them as: 0= add to gc_schools_may12 and 1= already reside in the gc_schools_jul08 dataset, 3= investigate further.
+
+-Flag field:
+ -V = verified. Verified means that the point has been visually checked, point is over building, and that the 
+ record was also found in the MSID
+
+ -NV = not verified. Not verified means that unable to verify the school and/or its location
+
+ -Duplicates were marked as duplicate and were later deleted
+
+-If the point was new, the point was moved from the geocoded generated spot, the SCORE field was populated with '0', 
+SIDE was populated with '*', and MATCH_ADRESS was populated as blank.
+
+-A duplicate point of all superintendent offices was created and the name was calculated as 
+"**** COUNTY STUDENT SERVICES/ MIGRANT/VIRTUAL PROGRAM/ MCKAY SCHOLARSHIP/ HOMEBOUND PROGRAM" 
+and its FEDERAL_ID was calculated as the migrant program ID when available.
+
+----------------------------------------------------------------------
+Attribute table updates:
+
+-Cleaned up city, county, and address fields in updated layer, ex. Ft. Myers became FORT MYERS. Replaced sch with 
+school when found.
+
+-COMMENT field records that were previously populated were given parentheses to separate previous update from 
+current update
+
+-PARCEL_ID was updated for points without an ID by identifying the parcel boundary that the point was within and 
+copying LINK field from statewide_parcels10.shp to PARCEL_ID
+
+-LAT_DD, LONG_DD were updated by calculating geometry tool
+
+-USNG_FL_1K was updated through a spatial join
+
+-For added records, source updated to GEOPLAN
+
+-FGDLAQDATE and UPDATE_DAY were updated
+
+-For public schools (OP_CLASS = 'PUBLIC'):
+ -Joined gc_schools_may12.shp and MSID_all_schools.dbf based on STATE_ID
+ -Updated table through field calculator: 
+ PRINCIPAL **see below for description of field and calculation
+ PHONE
+ LOW_GRADE
+ HIGH_GRADE
+ PROGRAMS **see below for description of field and calculation
+ MAGNETINFO **see below for description of field and calculation
+ TYPE **see below for description of field and calculation
+
+ -Joined gc_schools and NCES schools based on FEDERAL_ID
+ -Updated: 
+ STTCH_RT (in NCES table: STUDENT_TE)
+ TEACHER (in NCES table: TEACHERS_)
+ ENROLLMENT (in NCES table: STUDENTS_)
+ TITLE1SCHO (in NCES table: TITLE_1_SC)
+ FREE_LUNCH
+ REDUCED_LUNCH (in NCES table: REDUCED_LU)
+
+ -If school did not have a STATE_ID, then HIGH_GRADE, LOW_GRADE, MAGNETINFO, PROGRAMS (charter school status) 
+ were obtained from NCES public schools records by joining on FEDERAL_ID
+
+ -For records in gc_school_may12 that were not joined, COMMENT field includes note "NO NCES 09-10 UDPATE"
+
+-For private schools, (OP_CLASS = 'PRIVATE'):
+        -For private schools, FEDERAL_ID has multiple records under one unique ID.
+  To fix:
+  Ran summary on private ID, sorted count field descending. Created a query for all private IDs in gc_schools 
+  layer that had more than one count. Cross checked records against NCES attribute table. Corrected private 
+  ID for the one to one match. For the duplicate private ID, either remove ID or found the correct ID. 
+
+ -Joined gc_schools and FDOE_private based on STATE_ID
+ -Updated: 
+ PRINCIPAL (in NCES: DIRECTOR)
+ PHONE
+ GRADE (in NCES: GRAD_LEVE)
+ 
+ -Joined gc_schools and NCES_private based on FEDERAL_ID
+ -Updated: 
+ LOW_GRADE (in NCES: LOGRADE) **see below for description of field and calculation
+ HIGH_GRADE (in NCES: HIGRADE) **see below for description of field and calculation
+ PHONE (in NCES: PSS_PHONE)
+ ENROLLMENT (in NCES: PSS_ENR_15)
+ STTCH_RT (in NCES: PSS_STDTCH)
+ TEACHER (in NCES: PSS_FTE_TE) 
+ 
+ -For records in gc_school_may12 that were not joined, COMMENT field includes note "NO NCES 09-10 UDPATE"
+
+ -If school did not have a STATE_ID, then HIGH_GRADE and LOW_GRADE were obtained from NCES records
+
+-For colleges, (USE = 'COLLEGE/UNIVERSITY'),
+ Updated: 
+ PHONE
+ OP_CLASS (in FDOE College: TYPE indicated public or private)
+ ENROLLMENT (in FDOE College: STUDENT_PO)
+
+-Fields that were derived from fields within the attribute table,
+ GRADES: LOW_GRADE &amp; "-" &amp; HIGH_GRADE
+ OPERATING: Selected OP_CLASS = 'PUBLIC', removed PROGRAMS= 'DEPARTMENT OF JUVENILE JUSTICE (DJJ)' 
+ from selection. Field calculated selection as: COUNTY &amp; " " &amp;  "COUNTY SCHOOL DISTRICT"
+ TYPE: If private, based on GRADES selection
+
+-After attribute table was updated, STTCH_RT and TEACHERS were rounded to a whole number 
+
+-All fields were upcased.</stepDesc><stepDateTm>2012-05-16T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+
+GeoPlan process steps of public and private schools in 2017: 
+
+The following data sources were used to update the public and private schools data set:
+
+(1) FDOE Public Schools
+Source: Master School ID 2016-2017 
+http://doeweb-prd.doe.state.fl.us/EDS/MasterSchoolID
+Downloaded on 02/20/2017. 
+
+(2) FDOE K-12 Private Schools
+Source: Florida Department of Education K-12 Private Schools Annual Survey 2014-2015 
+http://www.floridaschoolchoice.org/information/PrivateSchoolDirectory/Default.aspx
+Downloaded on 02/20/2017
+
+(3) NCES Public Schools
+CCD Public school data 2014-2015, 2015-2016 school years
+http://nces.ed.gov/ccd/schoolsearch/
+* The directory information on school name, address, and phone number are preliminary data from initial 
+submissions of school level data for 2015-2016.
+** Data provided on student membership and staffing are from the official school level data for 2014-2015.
+Downloaded on 02/20/2017
+
+(4) NCES Private Schools
+Source: PSS Private School Universe Survey data for the 2013-2014 school year
+http://nces.ed.gov/ccd/schoolsearch/
+Downloaded on 02/20/2017
+
+(5) NCES Colleges
+Source: College Navigator consisting of 2015-2016 data from the Integrated Postsecondary 
+Education Data System (IPEDS), the core postsecondary education data collection program 
+for NCES. 
+http://nces.ed.gov/collegenavigator/
+Downloaded on 04/14/2017
+
+(6) FDOE Florida Colleges
+Source: Florida Department of Education College System Campuses 
+http://data.fldoe.org/workforce/contacts/default.cfm?action=showList&amp;ListID=11
+Accessed on 04/14/2017
+
+
+-------------------------------------------------------------------------------------------------------
+
+Using schools data sets downloaded from the websites listed above, records were reviewed 
+and edited to apply any available spatial and attribute updates. In most cases, school locations 
+were checked using imagery and Google Street View and either marked as Verified or Not Verified 
+in the FLAG field, please see the FLAG field Attribute Definition for more information.
+
+During the Spatial and Tabular QAQC duplicates and non-qualified points were
+removed.
+
+The final Point layer was spatially joined to a 2015 statewide parcel layer, and 
+the GCID field was populated with a crosswalk ID linking each point feature with 
+it's corresponding polygon layer feature, GC_SCHOOLSBND_SEP17. The GCID 
+field replaces the SCHOOL_ID field of the previous gc_schools layer as the unique 
+crosswalk ID. 
+
+Finally, the GeoPlan Center performed the following attribute table adjustments:
+
+Populated and cleaned all fields. 
+
+Fields added include:
+-GCID: replaces SCHOOLID as unique ID field
+-FSOURCE
+-DATASOURCE: replaces SOURCE
+-MGRS: replaces USNG_FL_1K field
+
+Fields removed include: 
+- COMMON_USE
+- USE
+- ACTIVITY
+
+School services/programs from new datasets above that were located at county school district offices 
+(for example:county student services, migrant programs, virtual programs, Mckay scholarship programs, 
+homebound programs, etc.) were not added in order to avoid duplicate points at county school district 
+locations. Schools or programs located at detention centers were not added with this latest update. 
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute table updates by data source: 
+
+For public schools (OP_CLASS = PUBLIC):
+
+  (1) Joined GC_SCHOOLS and MSID Schools based on STATE_ID
+ 
+     PRINCIPAL **see below for description of field and calculation
+     PHONE
+     LOW_GRADE **see below for description of field and calculation
+     HIGH_GRADE **see below for description of field and calculation
+     PROGRAMS **see below for description of field and calculation
+     OP_CLASS (For charter schools) **see below for description of field and calculation
+     MAGNETINFO **see below for description of field and calculation
+     TYPE **see below for description of field and calculation
+
+  (2) Joined GC_SCHOOLS and NCES Public Schools based on FEDERAL_ID
+
+     STTCH_RT (NCES: STUDENT_TEACHER_RATIO)
+     TEACHER (NCES: TEACHERS)
+     ENROLLMENT (NCES: STUDENTS)
+     TITLE1SCHO (NCES: TITLE_1_SCHOOL)
+     FREE_LUNCH (NCES: FREE_LUNCH)
+     REDUCED_LUNCH (NCES: REDUCED_LUNCH)
+
+     For schools with no STATE_ID, HIGH_GRADE, LOW_GRADE, MAGNETINFO, 
+     were obtained from NCES Public Schools. 
+
+For private schools (OP_CLASS = PRIVATE):
+
+  (3) Joined GC_SCHOOLS and FDOE Private Schools based on STATE_ID
+
+     PRINCIPAL (in NCES: DIRECTOR)
+     PHONE
+     GRADE (in NCES: GRAD_LEVEL)
+
+  (4) Joined GC_SCHOOLS and NCES Private Schools based on FEDERAL_ID
+
+     LOW_GRADE (in NCES: LOGRADE) **see below for description of field and calculation
+     HIGH_GRADE (in NCES: HIGRADE) **see below for description of field and calculation
+     PHONE (in NCES: PSS_PHONE)
+     ENROLLMENT (in NCES: PSS_ENROLL_T)
+     STTCH_RT (in NCES: PSS_STDTCH)
+     TEACHER (in NCES: PSS_FTE_TEACH)
+ 
+     If school did not have a STATE_ID, then HIGH_GRADE and LOW_GRADE were obtained 
+     from NCES records.
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute definitions from codebooks:
+
+PRINCIPAL_TITLE from MSID Codebook
+Attribute Definition
+1    Mr.
+2   Ms.
+3   Mrs.
+4   Miss
+5   Dr.
+6   Other/Unknown
+-Selected all 1's and field calculation as: "PRINCIPAL_TITLE" &amp; "PRINCIPAL_LAST". Repeated process for all attributes, 
+except did not use the PRINCIPAL_TITLE= other/unknown 
+
+CHARTER_SCHL_STAT from MSID Codebook
+Attribute Definition
+R   Regular charter school 
+C    Conversion charter school 
+T   Charter technical career center 
+B  Conversion charter school/charter technical career center
+Z  Not a charter school
+-Selected all attributes equal to R,C,T, and B. Field calculated OP_CLASS= "CHARTER" 
+
+TYPE from MSID Codebook
+Attribute Definition 
+01   Elementary
+02   Middle/Jr. High
+03  Senior High
+04  Combination Elementary and Secondary
+05  Adult
+07  Other
+-Selected all 01's and field calculation as "ELEMENTARY". Repeated the process for 02, 03, 04, and 05.
+
+PRIMARY SERVICE TYPE from MSID Codebook
+R                              K-12 General Education
+S                              Special Education
+B                              Alternative Education
+V                              Career and Technical Education
+A                              Adult General Education
+O                              Other
+-Selected all A's and calculated field as PROGRAMS= "ADULT GENERAL EDUCATION". Repeated the same process
+for all other primary service type codes.
+*This field was updated according to the above categories only for those records with a State ID that could 
+be joined to the Master School ID 2016-2017.  
+
+MAGNET_STATUS from MSID Codebook
+Attribute Definition
+S   Magnet School
+P   Magnet Program
+Z  Not Applicable
+-Selected all S's and field calculation as "MAGNET SCHOOL". 
+-Selected all P's and field calculation as "MAGENT PROGRAM". 
+-Selected all Z's and field calculation as "NOT A MAGNET SCHOOL/PROGRAM". 
+-If field still blank after, field calculated as "NO INFORMATION AVAILABLE".
+
+LOGRADE from NCES Private Schools database Codebook
+Attribute Definition
+2  Lowest grade in school is PK   
+3  Lowest grade in school is KG  
+4  Lowest grade in school is transitional KG
+5  Lowest grade in school is transitional 1st grade
+6  Lowest grade in school is 1st grade
+7  Lowest grade in school is 2nd grade
+8  Lowest grade in school is 3rd grade
+9  Lowest grade in school is 4th grade
+10  Lowest grade in school is 5th grade
+11  Lowest grade in school is 6th grade
+12  Lowest grade in school is 7th grade
+13  Lowest grade in school is 8th grade  
+14  Lowest grade in school is 9th grade
+15  Lowest grade in school is 10th grade
+16  Lowest grade in school is 11th grade   
+17  Lowest grade in school is 12th grade   
+-Selected all 2's and field calculated as "PK". Repeated the process for all attributes.
+
+HIGRADE from NCES Private Schools database Codebook
+Attribute Definition
+2  Highest grade in school is PK   
+3  Highest grade in school is KG  
+4  Highest grade in school is transitional KG
+5  Highest grade in school is transitional 1st grade
+6  Highest grade in school is 1st grade
+7  Highest grade in school is 2nd grade
+8  Highest grade in school is 3rd grade
+9  Highest grade in school is 4th grade
+10  Highest grade in school is 5th grade
+11  Highest grade in school is 6th grade
+12  Highest grade in school is 7th grade
+13  Highest grade in school is 8th grade  
+14  Highest grade in school is 9th grade
+15  Highest grade in school is 10th grade
+16  Highest grade in school is 11th grade   
+17  Highest grade in school is 12th grade   
+-Selected all 2's and field calculated as "PK". Repeated the process for all attributes.</stepDesc><stepDateTm>2017-04-17T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>New and future schools added (20 total) from various sources including Google, county school districts, and the Bureau of Indian Education in Florida.</stepDesc><stepDateTm>2017-09-15T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+
+GeoPlan process steps of public schools and post-secondary institutions in 2020:
+
+Note: This update of the GC_SCHOOLS layer contains public and post-secondary
+schools only. A subset of private schools from the previous version, gc_schools_priv_sep17, 
+is available through FGDL. 
+
+The following data sources were used to update the public schools and post-secondary 
+institutions data set:
+
+(1) FDOE Public Schools
+Source: Master School ID 2019-2020 
+http://doeweb-prd.doe.state.fl.us/EDS/MasterSchoolID
+Downloaded on 08/29/2019. 
+
+(2) NCES Public Schools
+CCD Public school data 2016-2017, 2018-2019 school years
+http://nces.ed.gov/ccd/schoolsearch/
+* The directory information on school name, address, and phone number are preliminary 
+data from initial submissions of school level data for 2018-2019.
+** Data provided on student membership and staffing are from the official school level data 
+for 2016-2017.
+Downloaded on 08/29/2019. 
+
+(3) NCES Colleges
+Source: College Navigator consisting of 2018-2019 data from the Integrated Postsecondary 
+Education Data System (IPEDS), the core postsecondary education data collection program 
+for NCES. 
+http://nces.ed.gov/collegenavigator/
+Downloaded on 11/15/2019
+
+-------------------------------------------------------------------------------------------------------
+
+Using schools data sets downloaded from the websites listed above, records were reviewed 
+and edited to apply any available spatial and attribute updates. In most cases, school locations 
+were checked using imagery and Google Street View and either marked as Verified or Not Verified 
+in the FLAG field, please see the FLAG field Attribute Definition for more information.
+
+During the Spatial and Tabular QAQC duplicates and non-qualified points were
+removed.
+
+The final Point layer was spatially joined to a 2018 statewide parcel layer, and 
+the GCID field was populated with a crosswalk ID linking each point feature with 
+it's corresponding polygon layer feature, GC_SCHOOLSBND_FEB20.
+
+Finally, the GeoPlan Center performed the following attribute table adjustments:
+
+Populated and cleaned all fields. 
+
+Fields added include:
+-NCES_COLL
+
+Fields removed include: 
+- FDOE_PRV
+- NCES_PRIV
+
+School services/programs from new datasets above that were located at county school district offices 
+or other existing school facilities (for example:adult programs, county student services, migrant programs, 
+virtual programs, Mckay scholarship programs, homebound programs, etc.) were not added in order to avoid duplicate points at facility locations. Schools or programs located at detention centers were not
+added with this latest update. 
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute table updates by data source: 
+
+(1) Joined GC_SCHOOLS and MSID Schools based on STATE_ID
+ 
+     PRINCIPAL **see below for description of field and calculation
+     PHONE
+     LOW_GRADE **see below for description of field and calculation
+     HIGH_GRADE **see below for description of field and calculation
+     PROGRAMS **see below for description of field and calculation
+     OP_CLASS (For charter schools) **see below for description of field and calculation
+     MAGNETINFO **see below for description of field and calculation
+     TYPE **see below for description of field and calculation
+
+(2) Joined GC_SCHOOLS and NCES Public Schools based on FEDERAL_ID
+
+     STTCH_RT (NCES: STUDENT_TEACHER_RATIO)
+     TEACHER (NCES: TEACHERS)
+     ENROLLMENT (NCES: STUDENTS)
+     TITLE1SCHO (NCES: TITLE_1_SCHOOL)
+     FREE_LUNCH (NCES: FREE_LUNCH)
+     REDUCED_LUNCH (NCES: REDUCED_LUNCH)
+
+     For schools with no STATE_ID, HIGH_GRADE, LOW_GRADE, MAGNETINFO, 
+     were obtained from NCES Public Schools. 
+
+     No updates were available for the following fields: MGRNT_STD, FISH_FAC1, 
+     FISH_FAC2, BBSERVICE, BBPROVIDER, BBSPEED, DSTREAMSPD. 
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute definitions from codebooks:
+
+PRINCIPAL_TITLE from MSID Codebook
+Attribute Definition
+1    Mr.
+2   Ms.
+3   Mrs.
+4   Miss
+5   Dr.
+6   Other/Unknown
+-Selected all 1's and field calculation as: "PRINCIPAL_TITLE" &amp; "PRINCIPAL_LAST". Repeated process for all attributes, except did not use the PRINCIPAL_TITLE= other/unknown 
+
+CHARTER_SCHL_STAT from MSID Codebook
+Attribute Definition
+R   Regular charter school 
+C    Conversion charter school 
+T   Charter technical career center 
+B  Conversion charter school/charter technical career center
+Z  Not a charter school
+-Selected all attributes equal to R,C,T, and B. Field calculated OP_CLASS= "CHARTER" 
+
+TYPE from MSID Codebook
+Attribute Definition 
+01   Elementary
+02   Middle/Jr. High
+03  Senior High
+04  Combination Elementary and Secondary
+05  Adult
+07  Other
+-Selected all 01's and field calculation as "ELEMENTARY". Repeated the process for 02, 03, 04, and 05.
+
+PRIMARY SERVICE TYPE from MSID Codebook
+R                              K-12 General Education
+S                              Special Education
+B                              Alternative Education
+V                              Career and Technical Education
+A                              Adult General Education
+O                              Other
+-Selected all A's and calculated field as PROGRAMS= "ADULT GENERAL EDUCATION". Repeated the same process for all other primary service type codes.
+*This field was updated according to the above categories only for those records with a State ID that could be joined to the Master School ID 2019-2020.  
+
+MAGNET_STATUS from MSID Codebook
+Attribute Definition
+S   Magnet School
+P   Magnet Program
+Z  Not Applicable
+-Selected all S's and field calculation as "MAGNET SCHOOL". 
+-Selected all P's and field calculation as "MAGNET PROGRAM". 
+-Selected all Z's and field calculation as "NOT A MAGNET SCHOOL/PROGRAM". 
+-If field still blank after, field calculated as "NO INFORMATION AVAILABLE".</stepDesc><stepDateTm>2020-02-21T00:00:00</stepDateTm></prcStep><prcStep xmlns=""><stepDesc>-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+
+GeoPlan process steps of public schools and post-secondary institutions in 2021:
+
+The following data sources were used to update the public schools and post-secondary 
+institutions data set:
+
+(1) FDOE Public Schools
+Source: Master School ID 2020-2021 
+http://doeweb-prd.doe.state.fl.us/EDS/MasterSchoolID
+Downloaded on 01/22/2021. 
+
+(2) NCES Public Schools
+CCD Public school data 2018-2019, 2019-2020 school years
+http://nces.ed.gov/ccd/schoolsearch/
+* The directory information on school name, address, and phone number are preliminary 
+data from initial submissions of school level data for 2019-2020.
+** Data provided on student membership and staffing are from the official school level data 
+for 2018-2019.
+Downloaded on 01/22/2021. 
+
+(3) NCES Colleges
+Source: College Navigator consisting of 2020-2021 data from the Integrated Postsecondary 
+Education Data System (IPEDS), the core postsecondary education data collection program 
+for NCES. 
+http://nces.ed.gov/collegenavigator/
+Downloaded on 03/24/2021
+
+-------------------------------------------------------------------------------------------------------
+
+Using schools data sets downloaded from the websites listed above, records were reviewed 
+and edited to apply any available spatial and attribute updates. In most cases, school locations 
+were checked using imagery and Google Street View and either marked as Verified or Not Verified 
+in the FLAG field, please see the FLAG field Attribute Definition for more information.
+
+During the Spatial and Tabular QAQC duplicates and non-qualified points were
+removed.
+
+The final Point layer was spatially joined to a 2019 statewide parcel layer, and 
+the GCID field was populated with a crosswalk ID linking each point feature with 
+it's corresponding polygon layer feature, GC_SCHOOLSBND_MAR21.
+
+Finally, the GeoPlan Center performed the following attribute table adjustments:
+
+Populated and standardized all fields. 
+
+School services/programs from new datasets above that were located at county school district offices 
+or other existing school facilities (for example:adult programs, county student services, migrant programs, 
+virtual programs, Mckay scholarship programs, homebound programs, etc.) were not added in order to avoid 
+duplicate points at facility locations. Schools or programs located at detention centers were not added with 
+this latest update. 
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute table updates by data source: 
+
+(1) Joined GC_SCHOOLS and MSID Schools based on STATE_ID
+ 
+     PRINCIPAL **see below for description of field and calculation
+     PHONE
+     LOW_GRADE **see below for description of field and calculation
+     HIGH_GRADE **see below for description of field and calculation
+     PROGRAMS **see below for description of field and calculation
+     OP_CLASS (For charter schools) **see below for description of field and calculation
+     MAGNETINFO **see below for description of field and calculation
+     TYPE **see below for description of field and calculation
+
+(2) Joined GC_SCHOOLS and NCES Public Schools based on FEDERAL_ID
+
+     STTCH_RT (NCES: STUDENT_TEACHER_RATIO)
+     TEACHER (NCES: TEACHERS)
+     ENROLLMENT (NCES: STUDENTS)
+     TITLE1SCHO (NCES: TITLE_1_SCHOOL)
+     FREE_LUNCH (NCES: FREE_LUNCH)
+     REDUCED_LUNCH (NCES: REDUCED_LUNCH)
+
+     For schools with no STATE_ID, HIGH_GRADE, LOW_GRADE, MAGNETINFO, 
+     were obtained from NCES Public Schools. 
+
+     No updates were available for the following fields: MGRNT_STD, FISH_FAC1, 
+     FISH_FAC2, BBSERVICE, BBPROVIDER, BBSPEED, DSTREAMSPD. 
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute definitions from codebooks:
+
+PRINCIPAL_TITLE from MSID Codebook
+Attribute Definition
+1    Mr.
+2   Ms.
+3   Mrs.
+4   Miss
+5   Dr.
+6   Other/Unknown
+-Selected all 1's and field calculation as: "PRINCIPAL_TITLE" &amp; "PRINCIPAL_LAST". Repeated process for all attributes, except did not use the PRINCIPAL_TITLE= other/unknown 
+
+CHARTER_SCHL_STAT from MSID Codebook
+Attribute Definition
+R   Regular charter school 
+C    Conversion charter school 
+T   Charter technical career center 
+B  Conversion charter school/charter technical career center
+Z  Not a charter school
+-Selected all attributes equal to R,C,T, and B. Field calculated OP_CLASS= "CHARTER" 
+
+TYPE from MSID Codebook
+Attribute Definition 
+01   Elementary
+02   Middle/Jr. High
+03  Senior High
+04  Combination Elementary and Secondary
+05  Adult
+07  Other
+-Selected all 01's and field calculation as "ELEMENTARY". Repeated the process for 02, 03, 04, and 05.
+
+PRIMARY SERVICE TYPE from MSID Codebook
+R                              K-12 General Education
+S                              Special Education
+B                              Alternative Education
+V                              Career and Technical Education
+A                              Adult General Education
+O                              Other
+-Selected all A's and calculated field as PROGRAMS= "ADULT GENERAL EDUCATION". Repeated the same process for all other primary service type codes.
+*This field was updated according to the above categories only for those records with a State ID that could be joined to the Master School ID 2019-2020.  
+
+MAGNET_STATUS from MSID Codebook
+Attribute Definition
+S   Magnet School
+P   Magnet Program
+Z  Not Applicable
+-Selected all S's and field calculation as "MAGNET SCHOOL". 
+-Selected all P's and field calculation as "MAGNET PROGRAM". 
+-Selected all Z's and field calculation as "NOT A MAGNET SCHOOL/PROGRAM". 
+-If field still blank after, field calculated as "NO INFORMATION AVAILABLE".</stepDesc><stepDateTm>2021-03-24T00:00:00</stepDateTm><stepSrc xmlns="" type="used"><srcCitatn><resAltTitle>GeoPlan</resAltTitle></srcCitatn></stepSrc></prcStep><prcStep xmlns=""><stepDesc>-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+
+GeoPlan process steps of public schools and post-secondary institutions in 2023:
+
+The following data sources were used to update the public schools and post-secondary 
+institutions data set:
+
+(1) FDOE Public Schools
+Source: Master School ID 2023-2024 
+https://eds.fldoe.org/EDS/MasterSchoolID/Downloads.cfm
+Downloaded on 7/13/2023. 
+
+(2) NCES Public Schools
+CCD Public school data 2021-2022 school year
+http://nces.ed.gov/ccd/schoolsearch/
+Downloaded on 5/2/2023.
+
+(3) NCES Public Schools Geospatial Data Layer
+NCES Public School Characteristics 2021-2022
+https://data-nces.opendata.arcgis.com/datasets/nces::public-school-characteristics-current/explore
+Data Updated: April 26, 2023
+Published Date: March 31, 2023 at 12:00 AM 
+Downloaded on 5/17/2023
+
+(4) NCES Colleges
+Source: College Navigator consisting of 2022-2023 data from the Integrated Postsecondary 
+Education Data System (IPEDS) February Collection, the core postsecondary education data 
+collection program for NCES. 
+http://nces.ed.gov/collegenavigator/
+Downloaded on 5/2/2023
+
+-------------------------------------------------------------------------------------------------------
+
+Using schools data sets downloaded from the websites listed above, records were reviewed 
+and edited to apply any available spatial and attribute updates.
+
+During the spatial and tabular QAQC, duplicates and non-qualified points were
+removed.
+
+The final Point layer was spatially joined to a 2022 statewide parcel layer, and 
+the GCID field was populated with a crosswalk ID linking each point feature with 
+it's corresponding polygon layer feature, GC_SCHOOLSBND_JUL23.
+
+Finally, the GeoPlan Center performed the following attribute table adjustments:
+
+Populated and standardized all fields. 
+
+Most schools identified by FDOE as closed were removed from the layer. 
+Future schools were included only if their locations could be identified and 
+verified. Schools or programs located at detention centers were removed.  
+Non-school facilities were removed from the layer (these included 
+bus/transportation compounds, maintenance and support facilities, 
+warehouse and distribution centers, and others).
+
+Added field ACTIVITYCD (Activity code).
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute table updates by data source: 
+
+(1) Joined GC_SCHOOLS and MSID Schools based on STATE_ID
+ 
+     PRINCIPAL **see below for description of field and calculation
+     PHONE
+     LOW_GRADE **see below for description of field and calculation
+     HIGH_GRADE **see below for description of field and calculation
+     PROGRAMS **see below for description of field and calculation
+     OP_CLASS (For charter schools) **see below for description of field and calculation
+     MAGNETINFO **see below for description of field and calculation
+     TYPE **see below for description of field and calculation
+
+(2) Joined GC_SCHOOLS and NCES Public Schools based on FEDERAL_ID
+
+     STTCH_RT (NCES: STUDENT_TEACHER_RATIO)
+     TEACHER (NCES: TEACHERS)
+     ENROLLMENT (NCES: STUDENTS)
+     TITLE1SCHO (NCES: TITLE_1_SCHOOL)
+     FREE_LUNCH (NCES: FREE_LUNCH)
+     REDUCED_LUNCH (NCES: REDUCED_LUNCH)
+
+     No updates were available for the following fields: MGRNT_STD, FISH_FAC1, 
+     FISH_FAC2, BBSERVICE, BBPROVIDER, BBSPEED, DSTREAMSPD. 
+
+-------------------------------------------------------------------------------------------------------
+
+Attribute definitions from codebooks:
+
+PRINCIPAL_TITLE from MSID Codebook
+Attribute Definition
+1    Mr.
+2   Ms.
+3   Mrs.
+4   Miss
+5   Dr.
+6   Other/Unknown
+-Selected all 1's and field calculation as: "PRINCIPAL_TITLE" &amp; "PRINCIPAL_LAST". Repeated process for all attributes, except did not use the PRINCIPAL_TITLE= other/unknown 
+
+CHARTER_SCHL_STAT from MSID Codebook
+Attribute Definition
+R   Regular charter school 
+C    Conversion charter school 
+T   Charter technical career center 
+B  Conversion charter school/charter technical career center
+Z  Not a charter school
+-Selected all attributes equal to R,C,T, and B. Field calculated OP_CLASS= "CHARTER" 
+
+TYPE from MSID Codebook
+Attribute Definition 
+01   Elementary
+02   Middle/Jr. High
+03  Senior High
+04  Combination Elementary and Secondary
+05  Adult
+07  Other
+-Selected all 01's and field calculation as "ELEMENTARY". Repeated the process for 02, 03, 04, and 05.
+
+PRIMARY SERVICE TYPE from MSID Codebook
+R   K-12 General Education
+S   Special Education
+B   Alternative Education
+V   Career and Technical Education
+A   Adult General Education
+O   Other
+-Selected all A's and calculated field as PROGRAMS= "ADULT GENERAL EDUCATION". Repeated the same process for all other primary service type codes.
+*This field was updated according to the above categories only for those records with a State ID that could be joined to the Master School ID 2023-2024.  
+
+MAGNET_STATUS from MSID Codebook
+Attribute Definition
+S   Magnet School
+P   Magnet Program
+Z  Not Applicable
+-Selected all S's and field calculation as "MAGNET SCHOOL". 
+-Selected all P's and field calculation as "MAGNET PROGRAM". 
+-Selected all Z's and field calculation as "NOT A MAGNET SCHOOL/PROGRAM". 
+-If field still blank after, field calculated as "NO INFORMATION AVAILABLE".</stepDesc><stepDateTm>2023-07-31T00:00:00</stepDateTm><stepProc xmlns=""><rpOrgName>University of Florida GeoPlan Center</rpOrgName><role><RoleCd value="006"/></role><displayName>University of Florida GeoPlan Center</displayName></stepProc></prcStep><dataSource type=""><srcDesc>Spatial and Attribute Information</srcDesc><srcMedName><MedNameCd value="015"/></srcMedName></dataSource></dataLineage><report type="DQConcConsis" dimension=""><measDesc>This data is provided 'as is'. GeoPlan relied on the integrity of the original data layer's topology.</measDesc></report><report type="DQCompOm" dimension=""><measDesc>This data is provided 'as is' by GeoPlan and is complete to our knowledge.</measDesc></report><report type="DQQuanAttAcc" dimension=""><measDesc>GeoPlan relied on the integrity of the attribute information within the original data.</measDesc><evalMethType><EvalMethTypeCd value="003"/></evalMethType></report><report type="DQAbsExtPosAcc" dimension="horizontal"><measDesc>This data is provided 'as is' and its horizontal positional accuracy has not been verified by GeoPlan.</measDesc></report><report type="DQAbsExtPosAcc" dimension="vertical"><measDesc>This data is provided 'as is' and its vertical positional accuracy has not been verified by GeoPlan.</measDesc><measResult><ConResult><conPass>0</conPass></ConResult></measResult></report></dqInfo><mdHrLvName Sync="TRUE">dataset</mdHrLvName><refSysInfo><RefSystem><refSysID><identCode code="3087" Sync="TRUE"/><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">6.12(9.2.0)</idVersion></refSysID></RefSystem></refSysInfo><spatRepInfo><VectSpatRep><geometObjs Name="gc_schools_jul23"><geoObjTyp><GeoObjTypCd value="004" Sync="TRUE"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">0</geoObjCnt></geometObjs><topLvl><TopoLevCd value="001" Sync="TRUE"></TopoLevCd></topLvl></VectSpatRep></spatRepInfo><mdMaint xmlns=""><maintFreq><MaintFreqCd value="009"/></maintFreq></mdMaint><Binary><Thumbnail><Data EsriPropertyType="PictureX">/9j/4AAQSkZJRgABAQEAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCACFAMgDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii
+gAooooAzte1uy8OaJdatqDsttbrltgyzEnAVR3JJAA9TWZ4d8bad4ku5LSC01S0uEUuI76yeHcg2
+gsCRg8sBjOcg8Ywa19YEn9jXpify5Vhdo38jzijAZDBP4iCAQO5FeC+CfGeseKfHGlJp8OsXsMcW
+3VxeXo8gptMZYpt2jgK+OpbcOetAHvd/qtnpulS6ncyn7JGgdpI0MnynoQFBJ69qXT9Sh1OOZ4En
+UQzPA3nQtGSynBI3AZHoRwa8/wDFjaB4U1fQdQPi6TQ7CxRF/si2bclzGDhcRg9PmbLYOR6EZo1y
+78R213YWmk+MFvbm8sZpYLVLKLzbkbtwkV/uKApUDPBAOMk8AHWav428N6E7x6hq0EUsc6W7xrl3
+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</Data></Thumbnail></Binary><mdContact xmlns=""><rpOrgName>University of Florida GeoPlan Center</rpOrgName><role><RoleCd value="006"/></role><rpCntInfo xmlns=""><cntAddress addressType="postal"><delPoint>University of Florida</delPoint><city>Gainesville</city><adminArea>FL</adminArea><postCode>32611</postCode><eMailAdd>https://www.geoplan.ufl.edu/contact/</eMailAdd><delPoint>431 Architecture PO Box 115706</delPoint></cntAddress></rpCntInfo><displayName>University of Florida GeoPlan Center</displayName></mdContact><spdoinfo><ptvctinf><esriterm Name="gc_schools_jul23"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom code="1" Sync="TRUE"></efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">0</efeacnt><spindex Sync="TRUE">FALSE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf></spdoinfo></metadata>
