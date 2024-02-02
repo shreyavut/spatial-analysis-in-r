@@ -1,6 +1,6 @@
 ---
 title: "Spatial Analysis in R: NICAR 2024"
-author: Shreya Vuttaluru 
+author: Shreya Vuttaluru and Ryan Little
 format: html
 editor: visual
 ---
