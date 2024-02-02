@@ -48,7 +48,7 @@ library(tidycensus)
 
 -   `high_school_parcels.geojson` is a spatial file of polygons that make up the area of high schools in Baltimore.
 
-Some other types of spatial files you might see: \* `filename.shp` --- An ESRI shapefile. Typically come in a folder with associated files like `.prj, .dbf, and  *`filename.kml`or`filename.kmz`- AGoogle Earth spatial file *`filename.gdb`— A geodatabase folder of files that manage spatial data. These can be tough to work with, and I recommend handling them in PostGIS or PostgresSQL.  *`filename.rds\` - You can store spatial data in an R data set file
+Some other types of spatial files you might see: \* `filename.shp` --- An ESRI shapefile. Typically come in a folder with associated files like `.prj, .dbf, and  *`filename.kml`or`filename.kmz`- A Google Earth spatial file *`filename.gdb`— A geodatabase folder of files that manage spatial data. These can be tough to work with, and I recommend handling them in PostGIS or PostgresSQL.  *`filename.rds\` - You can store spatial data in an R data set file
 
 ```{r}
 
@@ -380,5 +380,31 @@ mapview(shooting_incidents_within_buffer_2,
 
 Now try it on your own:
 
+Option 1: Florida Parcels 
 
+Let's figure out what census tracts the single family Florida Homeowners in `pinellas_parcels.shp` are in. `pinellas_tracts.geojson` has census tract data for total population and the Black population. 
+
+Be sure to go into the `option_1` directory for this data. 
+
+```{r}
+
+### Load in Census tract data 
+st_read()
+
+### Load in pinellas parcels data
+st_read()
+
+```
+
+Option 2: CCTV Cameras
+
+Be sure to go into the `option_2` directory for this data. 
+
+```{r}
+
+### Load in CCTV data
+st_read()
+
+
+```
 
