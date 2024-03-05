@@ -64,7 +64,7 @@ Clone this repository locally to start!
 - **Nearest Neighbor**:
   - Determines the nearest feature in one layer to each feature in another layer, achieved using spatial indexing and distance calculations, not directly supported by `st_join`.
 
-Check out the documentation for **(st_join)[https://r-spatial.github.io/sf/reference/st_join.html]** for more.
+Check out the documentation for - **[st_join](https://r-spatial.github.io/sf/reference/st_join.html)**  for more.
 
 ## Coordinate Reference Systems (CRS):
 - Choosing the right CRS is important for accurately representing spatial data on maps.
