@@ -48,7 +48,6 @@ Clone this repository locally to start!
   - Lightweight format for encoding geographic data structures in a human-readable text format, widely used for web mapping and interoperability purposes.
 
 ## Types of Spatial Joins:
-- Most of these kinds of joins can be passed as an argument in `st_join`.
 - **Point-in-Polygon**: 
   - Assigns attributes from polygons to points that fall within them. Implemented with `st_join` using `join = st_within`.
 - **Polygon-on-Polygon**:
