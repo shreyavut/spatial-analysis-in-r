@@ -18,10 +18,11 @@ Some advantages of using `sf` for spatial analysis:
 Clone this repository locally to start!
 
 ## Packages for Spatial Work in R:
-- (`sf`)[https://r-spatial.github.io/sf/] is a relatively intuitive R package with functions for spatial analysis that integrates well with other data analysis and cleaning steps.
-- (`raster`)[https://rspatial.org/raster/pkg/1-introduction.html] provides functions for reading, writing, processing, and analyzing gridded spatial data, such as satellite imagery, digital elevation models (DEMs), and climate data.
-- (`mapview`)[https://r-spatial.github.io/mapview/] is a library built off of the leaflet API for creating interactive web maps. Consider using (`leaflet`)[https://learn.r-journalism.com/en/mapping/leaflet_maps/leaflet/] instead for more customizable maps.
-- (`tidycensus`)[https://walker-data.com/tidycensus/articles/spatial-data.html] and (`tigris`)[https://rdrr.io/cran/tigris/man/tracts.html] provide spatial data for census geographies across the U.S.
+- **[sf](https://r-spatial.github.io/sf/)** is a relatively intuitive R package with functions for spatial analysis that integrates well with other data analysis and cleaning steps.
+- **[raster](https://rspatial.org/raster/pkg/1-introduction.html)** provides functions for reading, writing, processing, and analyzing gridded spatial data, such as satellite imagery, digital elevation models (DEMs), and climate data.
+- **[mapview](https://r-spatial.github.io/mapview/)** is a library built off of the leaflet API for creating interactive web maps. Consider using **[leaflet](https://learn.r-journalism.com/en/mapping/leaflet_maps/leaflet/)** instead for more customizable maps.
+- **[tidycensus](https://walker-data.com/tidycensus/articles/spatial-data.html)** and **[tigris](https://rdrr.io/cran/tigris/man/tracts.html)** provide spatial data for census geographies across the U.S.
+
 
 ## Basic Types of Spatial Data:
 - **Vector Data**: 
@@ -63,7 +64,7 @@ Clone this repository locally to start!
 - **Nearest Neighbor**:
   - Determines the nearest feature in one layer to each feature in another layer, achieved using spatial indexing and distance calculations, not directly supported by `st_join`.
 
-Check out the documentation for (`st_join`)[https://r-spatial.github.io/sf/reference/st_join.html] for more.
+Check out the documentation for `(st_join)[https://r-spatial.github.io/sf/reference/st_join.html]` for more.
 
 ## Coordinate Reference Systems (CRS):
 - Choosing the right CRS is important for accurately representing spatial data on maps.
