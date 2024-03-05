@@ -378,7 +378,7 @@ mapview(shooting_incidents_within_buffer_2,
 
 ```
 
-Now try it on your own! Choose between datasets in Florida or in Baltimore to practice reading in spatial files and performing joins. 
+Now try it on your own! Choose between datasets in Florida or in Baltimore to practice reading in spatial files and performing joins.
 
 Option 1: Florida Data
 
@@ -394,13 +394,12 @@ Be sure to go into the `data/florida/` directory for this data.
 
 ```
 
-Option 2: Baltimore Data 
+Option 2: Baltimore Data
 
- -   `Polling_Place.geojson` is a spatial file of poling places in Baltimore.
- -   `CCTV_Locations_Cameras.geojson` is a spatial file of Baltimore Police surveillance cameras.
- -   `brooklyn-homes.geojson` is a spatial file that contains the property parcel of a Baltimore housing authority housing complex in southern Baltimore.
- -   `Completed_City_Demo.geojson` is a spatial file of buildings demolished by the Baltimore City government.
- 
+-   `Polling_Place.geojson` is a spatial file of poling places in Baltimore.
+-   `CCTV_Locations_Cameras.geojson` is a spatial file of Baltimore Police surveillance cameras.
+-   `brooklyn-homes.geojson` is a spatial file that contains the property parcel of a Baltimore housing authority housing complex in southern Baltimore.
+-   `Completed_City_Demo.geojson` is a spatial file of buildings demolished by the Baltimore City government.
 
 Be sure to go into the `data/baltimore/` directory for this data.
 
