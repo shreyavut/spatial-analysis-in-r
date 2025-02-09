@@ -1,0 +1,41 @@
+---
+title: "Spatial Analysis in R: NICAR 2024"
+author: Shreya Vuttaluru and Ryan Little
+format: html
+editor: visual
+---
+
+Working with data based off of images can be confusing! 
+
+We'll be using the`raster` and `terra` and package for extracting information from our files, and `sf` fore more traditional spatial joins. 
+
+### Step 1: Load required packages.
+
+```{r}
+
+### This code will install the packages required for this project if you don't already have them installed.
+packages <- c("sf", "tidyverse", "raster", "mapview", "janitor", "lubridate", "tidycensus", "terra")
+
+for (pkg in packages) {
+  if (!require(pkg, character.only = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+### Import our packages into our script here.
+library(sf)
+library(tidyverse)
+library(janitor)
+library(leaflet)
+library(mapview)
+library(raster)
+library(lubridate)
+library(tidycensus)
+
+```
+
+### Step 2: Load in the data sets we'll be working with 
+
+Marine heatwave data
+
+
