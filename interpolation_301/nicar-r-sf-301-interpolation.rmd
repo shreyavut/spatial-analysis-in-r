@@ -34,6 +34,8 @@ library(lubridate)
 library(tidycensus)
 library(lwgeom)
 
+sf_use_s2(FALSE)
+
 ```
 
 ## The data
@@ -86,7 +88,7 @@ mapview(clipped_tracts)
 
 ```
 
-So we will use `st_union` to combine all the precincts from 2024 into one object. This functions as our "cookie cutter" the shape we will use to match the census tracts and the data that contains water areas. 
+So we will use `st_union` to combine all the precincts from 2024 into one object. This functions as our "cookie cutter" the shape we will use to match the census tracts and the data that contains water areas.
 
 ```{r}
 
@@ -229,5 +231,3 @@ trump_shift <- intersected_2024 |>
     )
 
 ```
-
-
