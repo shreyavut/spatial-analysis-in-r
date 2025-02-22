@@ -1,0 +1,233 @@
+---
+title: "Spatial Analysis in R - 301: NICAR 2025"
+author: Ryan Little
+format: html
+editor: visual
+---
+
+This is the third class in our our series on spatial analysis in R. In this class, we will be covering geospatial interpolations. As in our first two classes, we will be using the `sf` package to work with spatial data.
+
+This class assumes you have a basic understanding of spatial data and the `sf` package. If you are new to spatial data in R, let us know and we will try to help catch you up.
+
+## What is interpolation?
+
+Interpolation is the process of estimating values for unknown points within the range of known points. In the context of spatial data, interpolation is used to estimate values for points that are not directly observed.
+
+To do this, we will be working with election data from the last two presidential elections and U.S. Census data. We will use the data from [this map showing the shift toward President Donald J. Trump in the 2024 election](https://www.thebaltimorebanner.com/politics-power/national-politics/maryland-precinct-vote-trump-shift-margin-7GPJDFWDBBHH7OODK2BB77QU3Y/).
+
+Here's the steps we need to take: - Calculate the area of the final geography we want our data in. Today, we will finish in Census tracts. - Calculate the overlaps between the election data and the tracts. - Calculate the area of the overlaps. - Calculate the percentage of the overlaps. - Multiply the election counts by the percentage of the overlap.
+
+## The packages
+
+```{r}
+
+### Run this line to install all packages, if needed. 
+#install.packages(c("sf", "tidyverse", "leaflet", "mapview", "janitor", "lubridate", "tidycensus", "lwgeom"))
+
+### Call our packages into our script here.
+library(sf)
+library(tidyverse)
+library(janitor)
+library(leaflet)
+library(mapview)
+library(lubridate)
+library(tidycensus)
+library(lwgeom)
+
+```
+
+## The data
+
+The data we will be using in this class is from the 2024 general election in Baltimore County, Maryland. It includes precinct-levels election returns for the presidential election. The data is in GeoJSON format and can be found in the `data` folder in this repository.
+
+```{r}
+
+x2024 <- read_sf("data/baltimore-county-election-results-2024.geojson")
+
+mapview(x2024)
+
+```
+
+Now let's compare it to data from the 2020 general election. Do these precincts look the same?
+
+```{r}
+
+x2020 <- read_sf("data/baltimore-county-election-results-2020.geojson")
+
+mapview(x2020)
+
+```
+
+There's one more thing we need to tell the story of the 2024 presidential election. We need demographics data from the U.S. Census. Typically, we can get that data using the `tidycensus` package and the shape files from `tigris`. However, some changes in the federal government have made these packages less reliable. We will just import an existing version in the interest of time.
+
+What do you notice about the tracts? How do they compare to the election data?
+
+```{r}
+
+tracts <- read_sf("data/baltimore-county-tracts.geojson")
+
+mapview(tracts)
+
+```
+
+The x2024 election data doesn't include water, but our 2020 precincts and our Census tracts do. One geography that is much bigger than the others will throw off our calculations. We need to clip the data to the same geography.
+
+## Clipping the data
+
+All we need to do is use the `st_intersection` function to clip the data. This will take our existing spatial data and remove any areas that are not in both datasets, sort of like a cookie cutter.
+
+First, we need to make the cookie. If we use our existing dataset of 2024 precincts, we will get intersections inside the tracts, moving ahead to quickly like this.
+
+```{r}
+
+clipped_tracts <- st_intersection(tracts, x2024)
+
+mapview(clipped_tracts)
+
+```
+
+So we will use `st_union` to combine all the precincts from 2024 into one object. This functions as our "cookie cutter" the shape we will use to match the census tracts and the data that contains water areas. 
+
+```{r}
+
+cookie_cutter <- x2024 |>
+  mutate(temp = "temp") |>
+  group_by(temp) |>
+  summarise(geometry = st_union(geometry))
+
+mapview(cookie_cutter)
+
+```
+
+Now we can use this to cut down the Census tracts and the 2020 precincts.
+
+```{r}
+
+clipped_tracts <- st_intersection(tracts, cookie_cutter)
+
+mapview(clipped_tracts)
+
+```
+
+Now our tracts don't include the water and match the 2024 precincts. Now let's do 2020.
+
+```{r}
+
+clipped_2020 <- st_intersection(x2020, cookie_cutter)
+
+mapview(clipped_2020)
+
+```
+
+## Calculating the area of our final geograpy
+
+Now that we have clipped the data, we can calculate the area of our Census tracts to use as a denominator in our calculations.
+
+```{r}
+
+clipped_tracts <- clipped_tracts |> 
+    mutate(tract_area = st_area(geometry))
+
+```
+
+## Calculating the overlaps
+
+Now let's calculate the overlaps between the election data and the tracts.
+
+```{r}
+
+intersected_2024 <- st_intersection(clipped_tracts, x2024)
+
+mapview(intersected_2024)
+
+```
+
+Notice how our tracts are split into pieces where they overlap with the election data. This is what we want. Now we can calculate the area of the overlaps.
+
+```{r}
+
+intersected_2024 <- intersected_2024 |> 
+    mutate(intersect_area = st_area(geometry))
+
+```
+
+Let's take a look at this data.
+
+```{r}
+
+intersected_2024 |>
+    dplyr::select(tract_area, intersect_area) |>
+    head()
+
+```
+
+All we need to do now is calculate the percentage of the overlaps.
+
+```{r}
+
+intersected_2024 <- intersected_2024 |> 
+    mutate(overlap_pct = intersect_area / tract_area)
+
+intersected_2024 |>
+    select(tract_area, intersect_area, overlap_pct) |>
+    head()
+
+```
+
+Now we can multiply the election counts by the percentage of the overlap.
+
+```{r}
+
+intersected_2024 <- intersected_2024 |> 
+    mutate(votes_trump_2024 = votes_trump_2024 * overlap_pct,
+           votes_dem_2024 = votes_dem_2024 * overlap_pct,
+           total_votes_2024= total_votes_2024 * overlap_pct)
+
+intersected_2024 |>
+    select(tract_area, intersect_area, overlap_pct, votes_trump_2024, votes_dem_2024) |>
+    head()
+
+```
+
+Now let's get back to whole tracts. All we need to do is group by the tract and sum the votes.
+
+```{r}
+
+intersected_2024 <- intersected_2024 |> 
+    group_by(geoid) |>
+    summarise(trump_votes_2024 = sum(votes_trump_2024),
+              dem_votes_2024 = sum(votes_dem_2024)) |>
+    mutate(trump_share = trump_votes_2024 / (trump_votes_2024 + dem_votes_2024))
+
+```
+
+And let's catchup 2020 to the same point.
+
+```{r}
+
+intersected_2020 <- st_intersection(clipped_tracts, x2020) |>
+    mutate(intersect_area = st_area(geometry)) |>
+    ## calculate the overlapping area
+    mutate(overlap_pct = intersect_area / tract_area) |>
+    mutate(trump_votes = votes_trump_2020 * overlap_pct,
+           biden_votes = votes_dem_2020 * overlap_pct) |>
+    group_by(geoid) |>
+    summarise(trump_votes = sum(trump_votes),
+              dem_votes = sum(biden_votes)) %>%
+  st_drop_geometry()
+
+```
+
+Now we can join the two datasets together
+
+```{r}
+
+trump_shift <- intersected_2024 |> 
+    left_join(intersected_2020, by = "geoid") |> 
+    mutate(
+        trump_shift = trump_votes_2024 - trump_votes
+    )
+
+```
+
+

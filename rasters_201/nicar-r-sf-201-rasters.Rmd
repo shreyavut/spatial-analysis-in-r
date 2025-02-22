@@ -1,0 +1,370 @@
+---
+title: "Spatial Analysis in R - 201: NICAR 2025"
+author: "Shreya Vuttaluru"
+date: "2025-02-22"
+output: html_document
+---
+
+This is the second class in our spatial analysis series. We'll be covering the basics of rasters — image-based datasets collect information extracted from satellites and other aerial tools, and stored in pixels.
+
+This class assumes you have a basic understanding of spatial data and the `sf` package, like shapefiles and geojsons. If you are new to spatial data in R, let us know and we will try to help catch you up.
+
+We'll be using the `raster` and `ncdf4` and package for extracting information from our files, and `sf` fore more traditional spatial joins.
+
+## What are rasters, and why should I care about them?
+
+Rasters are digital images that store information in a grid of equally-sized pixels. Environmental agencies and scientists often collect and store data in this format because it allows them to store large summaries of information that is regularly collected about the world in just a single file.
+
+The more pixels we have in a dataset, and the smaller they are, the more detail we can get out of a dataset.
+
+Some examples of popular raster datasets include 
+- Land use changes across the United States 
+- Sea surface temperature 
+- Elevation data
+
+We'll be working with sea surface temperature data used in [this story that tracked how the most intense hurricanes in modern history almost always traverse over record-hot waters.](https://www.tampabay.com/hurricane/2024/11/03/more-hurricanes-are-slamming-gulf-coast-is-this-new-normal/).
+
+We won't be recreating all the findings in this story, since they require scraping and looping through hundreds of files. Instead, we'll walk through an example of how to clean, transform and subset this data in a way that can be applicable to larger projects.
+
+### Step 1: Load required packages.
+
+```{r}
+
+### This code will install the packages required for this project if you don't already have them installed. Uncomment this code if you need to install the packages. 
+
+# packages <- c("sf", "tidyverse", "raster", "mapview", "janitor", "lubridate", "tidycensus", "terra", "ncdf4")
+# 
+# for (pkg in packages) {
+#   if (!require(pkg, character.only = TRUE)) {
+#     install.packages(pkg)
+#   }
+# }
+
+### Import our packages into our script here.
+library(sf)
+library(tidyverse)
+library(janitor)
+library(leaflet)
+library(mapview)
+library(lubridate)
+library(tidycensus)
+
+### These libraries will help us work with rasters. 
+library(ncdf4)
+library(raster)
+
+```
+
+### Step 2: the datasets.
+
+Hurricane Milton's path, represented by points every 3 hours as measured by NOAA. 
+
+```{r}
+
+milton_path <- st_read("data/milton_path.geojson") %>%
+  st_transform(crs=4326)
+
+```
+
+Let's take a quick look at this path. All of these readings by NOAA take place over the storm's entire lifespan, which is several days. 
+
+```{r}
+
+mapview(milton_path, zcol="usa_sshs")
+
+```
+
+Sea surface temperature in 2024.
+
+Raster data can come in a few different filetypes: some of the most common are NetCDF (.nc) and .TIF files
+
+.TIF files typically store information from a single point in time. In this case, we're looking at ocean temperature data all across the world, as measured only on 10/04/2024. These types of files are typically good for data that doesn't change on a day to day basis — think elevation, or land use. 
+
+Let's take a look at the temperature (measured in celsius) on this October Saturday. 
+
+```{r}
+
+test_tif <- raster("data/sea_surface_temp/sst_raster_10042024.tif")
+
+mapview(test_tif)
+
+```
+
+NetCDF files are like a larger organized collection of data, much like a library with multiple shelves (called "bands") where each shelf holds a specific type of information. Here — each "band" in the NetCDF file represents the temperature on a different day. Think of it like several different .TIF files stacked on top of each other. 
+
+The original version of this file is much larger — it contains information for every single day within 2024. We've subsetted the file to contain information from just a few days. You can find the original version [here](https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html).
+
+```{r}
+
+nc_sst <- nc_open("data/sea_surface_temp/filtered_sst.nc")
+
+```
+
+### Step 3: Let's map this object
+
+Can we map this object immediately, like other spatial files? 
+
+```{r}
+
+mapview(nc_sst)
+
+```
+
+Since the NetCDF file stacks layers of pixels on top of each other, they're trickier to map right away. So to visualize this object, we're going to need to extract the specific information about the moment in time that we want see. 
+
+Sometimes these files can contain multiple variables that tell us different information. To check which variables exist within our NetCDF, we'll use the `names` function.
+
+```{r}
+
+print(names(nc_sst$var))
+
+```
+
+Let's print all the information stored in the netcdf file. 
+
+```{r}
+
+sst_var_info <- nc_sst$var[["sst"]]
+
+print(sst_var_info)
+
+```
+
+The time variables will tell us _when_ these measurements occured.
+
+```{r}
+
+# Extract the time variable 
+time_var <- ncvar_get(nc_sst, "time")
+
+print(time_var)
+
+```
+
+These numbers might not immediately make sense. You'll notice earlier that our list of dimension information told us that the units were "days since 1-1-1980." This means we'll need to transform this string of numbers into traditional dates. 
+
+```{r}
+
+time_units <- ncatt_get(nc_sst, "time", "units")
+
+ref_time <- as.Date(substr(time_units$value, 12, 21))  # Get reference date from the units attribute
+sst_dates <- ref_time + time_var  
+
+print(sst_dates)
+
+```
+
+Let's extract the data for 10-04-2024. Feel free to try a couple of dates in `target_date`, and see what happens. Why do some dates work, but not others? 
+
+```{r}
+
+# Find the index of August 3rd, 2020
+target_date <- as.Date("2024-10-04")
+
+date_index <- which(sst_dates == target_date)
+
+# Check if the date_index is valid
+if(length(date_index) == 0) {
+    stop("The specified target date is not found in the time variable.")
+}
+
+```
+
+Let's transform the data for a single day, so we can view it. 
+
+```{r}
+
+# Extract SST data for that specific day
+sst_data <- ncvar_get(nc_sst, "sst", 
+                       start = c(1, 1, date_index), 
+                       count = c(-1, -1, 1))
+
+# Get longitude and latitude values
+lon <- ncvar_get(nc_sst, "lon")
+lat <- ncvar_get(nc_sst, "lat")
+
+# Convert SST data into a raster object
+sst_raster <- raster::raster(t(sst_data), 
+                              xmn = min(lon), xmx = max(lon), 
+                              ymn = min(lat), ymx = max(lat))
+
+```
+
+Before we project this into an object we can map, let's check how big the pixels are:
+
+Note: this size is in DEGREES, not meters. We're not calculating area today, but in cases where you are calculating area from pixel files, be sure to convert your calculations to traditional measures of area. 
+
+```{r}
+
+res(sst_raster)
+
+```
+
+Now, let's project it into WGS84
+
+```{r}
+
+# Set the correct CRS to WGS84 (EPSG:4326) — the same CRS as we set milton path to earlier
+crs(sst_raster) <- CRS("+proj=longlat +datum=WGS84 +no_defs")
+
+mapview(sst_raster)
+
+```
+
+That looks wrong! Let's rotate and project this right-side up: 
+
+The final map should show a logical basemap, and map sea surface temperature in degrees celsius, much like the TIF file we mapped first. 
+
+```{r}
+
+# Rotate and flip the raster to ensure the orientation is correct
+projected_sst <- rotate(sst_raster) |>
+  flip(direction = 'y')
+
+# View the rotated raster using mapview
+mapview(projected_sst)
+
+```
+
+
+Now we have sea surface temperature data at every point in the ocean on October 4th, 2024. 
+
+We also know that then Tropical Depression Milton had formed in the Gulf of Mexico on this day, so we can track both the storm's movement and the temperature of the water. 
+
+```{r}
+
+milton_points_oct_4 <- milton_path |>
+  mutate(
+    date = as.Date(iso_time)
+  ) |>
+  filter(date == "2024-10-04")
+
+mapview(milton_points_oct_4, zoom=4, zcol="usa_sshs")
+
+```
+
+How hot was the Gulf of Mexico on October 4th, while NOAA was measuring the wind speed? 
+
+We'll use the `extract()` function within the raster package, which takes in points and then extracts the information from the corresponding raster. 
+
+```{r}
+
+### extract the coordinates on october 4th
+milton_points <- st_coordinates(milton_points_oct_4$geometry)
+
+### extract the SST 
+sst_values_oct_4 <- raster::extract(projected_sst, milton_points)
+
+milton_points_oct_4$sst <- sst_values_oct_4
+
+milton_points_oct_4 %>%
+  dplyr::select(iso_time, usa_sshs, usa_wind, sst) %>%
+  st_drop_geometry()
+
+```
+
+In our overall `milton_path` and `nc_sst` dataset, we have 7 days of sea surface temperature data, and 7 days in which Milton was tracked by NOAA. These should be the same dates, and we can check by printing a list: 
+
+```{r}
+
+milton_path_dates <- milton_path |>
+  mutate(
+    date = as.Date(iso_time)
+  ) |>
+  group_by(date) |>
+  summarize(
+    count = n()
+  ) %>%
+  pull(unique(date))
+
+print(milton_path_dates)
+print(sst_dates)
+
+```
+
+What if we wante to know how hot the water was during all the points that NOAA did a readings, not just during a single day? To do this, let's set up a loop! 
+
+First, let's re-extract the correct dates from the netcdf — remember that the initial units were "days since 1980-01-01". 
+Fun fact: that's because the modern satellite era begins in 1980! 
+
+```{r}
+
+# get the time indices and dates from nc_sst (we did this step earlier, too)
+time_var <- ncvar_get(nc_sst, "time")
+time_units <- ncatt_get(nc_sst, "time", "units")
+ref_time <- as.Date(substr(time_units$value, 12, 21))
+sst_dates <- ref_time + time_var
+
+# Get lon/lat once outside the loop
+lon <- ncvar_get(nc_sst, "lon")
+lat <- ncvar_get(nc_sst, "lat")
+
+# esure milton_path has date column that we can iterate through
+milton_path <- milton_path %>%
+  mutate(date = as.Date(iso_time))
+
+```
+
+For every date in `milton_path`, we'll get the corresponding SST layer within the netcdf file. Then, we'll convert it into a raster object, project it appropriately, and extract the sea surface temperature at the point that was tracked in the storm's path. 
+
+```{r}
+
+# initialize a list to store results
+sst_results <- list()
+
+# Loop through each unique date in milton_path
+for (target_date in unique(milton_path$date)) {
+  # Find the matching index in the netCDF file's time dimension
+  date_index <- which(sst_dates == target_date)
+  
+  if (length(date_index) == 0) {
+    warning(paste("No SST data found for date:", target_date))
+    next
+  }
+  
+  # extract SST data for this date
+  sst_data <- ncvar_get(nc_sst, "sst", 
+                        start = c(1, 1, date_index), 
+                        count = c(-1, -1, 1))
+  
+  # convert SST data into a raster
+  sst_raster <- raster(t(sst_data), 
+                      xmn = min(lon), xmx = max(lon), 
+                      ymn = min(lat), ymx = max(lat))
+  
+  # set CRS and correct orientation
+  crs(sst_raster) <- CRS("+proj=longlat +datum=WGS84 +no_defs")
+  projected_sst <- rotate(sst_raster) %>%
+    flip(direction = 'y')
+  
+  # get storm points for this date
+  date_storms <- milton_path %>% 
+    filter(date == target_date)
+  
+  # extract SST values at storm points
+  sst_values <- raster::extract(projected_sst, date_storms)
+  
+  # store extracted SST in the data
+  date_storms$sst <- sst_values
+  sst_results[[length(sst_results) + 1]] <- date_storms
+}
+
+# combine results into a single dataframe
+final_results <- bind_rows(sst_results)
+
+# view results
+final_results %>%
+  arrange(date) %>%
+  dplyr::select(date, iso_time, usa_sshs, usa_wind, sst) %>%
+  st_drop_geometry() %>%
+  head(10)
+
+```
+
+Finally, let's map the sea surface tempature along the path! 
+
+```{r}
+
+mapview(final_results, cex = "usa_sshs", zcol = "sst")
+
+```

@@ -1,9 +1,9 @@
-# Spatial Analysis in R - NICAR 2024 🗺️
+# Spatial Analysis in R - NICAR 2025 🗺️
 
 _Shreya Vuttaluru, Tampa Bay Times_ 
 <br>_Ryan Little, The Baltimore Banner_
 
-This GitHub repository accompanies a class on spatial analysis in R. We'll cover basic spatial functions for transforming data and explore tools for exploratory mapping, spatial joins, buffering, calculating spatial distances between points and spatial indexing.
+This GitHub repository accompanies a class on spatial analysis in R. We'll cover basic spatial functions for transforming data and explore tools for exploratory mapping, spatial joins, buffering, calculating spatial distances between points, interpolation and working with raster imagery.
 
 We'll be using the `sf` package for geospatial functions. This package has many of the same functions available in geospatial software like ArcGIS, QGIS and PostGIS.
 

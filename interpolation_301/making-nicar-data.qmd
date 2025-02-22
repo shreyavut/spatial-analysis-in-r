@@ -1,0 +1,31 @@
+
+
+```{r}
+
+baltimore_2024 <- x2024 |>
+  filter(countyname == "Baltimore")
+
+
+write_sf(baltimore_2024, "code/election-interpolation/data/nicar/baltimore-county-2024.geojson")
+
+
+baltimore_tracts <- tigris::tracts(state = "MD") |>
+  #tigris::erase_water() |>
+  st_transform(crs = 4326) |>
+  clean_names() |> 
+  st_make_valid() |>
+  filter(geoid != "24003990000") |>
+  filter(countyfp == "005")
+
+write_sf(baltimore_tracts, "code/election-interpolation/data/nicar/baltimore-county-tracts.geojson")
+
+mapview(baltimore_tracts)
+
+
+baltimore_2020 <- x2020 |>
+  filter(county_name.x == "Baltimore County")
+
+write_sf(baltimore_2020, "code/election-interpolation/data/nicar/baltimore-county-2020.geojson")
+
+```
+
