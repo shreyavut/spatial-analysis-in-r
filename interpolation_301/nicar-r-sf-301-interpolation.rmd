@@ -21,6 +21,9 @@ Here's the steps we need to take: - Calculate the area of the final geography we
 
 ```{r}
 
+#remove scientific notation
+options(scipen=999)
+
 ### Run this line to install all packages, if needed. 
 #install.packages(c("sf", "tidyverse", "leaflet", "mapview", "janitor", "lubridate", "tidycensus", "lwgeom"))
 
@@ -40,12 +43,14 @@ sf_use_s2(FALSE)
 
 ## The data
 
-The data we will be using in this class is from the 2024 general election in Baltimore County, Maryland. It includes precinct-levels election returns for the presidential election. The data is in GeoJSON format and can be found in the `data` folder in this repository.
+The data we will be using in this class is from the 2024 general election in Baltimore County, Maryland. It includes precinct-level election returns for the presidential election. The data is in GeoJSON format and can be found in the `data` folder in this repository.
 
 ```{r}
 
+#read_sf is like read_csv for spatial data (you could also use st_read)
 x2024 <- read_sf("data/baltimore-county-election-results-2024.geojson")
 
+#mapview is a simple function to view spatial data on a leaflat map
 mapview(x2024)
 
 ```
@@ -82,6 +87,7 @@ First, we need to make the cookie. If we use our existing dataset of 2024 precin
 
 ```{r}
 
+#st_intersection calculates the intersection of two spatial objectsm, in this case creating many new shapes
 clipped_tracts <- st_intersection(tracts, x2024)
 
 mapview(clipped_tracts)
@@ -93,8 +99,7 @@ So we will use `st_union` to combine all the precincts from 2024 into one object
 ```{r}
 
 cookie_cutter <- x2024 |>
-  mutate(temp = "temp") |>
-  group_by(temp) |>
+  #summarise and st_union will combine all the precincts into one object
   summarise(geometry = st_union(geometry))
 
 mapview(cookie_cutter)
@@ -105,6 +110,7 @@ Now we can use this to cut down the Census tracts and the 2020 precincts.
 
 ```{r}
 
+#used this way, st_intersection limits the existing tracts to the area of the cookie cutter
 clipped_tracts <- st_intersection(tracts, cookie_cutter)
 
 mapview(clipped_tracts)
@@ -128,6 +134,7 @@ Now that we have clipped the data, we can calculate the area of our Census tract
 ```{r}
 
 clipped_tracts <- clipped_tracts |> 
+    #st_area calculates the area of a spatial object and returns the value in square meters
     mutate(tract_area = st_area(geometry))
 
 ```
@@ -138,6 +145,7 @@ Now let's calculate the overlaps between the election data and the tracts.
 
 ```{r}
 
+#used this way, st_intersection returns new shapes where each shape is a tract that overlaps with a precinct
 intersected_2024 <- st_intersection(clipped_tracts, x2024)
 
 mapview(intersected_2024)
@@ -158,7 +166,7 @@ Let's take a look at this data.
 ```{r}
 
 intersected_2024 |>
-    dplyr::select(tract_area, intersect_area) |>
+    select(tract_area, intersect_area) |>
     head()
 
 ```
@@ -168,7 +176,10 @@ All we need to do now is calculate the percentage of the overlaps.
 ```{r}
 
 intersected_2024 <- intersected_2024 |> 
-    mutate(overlap_pct = intersect_area / tract_area)
+    #we calculate the overlap percentage by dividing the intersect area by the tract area
+    mutate(overlap_pct = intersect_area / tract_area) |>
+    #now lets make it a number without a unit of measurment
+    mutate(overlap_pct = as.numeric(overlap_pct))
 
 intersected_2024 |>
     select(tract_area, intersect_area, overlap_pct) |>
@@ -181,12 +192,13 @@ Now we can multiply the election counts by the percentage of the overlap.
 ```{r}
 
 intersected_2024 <- intersected_2024 |> 
+    #we multiply the election counts by the overlap percentage
     mutate(votes_trump_2024 = votes_trump_2024 * overlap_pct,
            votes_dem_2024 = votes_dem_2024 * overlap_pct,
            total_votes_2024= total_votes_2024 * overlap_pct)
 
 intersected_2024 |>
-    select(tract_area, intersect_area, overlap_pct, votes_trump_2024, votes_dem_2024) |>
+    select(tract_area, intersect_area, overlap_pct, votes_trump_2024, votes_dem_2024, total_votes_2024) |>
     head()
 
 ```
@@ -195,11 +207,20 @@ Now let's get back to whole tracts. All we need to do is group by the tract and 
 
 ```{r}
 
-intersected_2024 <- intersected_2024 |> 
+grouped_intersected_2024 <- intersected_2024 |> 
+    #st_drop_geometry removes the geometry column
+    st_drop_geometry() |>
+    #we group by the geoid and add up our interpolated votes
     group_by(geoid) |>
-    summarise(trump_votes_2024 = sum(votes_trump_2024),
-              dem_votes_2024 = sum(votes_dem_2024)) |>
-    mutate(trump_share = trump_votes_2024 / (trump_votes_2024 + dem_votes_2024))
+    summarise(trump_votes_2024 = round(sum(votes_trump_2024), 0),
+              dem_votes_2024 =  round(sum(votes_dem_2024), 0),
+              total_votes_2024 = round(sum(total_votes_2024), 0)
+              )|>
+    #we calculate the share of the vote for Trump
+    mutate(trump_share_2024 = trump_votes_2024 / total_votes_2024)
+
+grouped_intersected_2024 |>
+  head()
 
 ```
 
@@ -207,27 +228,83 @@ And let's catchup 2020 to the same point.
 
 ```{r}
 
-intersected_2020 <- st_intersection(clipped_tracts, x2020) |>
+grouped_intersected_2020 <- st_intersection(clipped_tracts, x2020) |>
+    #calculate intersection area
     mutate(intersect_area = st_area(geometry)) |>
-    ## calculate the overlapping area
+    # calculate the overlapping area
     mutate(overlap_pct = intersect_area / tract_area) |>
-    mutate(trump_votes = votes_trump_2020 * overlap_pct,
-           biden_votes = votes_dem_2020 * overlap_pct) |>
+    # times the votes by the percentage of the overlap and make it a normal number
+    mutate(trump_votes = as.numeric(votes_trump_2020 * overlap_pct),
+           biden_votes = as.numeric(votes_dem_2020 * overlap_pct),
+           total_votes = as.numeric(total_votes_2020 * overlap_pct)
+           )|>
+    #removing the geometry column
+    st_drop_geometry() |>
+    #group by the geoid and add the votes together
     group_by(geoid) |>
-    summarise(trump_votes = sum(trump_votes),
-              dem_votes = sum(biden_votes)) %>%
-  st_drop_geometry()
+    summarise(trump_votes_2020 = round(sum(trump_votes), 0),
+              dem_votes_2020 = round(sum(biden_votes), 0),
+              total_votes_2020 = round(sum(total_votes), 0)) |>
+    #calculate the share of the vote for Trump
+    mutate(trump_share_2020 = trump_votes_2020 / total_votes_2020)
 
 ```
 
-Now we can join the two datasets together
+Now we can join the two data sets together and calculate the shift.
 
 ```{r}
 
-trump_shift <- intersected_2024 |> 
-    left_join(intersected_2020, by = "geoid") |> 
-    mutate(
-        trump_shift = trump_votes_2024 - trump_votes
-    )
+trump_shift <- grouped_intersected_2024 |> 
+    #join the two datasets by the geoid, a unique identifier for each tract
+    left_join(grouped_intersected_2020, by = "geoid") |>
+    #calculate the shift by subtracting the 2020 share from the 2024 share, multiplied by 100 to make it a percentage
+    mutate(trump_shift = (trump_share_2024 - trump_share_2020)*100)
+
+trump_shift |>
+  select(geoid, trump_shift, trump_share_2024) |>
+  arrange(desc(trump_shift)) |>
+  head()
+
 
 ```
+
+The precinct with the biggest shift toward Trump shifted 12% points. Let's find out where it is.
+
+```{r error=TRUE}
+
+#this wont run because trump_shift has no geometry
+mapview(trump_shift)
+
+```
+
+The code above doesn't run because it is a regular dataframe. We dropped the geometry when we were making our calculations. We need to join the data back to the tracts sf object that includes the geometry.
+
+```{r}
+
+trump_shift_sf <- clipped_tracts |>
+  #join the two datasets by the geoid, a unique identifier for each tract
+  left_join(trump_shift, by = "geoid")
+
+
+#we add the zcol argument to tell mapview what column to use for the color scale
+mapview(trump_shift_sf, zcol="trump_shift")
+
+```
+
+And because `trump_shift_sf`is a dataframe, we can filter just the same way we would any map.
+
+```{r}
+
+trump_shift_sf |>
+  arrange(desc(trump_shift)) |>
+  #this gets the first ten rows
+  slice(1:10) |>
+  mapview(zcol="trump_shift")
+
+```
+
+## Conclusion
+
+In this class, we learned how to interpolate election data to Census tracts. We used the `sf` package to clip the data and calculate the overlaps between the election data and the tracts. We then calculated the percentage of the overlaps and multiplied the election counts by the percentage of the overlap. Finally, we calculated the shift toward President Donald J. Trump in the 2024 election.
+
+Where in Baltimore County would you send a reporter?

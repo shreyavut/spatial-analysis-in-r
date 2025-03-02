@@ -20,13 +20,13 @@ Some advantages of using `sf` for spatial analysis:
 ```{r}
 
 ### This code will install the packages required for this project if you don't already have them installed.
-packages <- c("sf", "tidyverse", "leaflet", "mapview", "janitor", "lubridate", "tidycensus")
+#packages <- c("sf", "tidyverse", "leaflet", "mapview", "janitor", "lubridate", "tidycensus")
 
-for (pkg in packages) {
-  if (!require(pkg, character.only = TRUE)) {
-    install.packages(pkg)
-  }
-}
+#for (pkg in packages) {
+#  if (!require(pkg, character.only = TRUE)) {
+#    install.packages(pkg)
+#  }
+#}
 
 ### Import our packages into our script here.
 library(sf)
@@ -42,11 +42,11 @@ library(tidycensus)
 
 ### Step 2: Load in the data sets we'll be working with today. We've pre-cleaned the data so we can focus on the spatial functions. But you'll typically need to clean your data before
 
--   `shooting_victims.csv` is a data set of unique shooting victims in Baltimore. This means that if there are multiple victims in a shooting, there each row represents a unique victim.
+- `shooting_victims.csv` is a data set of unique shooting victims in Baltimore. This means that if there are multiple victims in a shooting, there each row represents a unique victim.
 
--   `shooting_events.csv` is a data set that contains unique shooting events --- one line for each individual shooting, regardless of how many victims.
+- `shooting_events.csv` is a data set that contains unique shooting events --- one line for each individual shooting, regardless of how many victims.
 
--   `high_school_parcels.geojson` is a spatial file of polygons that make up the area of high schools in Baltimore.
+- `high_school_parcels.geojson` is a spatial file of polygons that make up the area of high schools in Baltimore.
 
 Some other types of spatial files you might see: \* `filename.shp` --- An ESRI shapefile. Typically come in a folder with associated files like `.prj, .dbf, and  *`filename.kml`or`filename.kmz`- A Google Earth spatial file *`filename.gdb`— A geodatabase folder of files that manage spatial data. These can be tough to work with, and I recommend handling them in PostGIS or PostgresSQL.  *`filename.rds\` - You can store spatial data in an R data set file
 

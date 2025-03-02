@@ -5,19 +5,19 @@ date: "2025-02-22"
 output: html_document
 ---
 
-This is the second class in our spatial analysis series. We'll be covering the basics of rasters — image-based datasets collect information extracted from satellites and other aerial tools, and stored in pixels.
+This is the second class in our spatial analysis series. We'll be covering the basics of rasters — image-based data sets that include information extracted from satellites and other aerial tools that are stored in pixels.
 
-This class assumes you have a basic understanding of spatial data and the `sf` package, like shapefiles and geojsons. If you are new to spatial data in R, let us know and we will try to help catch you up.
+This class assumes you have a basic understanding of spatial data and the `sf` package, like shape files and geojsons. If you are new to spatial data in R, let us know and we will try to help catch you up.
 
-We'll be using the `raster` and `ncdf4` and package for extracting information from our files, and `sf` fore more traditional spatial joins.
+We'll be using the `raster` and `ncdf4` packages for extracting information from our files and `sf` fore more traditional spatial joins.
 
 ## What are rasters, and why should I care about them?
 
 Rasters are digital images that store information in a grid of equally-sized pixels. Environmental agencies and scientists often collect and store data in this format because it allows them to store large summaries of information that is regularly collected about the world in just a single file.
 
-The more pixels we have in a dataset, and the smaller they are, the more detail we can get out of a dataset.
+The more pixels we have in a data set, the more detail we can get out of a dataset.
 
-Some examples of popular raster datasets include 
+Some examples of popular raster data sets include:
 - Land use changes across the United States 
 - Sea surface temperature 
 - Elevation data
@@ -76,7 +76,7 @@ mapview(milton_path, zcol="usa_sshs")
 
 Sea surface temperature in 2024.
 
-Raster data can come in a few different filetypes: some of the most common are NetCDF (.nc) and .TIF files
+Raster data can come in a few different file types: some of the most common are NetCDF (.nc) and .TIF files
 
 .TIF files typically store information from a single point in time. In this case, we're looking at ocean temperature data all across the world, as measured only on 10/04/2024. These types of files are typically good for data that doesn't change on a day to day basis — think elevation, or land use. 
 
@@ -92,7 +92,7 @@ mapview(test_tif)
 
 NetCDF files are like a larger organized collection of data, much like a library with multiple shelves (called "bands") where each shelf holds a specific type of information. Here — each "band" in the NetCDF file represents the temperature on a different day. Think of it like several different .TIF files stacked on top of each other. 
 
-The original version of this file is much larger — it contains information for every single day within 2024. We've subsetted the file to contain information from just a few days. You can find the original version [here](https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html).
+The original version of this file is much larger — it contains information for every single day within 2024. We've subset the file to contain information from just a few days. You can find the original version [here](https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html).
 
 ```{r}
 
@@ -104,7 +104,7 @@ nc_sst <- nc_open("data/sea_surface_temp/filtered_sst.nc")
 
 Can we map this object immediately, like other spatial files? 
 
-```{r}
+```{r error=TRUE}
 
 mapview(nc_sst)
 
@@ -282,7 +282,7 @@ print(sst_dates)
 
 ```
 
-What if we wante to know how hot the water was during all the points that NOAA did a readings, not just during a single day? To do this, let's set up a loop! 
+What if we want to know how hot the water was during all the points that NOAA did a readings, not just during a single day? To do this, let's set up a loop! 
 
 First, let's re-extract the correct dates from the netcdf — remember that the initial units were "days since 1980-01-01". 
 Fun fact: that's because the modern satellite era begins in 1980! 
