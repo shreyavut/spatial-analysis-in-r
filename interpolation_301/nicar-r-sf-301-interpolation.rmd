@@ -166,7 +166,7 @@ Let's take a look at this data.
 ```{r}
 
 intersected_2024 |>
-    select(tract_area, intersect_area) |>
+    dplyr::select(tract_area, intersect_area) |>
     head()
 
 ```
@@ -182,7 +182,7 @@ intersected_2024 <- intersected_2024 |>
     mutate(overlap_pct = as.numeric(overlap_pct))
 
 intersected_2024 |>
-    select(tract_area, intersect_area, overlap_pct) |>
+    dplyr::select(tract_area, intersect_area, overlap_pct) |>
     head()
 
 ```
@@ -198,7 +198,7 @@ intersected_2024 <- intersected_2024 |>
            total_votes_2024= total_votes_2024 * overlap_pct)
 
 intersected_2024 |>
-    select(tract_area, intersect_area, overlap_pct, votes_trump_2024, votes_dem_2024, total_votes_2024) |>
+    dplyr::select(tract_area, intersect_area, overlap_pct, votes_trump_2024, votes_dem_2024, total_votes_2024) |>
     head()
 
 ```
@@ -261,7 +261,7 @@ trump_shift <- grouped_intersected_2024 |>
     mutate(trump_shift = (trump_share_2024 - trump_share_2020)*100)
 
 trump_shift |>
-  select(geoid, trump_shift, trump_share_2024) |>
+  dplyr::select(geoid, trump_shift, trump_share_2024) |>
   arrange(desc(trump_shift)) |>
   head()
 
