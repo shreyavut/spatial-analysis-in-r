@@ -168,20 +168,21 @@ test_tif <- rast(here("rasters_201/data/sea_surface_temp/sst_raster_10042024.tif
 
 print(test_tif)
 
+```
 
+::: {.callout-note}
 
-library(leaflet)
+Mapview doesn't handle Terra formats currently. Lets pull out leaflet in the meantime
+
+:::
+
+```{r}
+
 pal <- colorNumeric("inferno", values(test_tif), na.color = "transparent")
 
 leaflet() %>%
   addTiles() %>%
   addRasterImage(test_tif, colors = pal, opacity = 0.8)
-
-```
-
-
-```{r}
-ncdf4::
 ```
 
 
@@ -189,11 +190,24 @@ NetCDF files are like a larger organized collection of data, much like a library
 
 The original version of this file is much larger — it contains information for every single day within 2024. We've subset the file to contain information from just a few days. You can find the original version [here](https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html).
 
+
 ```{r}
 
-nc_sst <- nc_open("data/sea_surface_temp/filtered_sst.nc")
+nc_sst <- rast(here("rasters_201/data/sea_surface_temp/filtered_sst.nc"))
+
+print(nc_sst)
+
 
 ```
+
+```{r}
+
+# terra parses the time dimension automatically
+sst_dates <- as.Date(time(nc_sst))
+print(sst_dates)
+
+```
+
 
 ### Step 3: Let's map this object
 
@@ -201,67 +215,35 @@ Can we map this object immediately, like other spatial files?
 
 ```{r error=TRUE}
 
-mapview(nc_sst)
+leaflet() %>%
+  addTiles() %>%
+  addRasterImage(nc_sst, colors = pal, opacity = 0.8)
 
 ```
 
 Since the NetCDF file stacks layers of pixels on top of each other, they're trickier to map right away. So to visualize this object, we're going to need to extract the specific information about the moment in time that we want see. 
 
-Sometimes these files can contain multiple variables that tell us different information. To check which variables exist within our NetCDF, we'll use the `names` function.
-
-```{r}
-
-print(names(nc_sst$var))
-
-```
-
-Let's print all the information stored in the netcdf file. 
-
-```{r}
-
-sst_var_info <- nc_sst$var[["sst"]]
-
-print(sst_var_info)
-
-```
-
-The time variables will tell us _when_ these measurements occured.
-
-```{r}
-
-# Extract the time variable 
-time_var <- ncvar_get(nc_sst, "time")
-
-print(time_var)
-
-```
-
-These numbers might not immediately make sense. You'll notice earlier that our list of dimension information told us that the units were "days since 1-1-1980." This means we'll need to transform this string of numbers into traditional dates. 
-
-```{r}
-
-time_units <- ncatt_get(nc_sst, "time", "units")
-
-ref_time <- as.Date(substr(time_units$value, 12, 21))  # Get reference date from the units attribute
-sst_dates <- ref_time + time_var  
-
-print(sst_dates)
-
-```
 
 Let's extract the data for 10-04-2024. Feel free to try a couple of dates in `target_date`, and see what happens. Why do some dates work, but not others? 
 
 ```{r}
 
-# Find the index of August 3rd, 2020
-target_date <- as.Date("2024-10-04")
-
+target_date <- as_date("2024-10-04")
 date_index <- which(sst_dates == target_date)
 
-# Check if the date_index is valid
-if(length(date_index) == 0) {
-    stop("The specified target date is not found in the time variable.")
-}
+# subset to just that layer
+projected_sst <- nc_sst[[date_index]]
+
+```
+
+
+```{r}
+
+pal <- colorNumeric("inferno", values(projected_sst), na.color = "transparent")
+
+leaflet() %>%
+  addTiles() %>%
+  addRasterImage(projected_sst, colors = pal, opacity = 0.8)
 
 ```
 
