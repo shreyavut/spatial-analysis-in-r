@@ -1,0 +1,5 @@
+# Ignore rv package manager files
+rproject.toml
+.Rprofile
+rv/
+rasters_201/temp.qmd

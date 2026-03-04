@@ -1,7 +1,7 @@
 ---
-title: "Spatial Analysis in R - 201: NICAR 2025"
-author: "Shreya Vuttaluru"
-date: "2025-02-22"
+title: "Spatial Analysis in R - 201: NICAR 2026"
+author: "Shreya Vuttaluru, updated by Nick McMillan"
+date: "2026-03-04"
 output: html_document
 ---
 
@@ -32,7 +32,7 @@ We won't be recreating all the findings in this story, since they require scrapi
 
 ### This code will install the packages required for this project if you don't already have them installed. Uncomment this code if you need to install the packages. 
 
-# packages <- c("sf", "tidyverse", "raster", "mapview", "janitor", "lubridate", "tidycensus", "terra", "ncdf4")
+# packages <- c("sf", "tidyverse", "raster", "mapview", "janitor", "lubridate", "tidycensus", "terra", "ncdf4", "stars", "here")
 # 
 # for (pkg in packages) {
 #   if (!require(pkg, character.only = TRUE)) {
@@ -48,10 +48,12 @@ library(leaflet)
 library(mapview)
 library(lubridate)
 library(tidycensus)
+library(here)
 
 ### These libraries will help us work with rasters. 
 library(ncdf4)
-library(raster)
+library(terra)
+library(stars)
 
 ```
 
@@ -61,7 +63,7 @@ Hurricane Milton's path, represented by points every 3 hours as measured by NOAA
 
 ```{r}
 
-milton_path <- st_read("data/milton_path.geojson") %>%
+milton_path <- st_read(here("rasters_201/data/milton_path.geojson")) %>%
   st_transform(crs=4326)
 
 ```
@@ -74,6 +76,11 @@ mapview(milton_path, zcol="usa_sshs")
 
 ```
 
+```{r}
+glimpse(milton_path)
+```
+
+
 Sea surface temperature in 2024.
 
 Raster data can come in a few different file types: some of the most common are NetCDF (.nc) and .TIF files
@@ -82,13 +89,25 @@ Raster data can come in a few different file types: some of the most common are 
 
 Let's take a look at the temperature (measured in celsius) on this October Saturday. 
 
+::: {.callout-note}
+
+> "Terra is designed to only read into memory those parts of a data set that are necessary for some analysis, raising the possibility of analyzing data sets that are much larger than the availble machine memory"^[<https://pjbartlein.github.io/REarthSysSci/netcdf_terra.html>]
+
+:::
+
 ```{r}
 
-test_tif <- raster("data/sea_surface_temp/sst_raster_10042024.tif")
+test_tif <- rast(here("rasters_201/data/sea_surface_temp/sst_raster_10042024.tif"))
 
 mapview(test_tif)
 
 ```
+
+
+```{r}
+ncdf4::
+```
+
 
 NetCDF files are like a larger organized collection of data, much like a library with multiple shelves (called "bands") where each shelf holds a specific type of information. Here — each "band" in the NetCDF file represents the temperature on a different day. Think of it like several different .TIF files stacked on top of each other. 
 
