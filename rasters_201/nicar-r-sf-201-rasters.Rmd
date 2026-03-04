@@ -9,24 +9,18 @@ This is the second class in our spatial analysis series. We'll be covering the b
 
 This class assumes you have a basic understanding of spatial data and the `sf` package, like shape files and geojsons. If you are new to spatial data in R, let us know and we will try to help catch you up.
 
-We'll be using the `raster` and `ncdf4` packages for extracting information from our files and `sf` fore more traditional spatial joins.
+We'll be using the terra package (the successor to the raster package) for extracting information from our files and `sf` fore more traditional spatial joins.
 
-## What are rasters, and why should I care about them?
+::: {.callout-note}
 
-Rasters are digital images that store information in a grid of equally-sized pixels. Environmental agencies and scientists often collect and store data in this format because it allows them to store large summaries of information that is regularly collected about the world in just a single file.
+> "Terra is designed to only read into memory those parts of a data set that are necessary for some analysis, raising the possibility of analyzing data sets that are much larger than the availble machine memory"^[<https://pjbartlein.github.io/REarthSysSci/netcdf_terra.html>]
 
-The more pixels we have in a data set, the more detail we can get out of a dataset.
-
-Some examples of popular raster data sets include:
-- Land use changes across the United States 
-- Sea surface temperature 
-- Elevation data
+:::
 
 We'll be working with sea surface temperature data used in [this story that tracked how the most intense hurricanes in modern history almost always traverse over record-hot waters.](https://www.tampabay.com/hurricane/2024/11/03/more-hurricanes-are-slamming-gulf-coast-is-this-new-normal/).
 
 We won't be recreating all the findings in this story, since they require scraping and looping through hundreds of files. Instead, we'll walk through an example of how to clean, transform and subset this data in a way that can be applicable to larger projects.
 
-### Step 1: Load required packages.
 
 ```{r}
 
@@ -57,7 +51,86 @@ library(stars)
 
 ```
 
-### Step 2: the datasets.
+
+## What are rasters, and why should I care about them?
+
+Rasters are digital images that store information in a grid of equally-sized pixels. Environmental agencies and scientists often collect and store data in this format because it allows them to store large summaries of information that is regularly collected about the world in just a single file.
+
+The more pixels we have in a data set, the more detail we can get out of a dataset.
+
+Some examples of popular raster data sets include:
+- Land use changes across the United States 
+- Sea surface temperature 
+- Elevation data
+
+
+### Okay, but what is really?
+
+Lets create our own raster!
+
+```{r}
+
+ras <- rast(xmin = 0, xmax = 10, ymin = 0, ymax = 10, resolution = 2)
+
+ras
+
+```
+
+What does it look like?
+
+```{r}
+plot(ras)
+```
+
+We got nothing! Cause there is no value assigned to the cells
+
+So what are we dealing with?
+
+(0,10) --- (10,10)
+  |  |  |  |  |
+  |  |  |  |  |
+  |  |  |  |  |
+  |  |  |  |  |
+  |  |  |  |  |
+(0,0)  --- (10,0)
+
+- The x range is 0 to 10 = 10 degrees wide, divided by resolution of 2 = 5 columns
+- The y range is 0 to 10 = 10 degrees tall, divided by resolution of 2 = 5 rows
+- We only specified one set of values (no time dimension or multiple variables), so it defaults to 1 layer
+
+How many cells should we have? 
+```{r}
+ncell(ras)
+```
+
+So lets assign some values
+
+```{r}
+
+values(ras) = 1:25
+
+plot(ras)
+```
+
+Lets make sure we understand fully whats going:
+
+```{r}
+ras
+```
+
+
+- **class**: the type of object — SpatRaster is terra's raster format
+- **size**: the grid is 5 rows × 5 columns × 1 layer
+- **resolution**: each pixel covers 2 degrees × 2 degrees (x, y)
+- **extent**: the bounding box — left, right, bottom, top edges in degrees
+- **coord. ref** : the coordinate reference system — WGS84 means standard lat/lon
+- **source(s)**: the data lives in RAM, not read from a file on disk
+- **name lyr.1**: the name of the layer — auto-assigned since we didn't specify one
+- **min value**: the lowest data value stored in any pixel
+- **max value**: the highest data value stored in any pixel
+
+
+## Step 1: the datasets.
 
 Hurricane Milton's path, represented by points every 3 hours as measured by NOAA. 
 
@@ -66,6 +139,7 @@ Hurricane Milton's path, represented by points every 3 hours as measured by NOAA
 milton_path <- st_read(here("rasters_201/data/milton_path.geojson")) %>%
   st_transform(crs=4326)
 
+glimpse(milton_path)
 ```
 
 Let's take a quick look at this path. All of these readings by NOAA take place over the storm's entire lifespan, which is several days. 
@@ -74,10 +148,6 @@ Let's take a quick look at this path. All of these readings by NOAA take place o
 
 mapview(milton_path, zcol="usa_sshs")
 
-```
-
-```{r}
-glimpse(milton_path)
 ```
 
 
@@ -89,17 +159,23 @@ Raster data can come in a few different file types: some of the most common are 
 
 Let's take a look at the temperature (measured in celsius) on this October Saturday. 
 
-::: {.callout-note}
 
-> "Terra is designed to only read into memory those parts of a data set that are necessary for some analysis, raising the possibility of analyzing data sets that are much larger than the availble machine memory"^[<https://pjbartlein.github.io/REarthSysSci/netcdf_terra.html>]
-
-:::
 
 ```{r}
 
 test_tif <- rast(here("rasters_201/data/sea_surface_temp/sst_raster_10042024.tif"))
 
-mapview(test_tif)
+
+print(test_tif)
+
+
+
+library(leaflet)
+pal <- colorNumeric("inferno", values(test_tif), na.color = "transparent")
+
+leaflet() %>%
+  addTiles() %>%
+  addRasterImage(test_tif, colors = pal, opacity = 0.8)
 
 ```
 
