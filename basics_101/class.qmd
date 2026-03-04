@@ -378,6 +378,30 @@ mapview(shooting_incidents_within_buffer_2,
 
 ```
 
+It's also really easy to share this map with your reporting partners or your editor.
+
+##Exporting for your friends
+
+```{r}
+library(htmlwidgets)
+
+#writing mapview output to an object
+map <- mapview(black_pop,
+            zcol = "percent_black",
+            col.regions = RColorBrewer::brewer.pal(9, "Greens"),
+            alpha.regions = 0.5,
+            #at = seq(0, 100),
+            legend = TRUE) + 
+mapview(shooting_incidents_within_buffer_2,
+        col.region = "red",
+        cex=2)
+
+#saving the object to a html file
+saveWidget(map@map, file = "shooting-incidents-near-schools-with-black-pop.html", selfcontained = TRUE)
+
+```
+
+
 Now try it on your own! Choose between datasets in Florida or in Baltimore to practice reading in spatial files and performing joins.
 
 Option 1: Florida Data
