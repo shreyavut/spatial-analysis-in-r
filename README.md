@@ -1,7 +1,9 @@
-# Spatial Analysis in R - NICAR 2025 🗺️
+# Spatial Analysis in R - NICAR 2026 🗺️
 
 _Shreya Vuttaluru, Tampa Bay Times_ 
-<br>_Ryan Little, The Baltimore Banner_
+<br>_Ryan Little, ProPublica_
+<br>Nick McMillan, ProPublica_
+<br>Taylor Nichols, Houston Chronicle_
 
 This GitHub repository accompanies a class on spatial analysis in R. We'll cover basic spatial functions for transforming data and explore tools for exploratory mapping, spatial joins, buffering, calculating spatial distances between points, interpolation and working with raster imagery.
 
