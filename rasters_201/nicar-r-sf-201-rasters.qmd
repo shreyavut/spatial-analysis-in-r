@@ -175,7 +175,7 @@ print(test_tif)
 
 ::: {.callout-note}
 
-Mapview doesn't handle Terra formats currently. Lets use the plot function `plet` found in Terra
+Mapview doesn't handle terra formats currently. Lets use the plot function `plet` in Terra
 
 :::
 
@@ -203,10 +203,21 @@ print(nc_sst)
 ```{r}
 
 # terra parses the time dimension automatically
-sst_dates <- as_date(time(nc_sst))
+sst_dates <- time(nc_sst)
 print(sst_dates)
 
 ```
+
+Lets take a look at our raster data in tabular form
+
+```{r}
+
+nc_sst |> 
+as.data.frame( xy = TRUE, time = TRUE, na.rm = TRUE, cells = TRUE) |>
+head(5)
+
+```
+
 
 
 ### Step 3: Let's map this object
@@ -216,14 +227,38 @@ Can we map this object immediately, like other spatial files?
 ```{r}
 #| error: true
 
-leaflet() %>%
-  addTiles() %>%
-  addRasterImage(nc_sst, colors = pal, opacity = 0.8)
+plet(nc_sst)
 
 ```
 
-Since the NetCDF file stacks layers of pixels on top of each other, they're trickier to map right away. So to visualize this object, we're going to need to extract the specific information about the moment in time that we want see. 
+```{r}
 
+print(nc_sst)
+
+```
+
+1. Notice the extent: 0, 360, -90, 90. This tells us the data is using a 0 to 360 longitude convention instead of the standard -180 to 180 that mapping tools usually expect.
+
+  - This is common in oceanography and climate science — NOAA stores their data this way because it avoids splitting the Pacific Ocean in half, which is mostly open water and a more convenient place to "cut" the globe than through the Americas.
+
+2. Since the NetCDF file stacks layers of pixels on top of each other, they're trickier to map right away. 
+
+
+
+The solution: 
+
+1. we need to rotate it to the standard -180/180 convention, using the `rotate` function
+2. The plet function allows you to easily go throuh the different layers. 
+
+```{r}
+terra::plet(rotate(nc_sst),  y=1:nlyr(nc_sst))
+```
+
+```{r}
+
+rotated_nc_sst = rotate(nc_sst)
+
+```
 
 Let's extract the data for 10-04-2024. Feel free to try a couple of dates in `target_date`, and see what happens. Why do some dates work, but not others? 
 
@@ -233,28 +268,16 @@ target_date <- as_date("2024-10-04")
 date_index <- which(sst_dates == target_date)
 
 # subset to just that layer
-projected_sst <- nc_sst[[date_index]]
+layer_sst <- rotated_nc_sst[[date_index]]
 
-print(projected_sst)
 
 ```
 
-Something like this:
 
-Notice the extent: 0, 360, -90, 90. This tells us the data is using a 0 to 360 longitude convention instead of the standard -180 to 180 that mapping tools usually expect.
 
-This is common in oceanography and climate science — NOAA stores their data this way because it avoids splitting the Pacific Ocean in half, which is mostly open water and a more convenient place to "cut" the globe than through the Americas.
-
-Before we can map this, we need to rotate it to the standard -180/180 convention:
 
 ```{r}
-
-projected_rotated <- rotate(projected_sst)
-
-print(projected_rotated)
-
-
-
+print(layer_sst)
 ```
 
 
@@ -263,7 +286,7 @@ The final map should show a logical basemap, and map sea surface temperature in 
 
 ```{r}
 
-terra::plet(projected_rotated)
+terra::plet(layer_sst)
 
 
 
@@ -289,7 +312,7 @@ We'll use the `extract()` function within the terra package, which takes in poin
 ```{r}
 
 # terra::extract() takes a SpatVector, so we convert sf with vect()
-sst_values_oct_4 <- terra::extract(projected_rotated, vect(milton_points_oct_4))
+sst_values_oct_4 <- terra::extract(layer_sst, vect(milton_points_oct_4))
 
 glimpse(sst_values_oct_4)
 
@@ -330,27 +353,38 @@ What if we want to know how hot the water was during all the points that NOAA di
 
 ```{r}
 
-final_results <- unique(milton_path$date) |>
-  map(\(target_date) {
-    date_index <- which(sst_dates == target_date)
-    
-    if (length(date_index) == 0) {
-      warning(paste("No SST data found for date:", target_date))
-      return(NULL)
-    }
-    
-    day_raster <- nc_sst[[date_index]] |> rotate()
-    
-    date_storms <- milton_path |> filter(date == target_date)
-    
-    date_storms$sst <- terra::extract(day_raster, vect(date_storms)) |> pull(2)
-    
-    date_storms
-  }) |>
-  list_rbind()
+# rotate once outside the function so we're not repeating it every iteration
+nc_sst_rotated <- rotate(nc_sst)
+sst_dates <- as_date(time(nc_sst_rotated))
+
+extract_sst <- \(target_date, raster_data) {
+  date_index <- which(sst_dates == as_date(target_date))
+  
+  if (length(date_index) == 0) {
+    warning(paste("No SST data found for date:", target_date))
+    return(NULL)
+  }
+  
+  date_storms <- milton_path |> filter(date == target_date)
+
+  date_storms$sst <- terra::extract(raster_data, vect(date_storms), layer = date_index) |> pull(2)
+
+  date_storms
+}
+
+
+extract_sst( "2024-10-04",nc_sst_rotated)
+
 
 ```
 
+```{r}
+
+final_results <- unique(milton_path$date) |>
+  map(\(target_date) extract_sst(target_date, nc_sst_rotated)) |>
+  list_rbind()
+
+```
 
 Finally, let's map the sea surface tempature along the path! 
 
@@ -358,4 +392,40 @@ Finally, let's map the sea surface tempature along the path!
 
 mapview(final_results, cex = "usa_sshs", zcol = "sst")
 
+```
+
+
+## How about doing it all at once?
+
+
+```{r}
+
+# extract from all layers at once
+sst_all <- terra::extract(nc_sst_rotated, vect(milton_path))
+
+glimpse(sst_all)
+
+
+
+
+```
+
+```{r}
+final_results_2 = milton_path |>
+  bind_cols(sst_all) |> 
+  pivot_longer(
+    cols = starts_with("sst"),
+    names_to = "layer",
+    values_to = "sst"
+  ) |> 
+  mutate(layer_index = as.integer(str_remove(layer, "sst_")),
+         date_layer = sst_dates[layer_index]) |> 
+  filter(date_layer == date) |> 
+  select(date, iso_time, usa_sshs, usa_wind, sst, geometry) |> 
+  st_as_sf() 
+
+
+glimpse(final_results_2)
+
+mapview(final_results_2, cex = "usa_sshs", zcol = "sst")
 ```
