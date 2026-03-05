@@ -9,7 +9,7 @@ This is the second class in our spatial analysis series. We'll be covering the b
 
 This class assumes you have a basic understanding of spatial data and the `sf` package, like shape files and geojsons. If you are new to spatial data in R, let us know and we will try to help catch you up.
 
-We'll be using the terra package (the successor to the raster package) for extracting information from our files and `sf` fore more traditional spatial joins.
+We'll be using the terra package (the successor to the raster package) for extracting information from our files and `sf` for more traditional spatial joins.
 
 ::: {.callout-note}
 
@@ -132,12 +132,16 @@ ras
 
 ## Step 1: the datasets.
 
+### Hurrican Path
+
 Hurricane Milton's path, represented by points every 3 hours as measured by NOAA. 
 
 ```{r}
 
 milton_path <- st_read(here("rasters_201/data/milton_path.geojson")) %>%
-  st_transform(crs=4326)
+  st_transform(crs=4326) |> 
+  mutate(date = as_date(iso_time))
+
 
 glimpse(milton_path)
 ```
@@ -151,7 +155,7 @@ mapview(milton_path, zcol="usa_sshs")
 ```
 
 
-Sea surface temperature in 2024.
+### Sea surface temperature in 2024.
 
 Raster data can come in a few different file types: some of the most common are NetCDF (.nc) and .TIF files
 
@@ -172,17 +176,14 @@ print(test_tif)
 
 ::: {.callout-note}
 
-Mapview doesn't handle Terra formats currently. Lets pull out leaflet in the meantime
+Mapview doesn't handle Terra formats currently. Lets use the plot function `plet` found in Terra
 
 :::
 
 ```{r}
 
-pal <- colorNumeric("inferno", values(test_tif), na.color = "transparent")
+terra::plet(test_tif)
 
-leaflet() %>%
-  addTiles() %>%
-  addRasterImage(test_tif, colors = pal, opacity = 0.8)
 ```
 
 
@@ -203,7 +204,7 @@ print(nc_sst)
 ```{r}
 
 # terra parses the time dimension automatically
-sst_dates <- as.Date(time(nc_sst))
+sst_dates <- as_date(time(nc_sst))
 print(sst_dates)
 
 ```
@@ -213,7 +214,8 @@ print(sst_dates)
 
 Can we map this object immediately, like other spatial files? 
 
-```{r error=TRUE}
+```{r}
+#| error: true
 
 leaflet() %>%
   addTiles() %>%
@@ -234,75 +236,39 @@ date_index <- which(sst_dates == target_date)
 # subset to just that layer
 projected_sst <- nc_sst[[date_index]]
 
+print(projected_sst)
+
 ```
 
+Something like this:
+
+Notice the extent: 0, 360, -90, 90. This tells us the data is using a 0 to 360 longitude convention instead of the standard -180 to 180 that mapping tools usually expect.
+
+This is common in oceanography and climate science — NOAA stores their data this way because it avoids splitting the Pacific Ocean in half, which is mostly open water and a more convenient place to "cut" the globe than through the Americas.
+
+Before we can map this, we need to rotate it to the standard -180/180 convention:
 
 ```{r}
 
-pal <- colorNumeric("inferno", values(projected_sst), na.color = "transparent")
+projected_rotated <- rotate(projected_sst)
 
-leaflet() %>%
-  addTiles() %>%
-  addRasterImage(projected_sst, colors = pal, opacity = 0.8)
+print(projected_rotated)
 
-```
 
-Let's transform the data for a single day, so we can view it. 
-
-```{r}
-
-# Extract SST data for that specific day
-sst_data <- ncvar_get(nc_sst, "sst", 
-                       start = c(1, 1, date_index), 
-                       count = c(-1, -1, 1))
-
-# Get longitude and latitude values
-lon <- ncvar_get(nc_sst, "lon")
-lat <- ncvar_get(nc_sst, "lat")
-
-# Convert SST data into a raster object
-sst_raster <- raster::raster(t(sst_data), 
-                              xmn = min(lon), xmx = max(lon), 
-                              ymn = min(lat), ymx = max(lat))
 
 ```
 
-Before we project this into an object we can map, let's check how big the pixels are:
-
-Note: this size is in DEGREES, not meters. We're not calculating area today, but in cases where you are calculating area from pixel files, be sure to convert your calculations to traditional measures of area. 
-
-```{r}
-
-res(sst_raster)
-
-```
-
-Now, let's project it into WGS84
-
-```{r}
-
-# Set the correct CRS to WGS84 (EPSG:4326) — the same CRS as we set milton path to earlier
-crs(sst_raster) <- CRS("+proj=longlat +datum=WGS84 +no_defs")
-
-mapview(sst_raster)
-
-```
-
-That looks wrong! Let's rotate and project this right-side up: 
 
 The final map should show a logical basemap, and map sea surface temperature in degrees celsius, much like the TIF file we mapped first. 
 
+
 ```{r}
 
-# Rotate and flip the raster to ensure the orientation is correct
-projected_sst <- rotate(sst_raster) |>
-  flip(direction = 'y')
+terra::plet(projected_rotated)
 
-# View the rotated raster using mapview
-mapview(projected_sst)
+
 
 ```
-
 
 Now we have sea surface temperature data at every point in the ocean on October 4th, 2024. 
 
@@ -311,9 +277,6 @@ We also know that then Tropical Depression Milton had formed in the Gulf of Mexi
 ```{r}
 
 milton_points_oct_4 <- milton_path |>
-  mutate(
-    date = as.Date(iso_time)
-  ) |>
   filter(date == "2024-10-04")
 
 mapview(milton_points_oct_4, zoom=4, zcol="usa_sshs")
@@ -322,36 +285,40 @@ mapview(milton_points_oct_4, zoom=4, zcol="usa_sshs")
 
 How hot was the Gulf of Mexico on October 4th, while NOAA was measuring the wind speed? 
 
-We'll use the `extract()` function within the raster package, which takes in points and then extracts the information from the corresponding raster. 
+We'll use the `extract()` function within the terra package, which takes in points and then extracts the information from the corresponding raster. 
 
 ```{r}
 
-### extract the coordinates on october 4th
-milton_points <- st_coordinates(milton_points_oct_4$geometry)
+# terra::extract() takes a SpatVector, so we convert sf with vect()
+sst_values_oct_4 <- terra::extract(projected_rotated, vect(milton_points_oct_4))
 
-### extract the SST 
-sst_values_oct_4 <- raster::extract(projected_sst, milton_points)
+glimpse(sst_values_oct_4)
 
-milton_points_oct_4$sst <- sst_values_oct_4
 
+```
+
+```{r}
+
+# We combined 
 milton_points_oct_4 %>%
+  bind_cols(sst = sst_values_oct_4 %>% pull(sst_1)) %>%
   dplyr::select(iso_time, usa_sshs, usa_wind, sst) %>%
   st_drop_geometry()
 
+
 ```
+
 
 In our overall `milton_path` and `nc_sst` dataset, we have 7 days of sea surface temperature data, and 7 days in which Milton was tracked by NOAA. These should be the same dates, and we can check by printing a list: 
 
 ```{r}
 
 milton_path_dates <- milton_path |>
-  mutate(
-    date = as.Date(iso_time)
-  ) |>
-  group_by(date) |>
-  summarize(
-    count = n()
-  ) %>%
+   summarize(
+    count = n(),
+    across(geometry, st_union),
+    .by = date
+  ) |> 
   pull(unique(date))
 
 print(milton_path_dates)
@@ -359,84 +326,32 @@ print(sst_dates)
 
 ```
 
-What if we want to know how hot the water was during all the points that NOAA did a readings, not just during a single day? To do this, let's set up a loop! 
+What if we want to know how hot the water was during all the points that NOAA did a readings, not just during a single day? To do this, lets map a function!
 
-First, let's re-extract the correct dates from the netcdf — remember that the initial units were "days since 1980-01-01". 
-Fun fact: that's because the modern satellite era begins in 1980! 
 
 ```{r}
 
-# get the time indices and dates from nc_sst (we did this step earlier, too)
-time_var <- ncvar_get(nc_sst, "time")
-time_units <- ncatt_get(nc_sst, "time", "units")
-ref_time <- as.Date(substr(time_units$value, 12, 21))
-sst_dates <- ref_time + time_var
-
-# Get lon/lat once outside the loop
-lon <- ncvar_get(nc_sst, "lon")
-lat <- ncvar_get(nc_sst, "lat")
-
-# esure milton_path has date column that we can iterate through
-milton_path <- milton_path %>%
-  mutate(date = as.Date(iso_time))
-
-```
-
-For every date in `milton_path`, we'll get the corresponding SST layer within the netcdf file. Then, we'll convert it into a raster object, project it appropriately, and extract the sea surface temperature at the point that was tracked in the storm's path. 
-
-```{r}
-
-# initialize a list to store results
-sst_results <- list()
-
-# Loop through each unique date in milton_path
-for (target_date in unique(milton_path$date)) {
-  # Find the matching index in the netCDF file's time dimension
-  date_index <- which(sst_dates == target_date)
-  
-  if (length(date_index) == 0) {
-    warning(paste("No SST data found for date:", target_date))
-    next
-  }
-  
-  # extract SST data for this date
-  sst_data <- ncvar_get(nc_sst, "sst", 
-                        start = c(1, 1, date_index), 
-                        count = c(-1, -1, 1))
-  
-  # convert SST data into a raster
-  sst_raster <- raster(t(sst_data), 
-                      xmn = min(lon), xmx = max(lon), 
-                      ymn = min(lat), ymx = max(lat))
-  
-  # set CRS and correct orientation
-  crs(sst_raster) <- CRS("+proj=longlat +datum=WGS84 +no_defs")
-  projected_sst <- rotate(sst_raster) %>%
-    flip(direction = 'y')
-  
-  # get storm points for this date
-  date_storms <- milton_path %>% 
-    filter(date == target_date)
-  
-  # extract SST values at storm points
-  sst_values <- raster::extract(projected_sst, date_storms)
-  
-  # store extracted SST in the data
-  date_storms$sst <- sst_values
-  sst_results[[length(sst_results) + 1]] <- date_storms
-}
-
-# combine results into a single dataframe
-final_results <- bind_rows(sst_results)
-
-# view results
-final_results %>%
-  arrange(date) %>%
-  dplyr::select(date, iso_time, usa_sshs, usa_wind, sst) %>%
-  st_drop_geometry() %>%
-  head(10)
+final_results <- unique(milton_path$date) |>
+  map(\(target_date) {
+    date_index <- which(sst_dates == target_date)
+    
+    if (length(date_index) == 0) {
+      warning(paste("No SST data found for date:", target_date))
+      return(NULL)
+    }
+    
+    day_raster <- nc_sst[[date_index]] |> rotate()
+    
+    date_storms <- milton_path |> filter(date == target_date)
+    
+    date_storms$sst <- terra::extract(day_raster, vect(date_storms)) |> pull(2)
+    
+    date_storms
+  }) |>
+  list_rbind()
 
 ```
+
 
 Finally, let's map the sea surface tempature along the path! 
 
