@@ -26,7 +26,7 @@ We won't be recreating all the findings in this story, since they require scrapi
 
 ### This code will install the packages required for this project if you don't already have them installed. Uncomment this code if you need to install the packages. 
 
-# packages <- c("sf", "tidyverse", "raster", "mapview", "janitor", "lubridate", "tidycensus", "terra", "ncdf4", "stars", "here")
+# packages <- c("sf", "tidyverse", "mapview", "janitor", "lubridate", "tidycensus", "terra", "here")
 # 
 # for (pkg in packages) {
 #   if (!require(pkg, character.only = TRUE)) {
@@ -45,9 +45,8 @@ library(tidycensus)
 library(here)
 
 ### These libraries will help us work with rasters. 
-library(ncdf4)
 library(terra)
-library(stars)
+
 
 ```
 
