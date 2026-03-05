@@ -1,5 +1,5 @@
 ---
-title: "Spatial Analysis in R: NICAR 2025 - Introduction"
+title: "Spatial Analysis in R: NICAR 2026 - Introduction"
 author: Shreya Vuttaluru and Ryan Little
 format: html
 editor: visual
@@ -160,7 +160,10 @@ mapview(shootings_subset,
 
 ```
 
-\*\*\*\*\* A quick side note about Coordinate Reference Systems, also called CRS \*\*\*\*\*\*\*
+
+::: {.callout-note}
+
+## A quick side note about Coordinate Reference Systems, also called CRS 
 
 Coordinate Reference Systems essentially tell our computers what kind of map we want to display our data on. If you're a round-earth truther, you'll know that the earth is *not* flat, and that maps are not perfect representations of what Earth looks like. We set CRS that are the most accurate representations of the areas we are working with.
 
@@ -170,7 +173,8 @@ If you're in the United States, my favorites are \* 4326 for most visualization-
 
 Datawrapper and Flourish sometimes require 4326.
 
-\*\*\*\*\* END NOTE \*\*\*\*\*\*\*
+:::
+
 
 ### Step 4: Buffering
 

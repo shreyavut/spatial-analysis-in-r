@@ -1,5 +1,5 @@
 ---
-title: "Spatial Analysis in R - 301: NICAR 2025"
+title: "Spatial Analysis in R - 301: NICAR 2026"
 author: Ryan Little
 format: html
 editor: visual

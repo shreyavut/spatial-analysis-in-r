@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>readme – Spatial Analysis in R - NICAR 2026</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7b1b06e26e1e2798ccde3208f86b5bbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./README.html">Overview</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Spatial Analysis in R - NICAR 2026</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./README.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics_101/class.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Analysis in R: NICAR 2026 - Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rasters_201/nicar-r-sf-201-rasters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Analysis in R - 201: NICAR 2026</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpolation_301/nicar-r-sf-301-interpolation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Analysis in R - 301: NICAR 2026</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#spatial-analysis-in-r---nicar-2026" id="toc-spatial-analysis-in-r---nicar-2026" class="nav-link active" data-scroll-target="#spatial-analysis-in-r---nicar-2026">Spatial Analysis in R - NICAR 2026 🗺️</a>
+  <ul class="collapse">
+  <li><a href="#packages-for-spatial-work-in-r" id="toc-packages-for-spatial-work-in-r" class="nav-link" data-scroll-target="#packages-for-spatial-work-in-r">Packages for Spatial Work in R:</a></li>
+  <li><a href="#basic-types-of-spatial-data" id="toc-basic-types-of-spatial-data" class="nav-link" data-scroll-target="#basic-types-of-spatial-data">Basic Types of Spatial Data:</a></li>
+  <li><a href="#common-spatial-filetypes" id="toc-common-spatial-filetypes" class="nav-link" data-scroll-target="#common-spatial-filetypes">Common Spatial Filetypes:</a></li>
+  <li><a href="#types-of-spatial-joins" id="toc-types-of-spatial-joins" class="nav-link" data-scroll-target="#types-of-spatial-joins">Types of Spatial Joins:</a></li>
+  <li><a href="#coordinate-reference-systems-crs" id="toc-coordinate-reference-systems-crs" class="nav-link" data-scroll-target="#coordinate-reference-systems-crs">Coordinate Reference Systems (CRS):</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="spatial-analysis-in-r---nicar-2026" class="level1">
+<h1>Spatial Analysis in R - NICAR 2026 🗺️</h1>
+<p><em>Shreya Vuttaluru, Tampa Bay Times</em> <br><em>Ryan Little, ProPublica</em> <br><em>Nick McMillan, ProPublica</em> <br><em>Taylor Nichols, Houston Chronicle</em></p>
+<p>This GitHub repository accompanies a class on spatial analysis in R. We’ll cover basic spatial functions for transforming data and explore tools for exploratory mapping, spatial joins, buffering, calculating spatial distances between points, interpolation and working with raster imagery.</p>
+<p>We’ll be using the <code>sf</code> package for geospatial functions. This package has many of the same functions available in geospatial software like ArcGIS, QGIS and PostGIS.</p>
+<p>Some advantages of using <code>sf</code> for spatial analysis:</p>
+<ul>
+<li>Easy to integrate with other data analysis and cleaning steps</li>
+<li>Reproduce your scripts</li>
+<li>Fairly easy visualization</li>
+<li>Faster processing time for large datasets</li>
+<li>Free! 💰</li>
+</ul>
+<p>Clone this repository locally to start!</p>
+<section id="packages-for-spatial-work-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="packages-for-spatial-work-in-r">Packages for Spatial Work in R:</h2>
+<ul>
+<li><strong><a href="https://r-spatial.github.io/sf/">sf</a></strong> is a relatively intuitive R package with functions for spatial analysis that integrates well with other data analysis and cleaning steps.</li>
+<li><strong><a href="https://rspatial.github.io/terra/">terra</a></strong> provides functions for reading, writing, processing, and analyzing gridded spatial data, such as satellite imagery, digital elevation models (DEMs), and climate data.</li>
+<li><strong><a href="https://r-spatial.github.io/mapview/">mapview</a></strong> is a library built off of the leaflet API for creating interactive web maps. Consider using <strong><a href="https://learn.r-journalism.com/en/mapping/leaflet_maps/leaflet/">leaflet</a></strong> instead for more customizable maps.</li>
+<li><strong><a href="https://walker-data.com/tidycensus/articles/spatial-data.html">tidycensus</a></strong> and <strong><a href="https://rdrr.io/cran/tigris/man/tracts.html">tigris</a></strong> provide spatial data for census geographies across the U.S.</li>
+</ul>
+</section>
+<section id="basic-types-of-spatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="basic-types-of-spatial-data">Basic Types of Spatial Data:</h2>
+<ul>
+<li><strong>Vector Data</strong>:
+<ul>
+<li>Represents geographic features like points, lines, and polygons.
+<ul>
+<li>Example: Points representing cities or landmarks, linear features like roads, rivers, or boundaries.</li>
+</ul></li>
+</ul></li>
+<li><strong>Raster Data</strong>:
+<ul>
+<li>Represents geographic features as a grid of cells or pixels, where each cell has a value representing a specific attribute.
+<ul>
+<li>Example: Satellite imagery, digital elevation models (DEMs), land cover classifications.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="common-spatial-filetypes" class="level2">
+<h2 class="anchored" data-anchor-id="common-spatial-filetypes">Common Spatial Filetypes:</h2>
+<ul>
+<li>When filing records requests, it might be helpful to include one or more of these filetypes. You can also ask for polygon, multipolygon, or latitude/longitude fields.</li>
+<li><strong>ESRI Shapefile (.shp)</strong>:
+<ul>
+<li>Standard format for geographic data, holding both shape geometry and attribute information.</li>
+</ul></li>
+<li><strong>KML (.kml)</strong>:
+<ul>
+<li>Google Earth’s language for displaying geographic data, featuring points, lines, and polygons.</li>
+</ul></li>
+<li><strong>Compressed KML (.kmz)</strong>:
+<ul>
+<li>Compact version of KML, convenient for sharing as a single compressed file.</li>
+</ul></li>
+<li><strong>ESRI Geodatabase (.gdb)</strong>:
+<ul>
+<li>ESRI’s comprehensive spatial data management system, storing various data types within a structured folder.</li>
+</ul></li>
+<li><strong>R Data Set (.rds)</strong>:
+<ul>
+<li>File format in R for storing spatial data objects, facilitating analysis and manipulation within the R environment.</li>
+</ul></li>
+<li><strong>GeoJSON (.geojson)</strong>:
+<ul>
+<li>Lightweight format for encoding geographic data structures in a human-readable text format, widely used for web mapping and interoperability purposes.</li>
+</ul></li>
+</ul>
+</section>
+<section id="types-of-spatial-joins" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-spatial-joins">Types of Spatial Joins:</h2>
+<ul>
+<li><strong>Point-in-Polygon</strong>:
+<ul>
+<li>Assigns attributes from polygons to points that fall within them. Implemented with <code>st_join</code> using <code>join = st_within</code>.</li>
+</ul></li>
+<li><strong>Polygon-on-Polygon</strong>:
+<ul>
+<li>Assigns attributes from one polygon layer to another based on their spatial intersection, or whether one polygon falls inside another. Implemented with <code>st_join</code> using <code>join = st_intersects</code>.</li>
+</ul></li>
+<li><strong>Intersect</strong>:
+<ul>
+<li>Computes the intersection between geometries, returning shared portions of intersecting geometries as a new <code>sf</code> object using <code>st_intersection</code>.</li>
+</ul></li>
+<li><strong>Union</strong>:
+<ul>
+<li>Combines geometries from multiple layers into a single <code>sf</code> object, preserving all features and their attributes using <code>st_union</code>.</li>
+</ul></li>
+<li><strong>Difference</strong>:
+<ul>
+<li>Computes the geometric difference between two <code>sf</code> objects and removes overlapping portions based on their intersection with <code>st_difference</code>.</li>
+</ul></li>
+<li><strong>Buffer</strong>:
+<ul>
+<li>Creates buffer zones around spatial features by generating new geometries at a specified distance from the original features using <code>st_buffer</code>.</li>
+</ul></li>
+<li><strong>Nearest Neighbor</strong>:
+<ul>
+<li>Determines the nearest feature in one layer to each feature in another layer, achieved using spatial indexing and distance calculations, not directly supported by <code>st_join</code>.</li>
+</ul></li>
+</ul>
+<p>Check out the documentation for <strong><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></strong> for more.</p>
+</section>
+<section id="coordinate-reference-systems-crs" class="level2">
+<h2 class="anchored" data-anchor-id="coordinate-reference-systems-crs">Coordinate Reference Systems (CRS):</h2>
+<ul>
+<li>Choosing the right CRS is important for accurately representing spatial data on maps.</li>
+<li>There are two main types of CRS: geographic and projected.</li>
+<li><strong>Geographic CRS</strong> (e.g., CRS 4326/WGS84):
+<ul>
+<li>Uses latitude and longitude coordinates, like a grid laid over a globe.</li>
+</ul></li>
+<li><strong>Projected CRS</strong> (e.g., CRS 5070/NAD83/Conus Albers):
+<ul>
+<li>Flattens the Earth’s surface onto a map, helping with calculating in distance, area, and direction. Stick with a projected system if you plan to do any math.</li>
+<li>When performing joins, ensure your CRS match each other. Pick one and stick with it.</li>
+<li>Popular CRS include 4326 and 5070 for any US-based spatial analysis you might do, but research the most appropriate system for your region!</li>
+</ul></li>
+</ul>
+<p><strong>Other Resources for Understanding CRS:</strong> - <a href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/">Earthlab introduction (with R code)</a> - <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/national-geospatial-data-standards.html">Overview from USCB</a></p>
+<p>Here’s this documentation in <a href="https://docs.google.com/document/d/1pilPhRDHUpVOgeCBC6X0y8-9vC7yl5SYmuEfEytSYy8/edit?usp=sharing">Google Docs</a>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

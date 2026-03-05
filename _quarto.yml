@@ -1,0 +1,38 @@
+project:
+  type: website
+  render:
+    - ./README.md
+    - basics_101/class.qmd
+    - rasters_201/nicar-r-sf-201-rasters.qmd
+    - interpolation_301/nicar-r-sf-301-interpolation.qmd
+ 
+
+website:
+  title: "Spatial Analysis in R - NICAR 2026"
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: "Overview"
+        href: README.md
+      - section: "Lessons"
+        contents:
+          - href: basics_101/class.qmd
+          - href: rasters_201/nicar-r-sf-201-rasters.qmd
+          - href: interpolation_301/nicar-r-sf-301-interpolation.qmd
+   
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    code-fold: show
+
+execute:
+  echo: true     
+  warning: false   # Hide warnings
+  message: false   # Hide messages
+
+

@@ -9,3 +9,5 @@ rv.lock
 rv/
 rasters_201/temp.qmd
 rasters_201/og.qmd
+
+/.quarto/
