@@ -1,0 +1,431 @@
+---
+title: "Spatial Analysis in R - 201: NICAR 2026"
+author: "Shreya Vuttaluru, updated by Nick McMillan"
+date: "2026-03-04"
+output: html_document
+---
+
+This is the second class in our spatial analysis series. We'll be covering the basics of rasters — image-based data sets that include information extracted from satellites and other aerial tools that are stored in pixels.
+
+This class assumes you have a basic understanding of spatial data and the `sf` package, like shape files and geojsons. If you are new to spatial data in R, let us know and we will try to help catch you up.
+
+We'll be using the terra package (the successor to the raster package) for extracting information from our files and `sf` for more traditional spatial joins.
+
+::: {.callout-note}
+
+> "Terra is designed to only read into memory those parts of a data set that are necessary for some analysis, raising the possibility of analyzing data sets that are much larger than the availble machine memory"^[<https://pjbartlein.github.io/REarthSysSci/netcdf_terra.html>]
+
+:::
+
+We'll be working with sea surface temperature data used in [this story that tracked how the most intense hurricanes in modern history almost always traverse over record-hot waters.](https://www.tampabay.com/hurricane/2024/11/03/more-hurricanes-are-slamming-gulf-coast-is-this-new-normal/).
+
+We won't be recreating all the findings in this story, since they require scraping and looping through hundreds of files. Instead, we'll walk through an example of how to clean, transform and subset this data in a way that can be applicable to larger projects.
+
+
+```{r}
+
+### This code will install the packages required for this project if you don't already have them installed. Uncomment this code if you need to install the packages. 
+
+# packages <- c("sf", "tidyverse", "mapview", "janitor", "lubridate", "tidycensus", "terra", "here")
+# 
+# for (pkg in packages) {
+#   if (!require(pkg, character.only = TRUE)) {
+#     install.packages(pkg)
+#   }
+# }
+
+### Import our packages into our script here.
+library(sf)
+library(tidyverse)
+library(janitor)
+library(leaflet)
+library(mapview)
+library(lubridate)
+library(tidycensus)
+library(here)
+
+### These libraries will help us work with rasters. 
+library(terra)
+
+
+```
+
+
+## What are rasters, and why should I care about them?
+
+Rasters are digital images that store information in a grid of equally-sized pixels. Environmental agencies and scientists often collect and store data in this format because it allows them to store large summaries of information that is regularly collected about the world in just a single file.
+
+The more pixels we have in a data set, the more detail we can get out of a dataset.
+
+Some examples of popular raster data sets include:
+- Land use changes across the United States 
+- Sea surface temperature 
+- Elevation data
+
+
+### Okay, but what is really?
+
+Lets create our own raster!
+
+```{r}
+
+ras <- rast(xmin = 0, xmax = 10, ymin = 0, ymax = 10, resolution = 2)
+
+ras
+
+```
+
+What does it look like?
+
+```{r}
+plot(ras)
+```
+
+We got nothing! Cause there is no value assigned to the cells
+
+So what are we dealing with?
+
+(0,10) --- (10,10)
+  |  |  |  |  |
+  |  |  |  |  |
+  |  |  |  |  |
+  |  |  |  |  |
+  |  |  |  |  |
+(0,0)  --- (10,0)
+
+- The x range is 0 to 10 = 10 degrees wide, divided by resolution of 2 = 5 columns
+- The y range is 0 to 10 = 10 degrees tall, divided by resolution of 2 = 5 rows
+- We only specified one set of values (no time dimension or multiple variables), so it defaults to 1 layer
+
+How many cells should we have? 
+```{r}
+ncell(ras)
+```
+
+So lets assign some values
+
+```{r}
+
+values(ras) = 1:25
+
+plot(ras)
+```
+
+Lets make sure we understand fully whats going:
+
+```{r}
+ras
+```
+
+
+- **class**: the type of object — SpatRaster is terra's raster format
+- **size**: the grid is 5 rows × 5 columns × 1 layer
+- **resolution**: each pixel covers 2 degrees × 2 degrees (x, y)
+- **extent**: the bounding box — left, right, bottom, top edges in degrees
+- **coord. ref** : the coordinate reference system — WGS84 means standard lat/lon
+- **source(s)**: the data lives in RAM, not read from a file on disk
+- **name lyr.1**: the name of the layer — auto-assigned since we didn't specify one
+- **min value**: the lowest data value stored in any pixel
+- **max value**: the highest data value stored in any pixel
+
+
+## Step 1: the datasets.
+
+### Hurrican Path
+
+Hurricane Milton's path, represented by points every 3 hours as measured by NOAA. 
+
+```{r}
+
+milton_path <- st_read(here("rasters_201/data/milton_path.geojson")) %>%
+  st_transform(crs=4326) |> 
+  mutate(date = as_date(iso_time))
+
+
+glimpse(milton_path)
+```
+
+Let's take a quick look at this path. All of these readings by NOAA take place over the storm's entire lifespan, which is several days. 
+
+```{r}
+
+mapview(milton_path, zcol="usa_sshs")
+
+```
+
+
+### Sea surface temperature in 2024.
+
+Raster data can come in a few different file types: some of the most common are NetCDF (.nc) and .TIF files
+
+.TIF files typically store information from a single point in time. In this case, we're looking at ocean temperature data all across the world, as measured only on 10/04/2024. These types of files are typically good for data that doesn't change on a day to day basis — think elevation, or land use. 
+
+Let's take a look at the temperature (measured in celsius) on this October Saturday. 
+
+
+
+```{r}
+
+test_tif <- rast(here("rasters_201/data/sea_surface_temp/sst_raster_10042024.tif"))
+
+
+print(test_tif)
+
+```
+
+::: {.callout-note}
+
+Mapview doesn't handle terra formats currently. Lets use the plot function `plet` in Terra
+
+:::
+
+```{r}
+
+terra::plet(test_tif)
+
+```
+
+
+NetCDF files are like a larger organized collection of data, much like a library with multiple shelves (called "bands") where each shelf holds a specific type of information. Here — each "band" in the NetCDF file represents the temperature on a different day. Think of it like several different .TIF files stacked on top of each other. 
+
+The original version of this file is much larger — it contains information for every single day within 2024. We've subset the file to contain information from just a few days. You can find the original version [here](https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html).
+
+
+```{r}
+
+nc_sst <- rast(here("rasters_201/data/sea_surface_temp/filtered_sst.nc"))
+
+print(nc_sst)
+
+
+```
+
+```{r}
+
+# terra parses the time dimension automatically
+sst_dates <- time(nc_sst)
+print(sst_dates)
+
+```
+
+Lets take a look at our raster data in tabular form
+
+```{r}
+
+nc_sst |> 
+as.data.frame( xy = TRUE, time = TRUE, na.rm = TRUE, cells = TRUE) |>
+head(5)
+
+```
+
+
+
+### Step 3: Let's map this object
+
+Can we map this object immediately, like other spatial files? 
+
+```{r}
+#| error: true
+
+plet(nc_sst)
+
+```
+
+```{r}
+
+print(nc_sst)
+
+```
+
+1. Notice the extent: 0, 360, -90, 90. This tells us the data is using a 0 to 360 longitude convention instead of the standard -180 to 180 that mapping tools usually expect.
+
+  - This is common in oceanography and climate science — NOAA stores their data this way because it avoids splitting the Pacific Ocean in half, which is mostly open water and a more convenient place to "cut" the globe than through the Americas.
+
+2. Since the NetCDF file stacks layers of pixels on top of each other, they're trickier to map right away. 
+
+
+
+The solution: 
+
+1. we need to rotate it to the standard -180/180 convention, using the `rotate` function
+2. The plet function allows you to easily go throuh the different layers. 
+
+```{r}
+terra::plet(rotate(nc_sst),  y=1:nlyr(nc_sst))
+```
+
+```{r}
+
+rotated_nc_sst = rotate(nc_sst)
+
+```
+
+Let's extract the data for 10-04-2024. Feel free to try a couple of dates in `target_date`, and see what happens. Why do some dates work, but not others? 
+
+```{r}
+
+target_date <- as_date("2024-10-04")
+date_index <- which(sst_dates == target_date)
+
+# subset to just that layer
+layer_sst <- rotated_nc_sst[[date_index]]
+
+
+```
+
+
+
+
+```{r}
+print(layer_sst)
+```
+
+
+The final map should show a logical basemap, and map sea surface temperature in degrees celsius, much like the TIF file we mapped first. 
+
+
+```{r}
+
+terra::plet(layer_sst)
+
+
+
+```
+
+Now we have sea surface temperature data at every point in the ocean on October 4th, 2024. 
+
+We also know that then Tropical Depression Milton had formed in the Gulf of Mexico on this day, so we can track both the storm's movement and the temperature of the water. 
+
+```{r}
+
+milton_points_oct_4 <- milton_path |>
+  filter(date == "2024-10-04")
+
+mapview(milton_points_oct_4, zoom=4, zcol="usa_sshs")
+
+```
+
+How hot was the Gulf of Mexico on October 4th, while NOAA was measuring the wind speed? 
+
+We'll use the `extract()` function within the terra package, which takes in points and then extracts the information from the corresponding raster. 
+
+```{r}
+
+# terra::extract() takes a SpatVector, so we convert sf with vect()
+sst_values_oct_4 <- terra::extract(layer_sst, vect(milton_points_oct_4))
+
+glimpse(sst_values_oct_4)
+
+
+```
+
+```{r}
+
+# We combined 
+milton_points_oct_4 %>%
+  bind_cols(sst = sst_values_oct_4 %>% pull(sst_1)) %>%
+  dplyr::select(iso_time, usa_sshs, usa_wind, sst) %>%
+  st_drop_geometry()
+
+
+```
+
+
+In our overall `milton_path` and `nc_sst` dataset, we have 7 days of sea surface temperature data, and 7 days in which Milton was tracked by NOAA. These should be the same dates, and we can check by printing a list: 
+
+```{r}
+
+milton_path_dates <- milton_path |>
+   summarize(
+    count = n(),
+    across(geometry, st_union),
+    .by = date
+  ) |> 
+  pull(unique(date))
+
+print(milton_path_dates)
+print(sst_dates)
+
+```
+
+What if we want to know how hot the water was during all the points that NOAA did a readings, not just during a single day? To do this, lets map a function!
+
+
+```{r}
+
+# rotate once outside the function so we're not repeating it every iteration
+nc_sst_rotated <- rotate(nc_sst)
+sst_dates <- as_date(time(nc_sst_rotated))
+
+extract_sst <- \(target_date, raster_data) {
+  date_index <- which(sst_dates == as_date(target_date))
+  
+  if (length(date_index) == 0) {
+    warning(paste("No SST data found for date:", target_date))
+    return(NULL)
+  }
+  
+  date_storms <- milton_path |> filter(date == target_date)
+
+  date_storms$sst <- terra::extract(raster_data, vect(date_storms), layer = date_index) |> pull(2)
+
+  date_storms
+}
+
+
+extract_sst( "2024-10-04",nc_sst_rotated)
+
+
+```
+
+```{r}
+
+final_results <- unique(milton_path$date) |>
+  map(\(target_date) extract_sst(target_date, nc_sst_rotated)) |>
+  list_rbind()
+
+```
+
+Finally, let's map the sea surface tempature along the path! 
+
+```{r}
+
+mapview(final_results, cex = "usa_sshs", zcol = "sst")
+
+```
+
+
+## How about doing it all at once?
+
+
+```{r}
+
+# extract from all layers at once
+sst_all <- terra::extract(nc_sst_rotated, vect(milton_path))
+
+glimpse(sst_all)
+
+
+
+
+```
+
+```{r}
+final_results_2 = milton_path |>
+  bind_cols(sst_all) |> 
+  pivot_longer(
+    cols = starts_with("sst"),
+    names_to = "layer",
+    values_to = "sst"
+  ) |> 
+  mutate(layer_index = as.integer(str_remove(layer, "sst_")),
+         date_layer = sst_dates[layer_index]) |> 
+  filter(date_layer == date) |> 
+  select(date, iso_time, usa_sshs, usa_wind, sst, geometry) |> 
+  st_as_sf() 
+
+
+glimpse(final_results_2)
+
+mapview(final_results_2, cex = "usa_sshs", zcol = "sst")
+```
