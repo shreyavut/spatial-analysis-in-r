@@ -85,13 +85,17 @@ We got nothing! Cause there is no value assigned to the cells
 
 So what are we dealing with?
 
-(0,10) --- (10,10)
-  |  |  |  |  |
-  |  |  |  |  |
-  |  |  |  |  |
-  |  |  |  |  |
-  |  |  |  |  |
-(0,0)  --- (10,0)
+        ┌───┬───┬───┬───┬───┐
+row 5   │   │   │   │   │   │  y=8–10
+        ├───┼───┼───┼───┼───┤
+row 4   │   │   │   │   │   │  y=6–8
+        ├───┼───┼───┼───┼───┤
+row 3   │   │   │   │   │   │  y=4–6
+        ├───┼───┼───┼───┼───┤
+row 2   │   │   │   │   │   │  y=2–4
+        ├───┼───┼───┼───┼───┤
+row 1   │   │   │   │   │   │  y=0–2
+        └───┴───┴───┴───┴───┘
 
 - The x range is 0 to 10 = 10 degrees wide, divided by resolution of 2 = 5 columns
 - The y range is 0 to 10 = 10 degrees tall, divided by resolution of 2 = 5 rows
