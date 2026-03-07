@@ -3,6 +3,7 @@ title: "Spatial Analysis in R - 301: NICAR 2026"
 author: Ryan Little
 format: html
 editor: visual
+
 ---
 
 This is the third class in our our series on spatial analysis in R. In this class, we will be covering geospatial interpolations. As in our first two classes, we will be using the `sf` package to work with spatial data.
